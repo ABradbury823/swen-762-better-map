@@ -3,7 +3,7 @@ This a repository for the semester-long project for SWEN 746: Model -Driven Deve
 
 The goal of this project is to make an Android mobile application that improves upon the existing RIT campus map.
 
-Branches
+## Branches
 The main branch will hold the most recent version of the project. (stable)
 
 The release branch will hold the compiled changes from all the sprints of a milestone cycle. These changes are ready to be tested and merged into main. (stable*)
