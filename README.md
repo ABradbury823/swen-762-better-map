@@ -1,15 +1,49 @@
-# SWEN 746 Project: Better Map
-This a repository for the semester-long project for SWEN 746: Model -Driven Development. 
 
-The goal of this project is to make an Android mobile application that improves upon the existing RIT campus map.
+# PROJECT Design Documentation
 
-## Branches
-The main branch will hold the most recent version of the project. (stable)
+> _The following template provides the headings for your Design
+> Documentation.  As you edit each section make sure you remove these
+> commentary 'blockquotes'; the lines that start with a > character
+> and appear in the generated PDF in italics._
 
-The release branch will hold the compiled changes from all the sprints of a milestone cycle. These changes are ready to be tested and merged into main. (stable*)
+## Team Information
+* Team name: TEAMNAME
+* Team members
+  * MEMBER1
+  * MEMBER2
+  * MEMBER3
+  * MEMBER4
 
-The develop branch will hold the compiled changes from a sprint's feature branches. (unstable)
+## Executive Summary
 
-The feature branch(es) will hold in-progress tasks of a sprint. (unstable)
+This is a summary of the project.
 
-*The release branch can potentially be unstable if there are issues merging a sprint's develop branch.
+
+## Requirements
+
+This section describes the features of the application.
+
+### Definition of MVP
+> _Provide a simple description of the Minimum Viable Product._
+
+### MVP Features
+>  _Provide a list of top-level Epics and/or Stories of the MVP._
+
+
+## Architecture and Design
+
+This section describes the application architecture.
+
+### Software Architecture
+> _Place a architectural diagram here._
+> _Describe your software architecture._
+
+
+### Use Cases
+> _Place a use case diagram here._
+> _Describe your use case diagram._
+
+
+### Class Diagram
+> _Place a class diagram here._
+> _Describe your class diagram._
