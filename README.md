@@ -35,7 +35,18 @@ special featuers. Signing in with an RIT ID will allow students
 to add favorite locations and view dorm tunnels.
 
 ### MVP Features
->  _Provide a list of top-level Epics and/or Stories of the MVP._
+As a user, I want to view the map so I can navigate
+As a user, I want to log in with my university ID to access my account info and permissions.
+As an administrator, I want to add/edit routes so that the map remains up to date
+As a student, I want to view tunnel routes so that I can navigate the tunnels
+As a student, I want to favorite locations so that I can easily find my frequented locations
+As a faculty, I want to add availability information
+As a student, I want to see hours of operation so that I know if I have access to areas on campus
+As a student, I want to see accessible facilities such as bathrooms, study rooms, etc. so that I can find places to go
+As a student, I want to add stops to a route so that I can efficiently reach all of my destinations
+As a student, I want to give updates on locations and routes so that others can know about obstacles and closures
+
+
 
 
 ## Architecture and Design
