@@ -25,7 +25,14 @@ The maps for RIT students to learn how to get around campus are not sufficient, 
 This section describes the features of the application.
 
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+The app will act as an improvement for the existing RIT campus
+navigation tools. Users will be able to access a campus map to
+look up building locations, such as classes/meetings/dorms, and 
+navigate to them using the familiar Google Maps API on their
+smart phone. Anyone will be able to access the app, such as
+vistors on a campus tour, but students will be able to access 
+special featuers. Signing in with an RIT ID will allow students
+to add favorite locations and view dorm tunnels.
 
 ### MVP Features
 >  _Provide a list of top-level Epics and/or Stories of the MVP._
