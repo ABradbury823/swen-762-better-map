@@ -54,9 +54,7 @@ This section describes the application architecture.
 
 
 ### Use Cases
-> _Place a use case diagram here._
-> _Describe your use case diagram._
-
+![Use case diagram for Better Map](/assets/better_maps.png)
 
 ### Class Diagram
 > _Place a class diagram here._
