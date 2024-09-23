@@ -9,14 +9,15 @@
 ## Team Information
 * Team name: TEAMNAME
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * JoJo Kaler
+  * Shamir Khan
+  * Christian Ashley
+  * Tyler Jaafari
+  * Andrew Bradbury
 
 ## Executive Summary
 
-This is a summary of the project.
+The maps for RIT students to learn how to get around campus are not sufficient, especially when it comes to indoor connections. We aim to fix this problem by creating a better version of RIT maps that includes route generation through tunnels and connected buildings. We also plan to implement extended features to help students find amenities and other places they might want to go on campus. For example, let's say it's freezing cold outside and you are looking for a place to study on the academic side, but don't want to go outside in the cold to get there. On our map, you will be able to search for an open study space and then select a route that gets you there through the tunnels rather than having to brave the outdoors. 
 
 
 ## Requirements
