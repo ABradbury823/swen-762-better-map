@@ -5,7 +5,7 @@
 * Team name: THE CARiTOGRAPHERS
 * Team members
   * JoJo Kaler
-  * Shamir Khan
+  * Shahmir Khan
   * Christian Ashley
   * Tyler Jaafari
   * Andrew Bradbury
