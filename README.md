@@ -82,6 +82,9 @@ This section describes the application architecture.
 ### Use Cases
 ![Use case diagram for Better Map](/assets/better_maps.png)
 
+### Domain Model
+![Use case diagram for Better Map](/assets/better_maps-domain_model.png)
+
 ### Class Diagram
 > _Place a class diagram here._
 > _Describe your class diagram._
