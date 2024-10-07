@@ -6,6 +6,7 @@ android {
     namespace = "com.example.swen766_bettermaps"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.example.swen766_bettermaps"
         minSdk = 24
@@ -43,7 +44,12 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation("com.google.maps.android:android-maps-utils:3.8.2")
+    implementation("com.google.maps.android:maps-utils-ktx:5.1.1")
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 }
