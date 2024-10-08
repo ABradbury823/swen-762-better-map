@@ -83,7 +83,10 @@ This section describes the application architecture.
 ![Use case diagram for Better Map](/assets/better_maps.png)
 
 ### Domain Model
-![Use case diagram for Better Map](/assets/better_maps-domain_model.png)
+![Domain model for Better Map](/assets/better_maps-domain_model.png)
+
+#### Sequence Diagram
+![Sequence diagram for student login](/assets//better_maps-sequence_diagram.png)
 
 ### Class Diagram
 > _Place a class diagram here._
