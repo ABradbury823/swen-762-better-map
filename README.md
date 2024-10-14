@@ -75,9 +75,7 @@ to add favorite locations and view dorm tunnels.
 This section describes the application architecture.
 
 ### Software Architecture
-> _Place a architectural diagram here._
-> _Describe your software architecture._
-
+![Architecture Diagram for Better Map](/assets/better_maps-architecture_diagram.png)
 
 ### Use Cases
 ![Use case diagram for Better Map](/assets/better_maps.png)
