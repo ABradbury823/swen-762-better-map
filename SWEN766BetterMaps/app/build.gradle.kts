@@ -46,6 +46,10 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation("com.google.maps.android:android-maps-utils:3.8.2")
     implementation("com.google.maps.android:maps-utils-ktx:5.1.1")
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.annotation)
 
 
     testImplementation(libs.junit)
