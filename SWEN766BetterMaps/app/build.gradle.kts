@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.swen766_bettermaps"
-    compileSdk = 34
+    compileSdk = 35
 
 
     defaultConfig {
