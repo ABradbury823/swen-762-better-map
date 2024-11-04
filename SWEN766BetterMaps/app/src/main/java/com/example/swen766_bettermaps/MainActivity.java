@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-
         // Add a marker and move the camera
 
         LatLng TigerStatue = new LatLng(43.084180,-77.675593);
@@ -73,5 +72,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setMinZoomPreference(14.0f);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
+        MapUtils.drawRoute(
+            mMap,
+            TigerStatue,
+            Golisano,
+            BuildConfig.MAPS_API_KEY
+        );
     }
 }
