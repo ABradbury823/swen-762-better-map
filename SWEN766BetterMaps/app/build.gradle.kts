@@ -56,4 +56,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    implementation("com.google.android.gms:play-services-auth:20.3.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+
 }

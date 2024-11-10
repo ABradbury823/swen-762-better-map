@@ -1,7 +1,10 @@
 package com.example.swen766_bettermaps;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
+import com.example.swen766_bettermaps.ui.login.LoginActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -32,11 +35,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_account, R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        /*Button loginButton = (Button) findViewById(R.id.navigation_account);
+        loginButton.setOnClickListener(view -> {
+          startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        });*/
+
+        binding.navView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.navigation_account) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                return true;
+            }
+            return false;
+        });
 
         // Initialize the map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
