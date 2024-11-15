@@ -87,5 +87,4 @@ This section describes the application architecture.
 ![Sequence diagram for student login](/assets//better_maps-sequence_diagram.png)
 
 ### Class Diagram
-> _Place a class diagram here._
-> _Describe your class diagram._
+![Class diagram for better map](/assets/better_maps-class_diagram.png)
