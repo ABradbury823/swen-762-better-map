@@ -72,11 +72,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setMinZoomPreference(14.0f);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        MapUtils.drawRoute(
-            mMap,
-            TigerStatue,
-            Golisano,
-            BuildConfig.MAPS_API_KEY
+        Route myRoute = new Route(
+                new Location("Tiger Statue", TigerStatue),
+                new Location("Golisano", Golisano)
         );
+//
+        myRoute.drawRoute(mMap);
+
+//        MapUtils.drawRoute(
+//            mMap,
+//            myRoute.getOrigin().getCoordinates(),
+//            myRoute.getDestination().getCoordinates(),
+//            BuildConfig.MAPS_API_KEY
+//        );
     }
 }

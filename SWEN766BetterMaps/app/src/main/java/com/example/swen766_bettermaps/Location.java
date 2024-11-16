@@ -22,4 +22,12 @@ public class Location {
     public LatLng getCoordinates() {
         return coordinates;
     }
+
+    public double latitude() {
+        return coordinates.latitude;
+    }
+
+    public double longitude() {
+        return coordinates.longitude;
+    }
 }
