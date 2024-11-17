@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Successfully signed in, handle the account info
-            //updateUiWithUser(account);
+            // updateUiWithUser(account);
         } catch (ApiException e) {
             // Handle error
             Toast.makeText(this, "Sign-in failed", Toast.LENGTH_SHORT).show();
