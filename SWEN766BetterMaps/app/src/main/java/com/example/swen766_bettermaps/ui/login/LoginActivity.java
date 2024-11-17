@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
             String displayName = account.getDisplayName(); // Get the user's display name
 
             // Check if email ends with "@rit.edu"
-            boolean isRITAssociated = email != null && email.endsWith("@rit.edu");
+            boolean isRITAssociated = email != null && email.endsWith("rit.edu");
 
             if (isRITAssociated) {
                 // Pass the user's display name to the LoggedInActivity
@@ -170,8 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Only RIT-associated emails are allowed", Toast.LENGTH_SHORT).show();
             }
         } catch (ApiException e) {
-            Toast.makeText(this, "Sign-in failed", Toast.LENGTH_SHORT).show();
-        }
+            Toast.makeText(this, "Sign-in failed. Status Code: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();        }
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
