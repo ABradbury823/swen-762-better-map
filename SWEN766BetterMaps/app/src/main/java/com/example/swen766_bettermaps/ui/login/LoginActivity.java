@@ -154,10 +154,22 @@ public class LoginActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            // Successfully signed in, handle the account info
-            // updateUiWithUser(account);
+            String email = account.getEmail(); // Get email address
+            String displayName = account.getDisplayName(); // Get the user's display name
+
+            // Check if email ends with "@rit.edu"
+            boolean isRITAssociated = email != null && email.endsWith("@rit.edu");
+
+            if (isRITAssociated) {
+                // Pass the user's display name to the LoggedInActivity
+                Intent loggedInIntent = new Intent(LoginActivity.this, LoggedInActivity.class);
+                loggedInIntent.putExtra("name", displayName); // Pass the name here
+                startActivity(loggedInIntent);
+                finish(); // Close the login activity
+            } else {
+                Toast.makeText(this, "Only RIT-associated emails are allowed", Toast.LENGTH_SHORT).show();
+            }
         } catch (ApiException e) {
-            // Handle error
             Toast.makeText(this, "Sign-in failed", Toast.LENGTH_SHORT).show();
         }
     }
