@@ -1,7 +1,11 @@
 package com.example.swen766_bettermaps;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
+import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -43,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        // button to open filters
+        ImageButton openFilterButton = findViewById(R.id.openRouteFilterButton);
+        openFilterButton.setOnClickListener(view -> openRouteFilters(view));
     }
 
     @Override
@@ -53,5 +61,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng RIT = new LatLng(43.0839295, -77.680005); // Example coordinates (Sydney)
         mMap.addMarker(new MarkerOptions().position(RIT).title("Golisano Hall on RIT Campus"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(RIT, 10)); // Zoom level 10
+    }
+
+    public void openRouteFilters(View view) {
+
+        RouteFilterPopupWindow routeFilterPopupWindow =
+                new RouteFilterPopupWindow(MainActivity.this);
+        routeFilterPopupWindow.show(view);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.swen766_bettermaps.ui.home.route_filter;
 
 import android.content.Context;
-import android.view.Display;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,44 +14,57 @@ import com.example.swen766_bettermaps.R;
 
 public class RouteFilterPopupWindow {
 
+    private static final String PREFS_NAME = "RouteFilters";
+    private static final String KEY_IS_FASTEST_ROUTE = "isFastestRoute";
+    private static final String KEY_IS_INDOORS_ONLY = "isIndoorsOnly";
+
     private PopupWindow popupWindow;
     private View popupView;
+    private Context context;
 
-    // Constructor accepts context for inflating and anchor view for positioning
-    public RouteFilterPopupWindow(Context context,View anchorView) {
+    private CheckBox fastestRouteCheckBox;
+    private CheckBox indoorsOnlyCheckBox;
+
+    private RouteFilterSettings previousSettings;
+
+    // Constructor accepts context for inflating
+    public RouteFilterPopupWindow(Context context) {
+        this.context = context;
+
         // inflate the layout for the filter menu
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
-        popupView = inflater.inflate(R.layout.route_filter_menu, null);
+        this.popupView = inflater.inflate(R.layout.route_filter_menu, null);
 
         // init PopupWindow
-        popupWindow = new PopupWindow(
+        this.popupWindow = new PopupWindow(
                 popupView,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 
         // set up popup window properties
-        popupWindow.setFocusable(true); // allow interaction
-        popupWindow.setOutsideTouchable(true); // close when outside clicked
-        popupWindow.setAnimationStyle(android.R.style.Animation_Dialog); // animate
+        this.popupWindow.setFocusable(true); // allow interaction
+        this.popupWindow.setOutsideTouchable(true); // close when outside clicked
+        this.popupWindow.setAnimationStyle(android.R.style.Animation_Dialog); // animate
+
+        this.fastestRouteCheckBox = popupView.findViewById(R.id.fastestRouteCheckBox);
+        this.indoorsOnlyCheckBox = popupView.findViewById(R.id.indoorsOnlyCheckBox);
 
         // handle Apply Filters button
         Button applyButton = popupView.findViewById(R.id.applyRouteFilterButton);
         applyButton.setOnClickListener(view -> {
-            // get values from filter options
-            CheckBox fastestRouteCheckBox = popupView.findViewById(R.id.fastestRouteCheckBox);
-            CheckBox indoorOnlyCheckBox = popupView.findViewById(R.id.indoorsOnlyCheckBox);
 
-            boolean fastestRoute = fastestRouteCheckBox.isChecked();
-            boolean indoorOnly = indoorOnlyCheckBox.isChecked();
-
+            // set new settings
             RouteFilterSettings settings = new RouteFilterSettings.Builder()
-                    .setFastestRoute(fastestRoute)
-                    .setUseIndoorsOnly(indoorOnly)
+                    .setFastestRoute(this.fastestRouteCheckBox.isChecked())
+                    .setUseIndoorsOnly(this.indoorsOnlyCheckBox.isChecked())
                     .build();
 
-            // apply filters
-            applyFilters(settings);
+            this.previousSettings = settings;
+
+            saveFilterSettings();
+
+            debugShowFilters();
 
             // dismiss window
             popupWindow.dismiss();
@@ -59,7 +72,14 @@ public class RouteFilterPopupWindow {
 
         // handle Close button - close without saving
         Button closeButton = popupView.findViewById(R.id.closeRouteFilterButton);
-        closeButton.setOnClickListener(view -> { popupWindow.dismiss(); });
+        closeButton.setOnClickListener(view -> {
+
+            debugShowFilters();
+
+            popupWindow.dismiss();
+        });
+
+        loadFilterSettings();
     }
 
     /**
@@ -71,13 +91,45 @@ public class RouteFilterPopupWindow {
     }
 
     /**
-     * Apply filters based on given values.
+     * Save the current filter settings to Shared Preferences.
+     */
+    private void saveFilterSettings() {
+        SharedPreferences sharedPreferences =
+                context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(KEY_IS_FASTEST_ROUTE, this.previousSettings.getIsFastestRoute());
+        editor.putBoolean(KEY_IS_INDOORS_ONLY, this.previousSettings.getIsIndoorsOnly());
+        editor.apply(); // commit changes to shared preferences
+    }
+
+    /**
+     * Load the previous filter settings from Shared Preferences.
+     */
+    private void loadFilterSettings() {
+        SharedPreferences sharedPreferences =
+                context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        boolean lastIsFastestRoute = sharedPreferences.getBoolean(KEY_IS_FASTEST_ROUTE, true);
+        boolean lastIsIndoorsOnly = sharedPreferences.getBoolean(KEY_IS_INDOORS_ONLY, false);
+
+        // set ui elements to previous load
+        fastestRouteCheckBox.setChecked(lastIsFastestRoute);
+        indoorsOnlyCheckBox.setChecked(lastIsIndoorsOnly);
+
+        previousSettings = new RouteFilterSettings.Builder()
+                .setFastestRoute(lastIsFastestRoute)
+                .setUseIndoorsOnly(lastIsIndoorsOnly)
+                .build();
+    }
+
+    /**
+     * Show filters in a test toast pop-up.
       */
-    public void applyFilters(RouteFilterSettings settings) {
+    private void debugShowFilters() {
         // test with a toast
         Toast.makeText(popupView.getContext(),
-                "Applied Route Filters: Fastest Route? = " + settings.getIsFastestRoute() +
-                        ", Indoors Only? = " + settings.getIsIndoorsOnly(),
+                "Route Filters: " +
+                        "Fastest Route? = " + this.previousSettings.getIsFastestRoute() +
+                        ", Indoors Only? = " + this.previousSettings.getIsIndoorsOnly(),
                 Toast.LENGTH_SHORT).show();
     }
 }
