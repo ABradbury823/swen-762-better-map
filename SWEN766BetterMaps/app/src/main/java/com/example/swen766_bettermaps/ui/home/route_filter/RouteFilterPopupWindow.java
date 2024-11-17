@@ -1,6 +1,7 @@
-package com.example.swen766_bettermaps.ui.home;
+package com.example.swen766_bettermaps.ui.home.route_filter;
 
 import android.content.Context;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -10,73 +11,6 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.example.swen766_bettermaps.R;
-
-/**
- * Data object representing the current route filter settings.
- * This object implements the builder pattern, so instantiate it with
- * <code>RouteFilterSettings settings = new RouteFilterSettings.Builder()
- * {setSettings...}.build()</code>
- */
-class RouteFilterSettings {
-
-    private final boolean isFastestRoute;  // whether user prefers the fastest route
-    private final boolean isIndoorsOnly;   // whether user wants only indoor routes
-
-    // Builder pattern to create filter settings
-    public static class Builder {
-        private boolean isFastestRoute = true;
-        private boolean isIndoorsOnly = false;
-
-        /**
-         * Set if the user prefers the fastest route.
-         * @param isFastestRoute
-         * @return Reference to the builder, for chain method call instantiation.
-         */
-        public Builder setFastestRoute(boolean isFastestRoute) {
-            this.isFastestRoute = isFastestRoute;
-            return this;
-        }
-
-        /**
-         * Set if the user prefers only traveling indoors.
-         * @param isIndoorsOnly
-         * @return Reference to the builder, for chain method call instantiation.
-         */
-        public Builder setUseIndoorsOnly(boolean isIndoorsOnly) {
-            this.isIndoorsOnly = isIndoorsOnly;
-            return this;
-        }
-
-        /**
-         * Build the route filter settings.
-         * @return Route filter settings. Defaults: `isFastestRoute = true`,
-         * `isIndoorsOnly = false`.
-         */
-        public RouteFilterSettings build() {
-            return new RouteFilterSettings(this);
-        }
-    }
-    // private to prevent explicit instantiation
-    private RouteFilterSettings(Builder builder) {
-        this.isFastestRoute = builder.isFastestRoute;
-        this.isIndoorsOnly = builder.isIndoorsOnly;
-    }
-
-    /**
-     * Does the user prefer using the fastest route?
-     */
-    public boolean getIsFastestRoute() {
-        return this.isFastestRoute;
-    }
-
-    /**
-     * Does the user prefer traveling indoors?
-     */
-    public boolean getIsIndoorsOnly() {
-        return this.isIndoorsOnly;
-    }
-
-}
 
 public class RouteFilterPopupWindow {
 
@@ -128,13 +62,17 @@ public class RouteFilterPopupWindow {
         closeButton.setOnClickListener(view -> { popupWindow.dismiss(); });
     }
 
-    // Display the Popup Window at the given anchor view
+    /**
+     *  Display the Popup Window at the given anchor view.
+     */
     public void show(View anchorView) {
         // position window below anchor
         popupWindow.showAsDropDown(anchorView, 0, 0);
     }
 
-    // Apply filters based on given values
+    /**
+     * Apply filters based on given values.
+      */
     public void applyFilters(RouteFilterSettings settings) {
         // test with a toast
         Toast.makeText(popupView.getContext(),
