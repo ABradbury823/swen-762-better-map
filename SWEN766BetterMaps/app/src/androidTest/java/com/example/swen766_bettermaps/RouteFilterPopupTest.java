@@ -114,4 +114,25 @@ public class RouteFilterPopupTest {
         onView(withId(R.id.indoorsOnlyCheckBox)).check(matches(isNotChecked()));
     }
 
+    // test that clicking Apply button saves filters on subsequent loads
+    @Test
+    public void applySavesFilters() {
+        // open the filters menu
+        onView(withId(R.id.openRouteFilterButton)).perform(click());
+
+        // change the checkboxes from their default values
+        onView(withId(R.id.fastestRouteCheckBox)).perform(click());
+        onView(withId(R.id.indoorsOnlyCheckBox)).perform(click());
+
+        // apply settings by pressing apply button
+        onView(withId(R.id.applyRouteFilterButton)).perform(click());
+
+        // re-open the filters menu
+        onView(withId(R.id.openRouteFilterButton)).perform(click());
+
+        // check that checkboxes have new loaded values
+        onView(withId(R.id.fastestRouteCheckBox)).check(matches(isNotChecked()));
+        onView(withId(R.id.indoorsOnlyCheckBox)).check(matches(isChecked()));
+    }
+
 }
