@@ -19,6 +19,7 @@ public class RouteFilterSettingsTest {
         assertEquals(expectedIsIndoors, settings.getIsIndoorsOnly());
     }
 
+    // build parameterized settings with chained builder class methods
     @Test
     public void buildParamsRFS() {
         boolean expectedIsFastest = false;
