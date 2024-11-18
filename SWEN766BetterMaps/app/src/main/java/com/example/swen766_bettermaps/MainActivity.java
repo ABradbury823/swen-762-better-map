@@ -78,6 +78,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Location magic = new Location("Magic", "300 Lomb Memorial Dr");
         myRoute.addStop(magic);
+
+        Location imaging = new Location(
+            "Chester F. Carlson Center for Imaging Science",
+            "54 Lomb Memorial Dr"
+        );
+        myRoute.addStop(imaging);
 //
         myRoute.drawRoute(mMap);
 
