@@ -134,10 +134,8 @@ public class RouteFilterPopupWindow {
       */
     private void debugShowFilters() {
         // test with a toast
-        Toast.makeText(popupView.getContext(),
-                "Route Filters: " +
-                        "Fastest Route? = " + this.previousSettings.getIsFastestRoute() +
-                        ", Indoors Only? = " + this.previousSettings.getIsIndoorsOnly(),
+        Toast.makeText(popupView.getContext(), 
+                "Route Filters: " + this.previousSettings.toString(),
                 Toast.LENGTH_SHORT).show();
     }
 }
