@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng Golisano = new LatLng(43.083872,-77.67986);
         mMap.addMarker(new MarkerOptions().position(Golisano).title("Golisano Building"));
 
-
         LatLngBounds RITBounds = new LatLngBounds(
                 new LatLng(43.078414, -77.687614), // Southwest corner
                 new LatLng(43.092335, -77.665870)  // Northeast corner
@@ -76,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 new Location("Tiger Statue", TigerStatue),
                 new Location("Golisano", Golisano)
         );
+
+        Location magic = new Location("Magic", "300 Lomb Memorial Dr");
+        myRoute.addStop(magic);
 //
         myRoute.drawRoute(mMap);
 

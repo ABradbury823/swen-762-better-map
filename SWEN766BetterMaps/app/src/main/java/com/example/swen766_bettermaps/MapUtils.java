@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 public class MapUtils {
@@ -27,10 +28,18 @@ public class MapUtils {
 
     private static String getDirectionsUrl(Route route, String apiKey) {
         // URL for getting directions between origin and destination
+        String waypoints = "";
+        if (route.getStops().size() > 0) {
+            Iterator<Location> stops = route.getStops().iterator();
+            waypoints += stops.next().urlFormat();
+            while (stops.hasNext()) {
+                waypoints += "|" + stops.next().urlFormat();
+            }
+        }
         return "https://maps.googleapis.com/maps/api/directions/json?" +
                 "origin=" + route.getOrigin().urlFormat() +
                 "&destination=" + route.getDestination().urlFormat() +
-                "&waypoints=" + "Chester+F.+Carlson+Center+for+Imaging+Science" +
+                "&waypoints=" + waypoints +
                 "&mode=" + "walking" +
                 "&key=" + apiKey;
     }
