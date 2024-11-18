@@ -135,4 +135,25 @@ public class RouteFilterPopupTest {
         onView(withId(R.id.indoorsOnlyCheckBox)).check(matches(isChecked()));
     }
 
+    // test that clicking Close button does not save filters on subsequent loads
+    @Test
+    public void closeDoesNotSaveFilters() {
+        // open the filters menu
+        onView(withId(R.id.openRouteFilterButton)).perform(click());
+
+        // change the checkboxes from their default values
+        onView(withId(R.id.fastestRouteCheckBox)).perform(click());
+        onView(withId(R.id.indoorsOnlyCheckBox)).perform(click());
+
+        // close settings by pressing close button
+        onView(withId(R.id.closeRouteFilterButton)).perform(click());
+
+        // re-open the filters menu
+        onView(withId(R.id.openRouteFilterButton)).perform(click());
+
+        // check that checkboxes have old loaded values
+        onView(withId(R.id.fastestRouteCheckBox)).check(matches(isChecked()));
+        onView(withId(R.id.indoorsOnlyCheckBox)).check(matches(isNotChecked()));
+    }
+
 }
