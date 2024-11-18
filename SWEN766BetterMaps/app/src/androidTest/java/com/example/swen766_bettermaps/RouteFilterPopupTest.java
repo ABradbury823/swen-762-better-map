@@ -5,6 +5,9 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isFocused;
+import static androidx.test.espresso.matcher.ViewMatchers.isNotFocused;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -33,7 +36,7 @@ public class RouteFilterPopupTest {
         onView(withId(R.id.openRouteFilterButton)).perform(click());
 
         // check that the menu is displayed
-        onView(withId(R.id.routeFilterTitle)).check(matches(isDisplayed()));
+        onView(withId(R.id.routeFilterMenu)).check(matches(isDisplayed()));
     }
 
     // test that clicking Close button closes route filter menu
@@ -45,7 +48,20 @@ public class RouteFilterPopupTest {
         // click the close button
         onView(withId(R.id.closeRouteFilterButton)).perform(click());
 
-        onView(withId(R.id.routeFilterTitle)).check(doesNotExist());
+        // check that the menu no longer exists
+        onView(withId(R.id.routeFilterMenu)).check(doesNotExist());
+    }
+
+    @Test
+    public void closeRouteFiltersMenuClickOutside() {
+        // open the route filters
+        onView(withId(R.id.openRouteFilterButton)).perform(click());
+
+        // click outside the route filter
+        onView(isRoot()).perform(click());
+
+        // check that the menu no longer focused (will close automatically)
+        onView(withId(R.id.routeFilterMenu)).check(matches(isNotFocused()));
     }
 
 
