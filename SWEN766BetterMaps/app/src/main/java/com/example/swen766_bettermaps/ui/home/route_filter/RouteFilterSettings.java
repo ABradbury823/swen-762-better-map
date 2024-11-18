@@ -76,4 +76,14 @@ public class RouteFilterSettings {
                 ", Is Indoors Only? = " + this.isIndoorsOnly + ")";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof RouteFilterSettings) {
+            RouteFilterSettings rfs = (RouteFilterSettings) obj;
+            return this.isFastestRoute == rfs.isFastestRoute
+                    && this.isIndoorsOnly == rfs.isIndoorsOnly;
+        }
+        return false;
+    }
+
 }

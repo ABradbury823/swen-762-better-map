@@ -4,8 +4,10 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isFocused;
+import static androidx.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isNotFocused;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -16,6 +18,8 @@ import android.content.SharedPreferences;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterSettings;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -99,5 +103,15 @@ public class RouteFilterPopupTest {
         sharedPreferences.edit().clear().apply();
     }
 
+    // test that opening the filter menu for the first time loads default values
+    @Test
+    public void firstOpenLoadsDefaults() {
+        // open the filters menu
+        onView(withId(R.id.openRouteFilterButton)).perform(click());
+
+        // check that checkboxes have default loaded values
+        onView(withId(R.id.fastestRouteCheckBox)).check(matches(isChecked()));
+        onView(withId(R.id.indoorsOnlyCheckBox)).check(matches(isNotChecked()));
+    }
 
 }
