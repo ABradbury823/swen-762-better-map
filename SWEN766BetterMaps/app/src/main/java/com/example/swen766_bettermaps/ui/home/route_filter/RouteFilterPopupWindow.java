@@ -134,7 +134,7 @@ public class RouteFilterPopupWindow {
       */
     private void debugShowFilters() {
         // test with a toast
-        Toast.makeText(popupView.getContext(), 
+        Toast.makeText(popupView.getContext(),
                 "Route Filters: " + this.previousSettings.toString(),
                 Toast.LENGTH_SHORT).show();
     }
