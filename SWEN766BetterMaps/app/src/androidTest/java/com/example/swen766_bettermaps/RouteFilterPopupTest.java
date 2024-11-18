@@ -10,9 +10,14 @@ import static androidx.test.espresso.matcher.ViewMatchers.isNotFocused;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +46,7 @@ public class RouteFilterPopupTest {
 
     // test that clicking Close button closes route filter menu
     @Test
-    public void closeRouteFiltersMenuButton() {
+    public void closeRouteFiltersMenuCloseButton() {
         // open the route filters
         onView(withId(R.id.openRouteFilterButton)).perform(click());
 
@@ -62,6 +67,36 @@ public class RouteFilterPopupTest {
 
         // check that the menu no longer focused (will close automatically)
         onView(withId(R.id.routeFilterMenu)).check(matches(isNotFocused()));
+    }
+
+    @Test
+    public void closeRouteFiltersMenuApplyButton() {
+        // open the route filters
+        onView(withId(R.id.openRouteFilterButton)).perform(click());
+
+        // click the close button
+        onView(withId(R.id.applyRouteFilterButton)).perform(click());
+
+        // check that the menu no longer exists
+        onView(withId(R.id.routeFilterMenu)).check(doesNotExist());
+    }
+
+    // vv TEST SAVING SETTINGS vv
+
+    private static final String PREFS_NAME = "RouteFilters";
+    private static final String KEY_IS_FASTEST_ROUTE = "isFastestRoute";
+    private static final String KEY_IS_INDOORS_ONLY = "isIndoorsOnly";
+
+    private SharedPreferences sharedPreferences;
+
+    @Before
+    public void setUp() {
+        // Get the SharedPreferences instance
+        Context context = ApplicationProvider.getApplicationContext();
+        sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        // Clear SharedPreferences before each test to avoid interference between tests
+        sharedPreferences.edit().clear().apply();
     }
 
 
