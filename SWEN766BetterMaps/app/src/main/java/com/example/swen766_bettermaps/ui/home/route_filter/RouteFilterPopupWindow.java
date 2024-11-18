@@ -1,5 +1,6 @@
 package com.example.swen766_bettermaps.ui.home.route_filter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -18,16 +19,17 @@ public class RouteFilterPopupWindow {
     private static final String KEY_IS_FASTEST_ROUTE = "isFastestRoute";
     private static final String KEY_IS_INDOORS_ONLY = "isIndoorsOnly";
 
-    private PopupWindow popupWindow;
-    private View popupView;
-    private Context context;
+    private final PopupWindow popupWindow;
+    private final View popupView;
+    private final Context context;
 
-    private CheckBox fastestRouteCheckBox;
-    private CheckBox indoorsOnlyCheckBox;
+    private final CheckBox fastestRouteCheckBox;
+    private final CheckBox indoorsOnlyCheckBox;
 
     private RouteFilterSettings previousSettings;
 
     // Constructor accepts context for inflating
+    @SuppressLint("InflateParams")
     public RouteFilterPopupWindow(Context context) {
         this.context = context;
 
@@ -55,12 +57,10 @@ public class RouteFilterPopupWindow {
         applyButton.setOnClickListener(view -> {
 
             // set new settings
-            RouteFilterSettings settings = new RouteFilterSettings.Builder()
+            this.previousSettings = new RouteFilterSettings.Builder()
                     .setFastestRoute(this.fastestRouteCheckBox.isChecked())
                     .setUseIndoorsOnly(this.indoorsOnlyCheckBox.isChecked())
                     .build();
-
-            this.previousSettings = settings;
 
             saveFilterSettings();
 

@@ -1,5 +1,7 @@
 package com.example.swen766_bettermaps.ui.home.route_filter;
 
+import androidx.annotation.NonNull;
+
 /**
  * Data object representing the current route filter settings.
  * This object implements the builder pattern, so instantiate it with
@@ -22,7 +24,6 @@ public class RouteFilterSettings {
 
         /**
          * Set if the user prefers the fastest route.
-         * @param isFastestRoute
          * @return Reference to the builder, for chain method call instantiation.
          */
         public Builder setFastestRoute(boolean isFastestRoute) {
@@ -32,7 +33,6 @@ public class RouteFilterSettings {
 
         /**
          * Set if the user prefers only traveling indoors.
-         * @param isIndoorsOnly
          * @return Reference to the builder, for chain method call instantiation.
          */
         public Builder setUseIndoorsOnly(boolean isIndoorsOnly) {
@@ -70,6 +70,7 @@ public class RouteFilterSettings {
         return this.isIndoorsOnly;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "(Is Fastest Route? = " + this.isFastestRoute +

@@ -6,7 +6,6 @@ import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.isFocused;
 import static androidx.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isNotFocused;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
@@ -18,8 +17,6 @@ import android.content.SharedPreferences;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterSettings;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -87,17 +84,13 @@ public class RouteFilterPopupTest {
 
     // vv TEST SAVING SETTINGS vv
 
-    private static final String PREFS_NAME = "RouteFilters";
-    private static final String KEY_IS_FASTEST_ROUTE = "isFastestRoute";
-    private static final String KEY_IS_INDOORS_ONLY = "isIndoorsOnly";
-
-    private SharedPreferences sharedPreferences;
-
     @Before
     public void setUp() {
+        String PREFS_NAME = "RouteFilters";
         // Get the SharedPreferences instance
         Context context = ApplicationProvider.getApplicationContext();
-        sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences =
+                context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         // Clear SharedPreferences before each test to avoid interference between tests
         sharedPreferences.edit().clear().apply();
