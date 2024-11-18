@@ -63,6 +63,6 @@ public class Route {
     }
 
     public void drawRoute(GoogleMap mMap) {
-        MapUtils.drawRoute(mMap, origin.getCoordinates(), destination.getCoordinates(), BuildConfig.MAPS_API_KEY);
+        MapUtils.drawRoute(mMap,this, BuildConfig.MAPS_API_KEY);
     }
 }

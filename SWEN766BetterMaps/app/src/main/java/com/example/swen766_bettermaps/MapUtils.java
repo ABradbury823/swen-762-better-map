@@ -20,15 +20,17 @@ import java.util.List;
 
 public class MapUtils {
 
-    public static void drawRoute(GoogleMap map, LatLng origin, LatLng destination, String apiKey) {
-        String url = getDirectionsUrl(origin, destination, apiKey);
+    public static void drawRoute(GoogleMap map, Route route, String apiKey) {
+        String url = getDirectionsUrl(route, apiKey);
         new FetchURL(map).execute(url);
     }
 
-    private static String getDirectionsUrl(LatLng origin, LatLng dest, String apiKey) {
+    private static String getDirectionsUrl(Route route, String apiKey) {
         // URL for getting directions between origin and destination
-        return "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin.latitude + "," + origin.longitude +
-                "&destination=" + dest.latitude + "," + dest.longitude +
+        return "https://maps.googleapis.com/maps/api/directions/json?" +
+                "origin=" + route.getOrigin().urlFormat() +
+                "&destination=" + route.getDestination().urlFormat() +
+                "&waypoints=" + "Chester+F.+Carlson+Center+for+Imaging+Science" +
                 "&mode=" + "walking" +
                 "&key=" + apiKey;
     }
