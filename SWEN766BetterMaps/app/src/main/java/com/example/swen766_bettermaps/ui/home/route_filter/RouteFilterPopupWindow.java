@@ -83,6 +83,14 @@ public class RouteFilterPopupWindow {
     }
 
     /**
+     * Retrieve the current route filter settings.
+     * @return An object containing all route filter information.
+     */
+    public RouteFilterSettings getSettings() {
+        return this.previousSettings;
+    }
+
+    /**
      *  Display the Popup Window at the given anchor view.
      */
     public void show(View anchorView) {

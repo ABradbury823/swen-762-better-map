@@ -70,4 +70,10 @@ public class RouteFilterSettings {
         return this.isIndoorsOnly;
     }
 
+    @Override
+    public String toString() {
+        return "[Is Fastest Route? = " + this.isFastestRoute +
+                ", Is Indoors Only? = " + this.isIndoorsOnly + "]";
+    }
+
 }
