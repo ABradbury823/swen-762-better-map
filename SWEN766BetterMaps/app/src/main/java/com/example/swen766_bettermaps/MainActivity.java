@@ -1,6 +1,12 @@
 package com.example.swen766_bettermaps;
 
 import android.os.Bundle;
+
+import android.view.View;
+import android.widget.ImageButton;
+
+import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.swen766_bettermaps.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
@@ -29,5 +35,16 @@ public class MainActivity extends AppCompatActivity  {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        // button to open filters
+        ImageButton openFilterButton = findViewById(R.id.openRouteFilterButton);
+        openFilterButton.setOnClickListener(this::openRouteFilters);
+    }
+
+    // opens the route filters popup menu
+    public void openRouteFilters(View view) {
+        RouteFilterPopupWindow routeFilterPopupWindow =
+                new RouteFilterPopupWindow(MainActivity.this);
+        routeFilterPopupWindow.show(view);
     }
 }
