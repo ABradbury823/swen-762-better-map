@@ -1,7 +1,10 @@
 package com.example.swen766_bettermaps;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
+import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -44,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        // button to open filters
+        ImageButton openFilterButton = findViewById(R.id.openRouteFilterButton);
+        openFilterButton.setOnClickListener(this::openRouteFilters);
     }
 
     @Override
@@ -93,5 +100,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            myRoute.getDestination().getCoordinates(),
 //            BuildConfig.MAPS_API_KEY
 //        );
+    }
+
+    // opens the route filters popup menu
+    public void openRouteFilters(View view) {
+        RouteFilterPopupWindow routeFilterPopupWindow =
+                new RouteFilterPopupWindow(MainActivity.this);
+        routeFilterPopupWindow.show(view);
     }
 }
