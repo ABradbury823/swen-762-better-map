@@ -9,6 +9,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -50,8 +51,47 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         // Add a marker and move the camera
-        LatLng RIT = new LatLng(43.0839295, -77.680005); // Example coordinates (Sydney)
-        mMap.addMarker(new MarkerOptions().position(RIT).title("Golisano Hall on RIT Campus"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(RIT, 10)); // Zoom level 10
+
+        LatLng TigerStatue = new LatLng(43.084180,-77.675593);
+        mMap.addMarker(new MarkerOptions().position(TigerStatue).title("Tiger Statue"));
+
+        LatLng Golisano = new LatLng(43.083872,-77.67986);
+        mMap.addMarker(new MarkerOptions().position(Golisano).title("Golisano Building"));
+
+        LatLngBounds RITBounds = new LatLngBounds(
+                new LatLng(43.078414, -77.687614), // Southwest corner
+                new LatLng(43.092335, -77.665870)  // Northeast corner
+        );
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(TigerStatue, 15));
+
+        // Lock the map to the defined bounds
+        mMap.setLatLngBoundsForCameraTarget(RITBounds);
+
+        // Optionally, set the minimum zoom level to prevent zooming out too much
+        mMap.setMinZoomPreference(14.0f);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
+        Route myRoute = new Route(
+                new Location("Tiger Statue", TigerStatue),
+                new Location("Golisano", Golisano)
+        );
+
+        Location magic = new Location("Magic", "300 Lomb Memorial Dr");
+        myRoute.addStop(magic);
+
+        Location imaging = new Location(
+            "Chester F. Carlson Center for Imaging Science",
+            "54 Lomb Memorial Dr"
+        );
+        myRoute.addStop(imaging);
+//
+        myRoute.drawRoute(mMap);
+
+//        MapUtils.drawRoute(
+//            mMap,
+//            myRoute.getOrigin().getCoordinates(),
+//            myRoute.getDestination().getCoordinates(),
+//            BuildConfig.MAPS_API_KEY
+//        );
     }
 }
