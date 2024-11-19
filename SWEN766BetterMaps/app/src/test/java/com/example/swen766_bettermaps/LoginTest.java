@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class LoginTest {
     @Test
-    public void validateGoogleAuth() {
+    public void sumTest() {
 
     }
 }
