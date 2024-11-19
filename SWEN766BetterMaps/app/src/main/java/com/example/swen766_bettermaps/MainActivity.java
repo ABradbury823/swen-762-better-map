@@ -1,10 +1,12 @@
 package com.example.swen766_bettermaps;
 
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
