@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.swen766_bettermaps.ui.home.favorite_locations.FavoritesBottomSheetFragment;
 import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // button to open filters
         ImageButton openFilterButton = findViewById(R.id.openRouteFilterButton);
         openFilterButton.setOnClickListener(this::openRouteFilters);
+
+        // button to open favorites
+        ImageButton openFavoritesButton = findViewById(R.id.openFavoritesButton);
+        openFavoritesButton.setOnClickListener(this::openFavorites);
     }
 
     @Override
@@ -107,5 +112,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         RouteFilterPopupWindow routeFilterPopupWindow =
                 new RouteFilterPopupWindow(MainActivity.this);
         routeFilterPopupWindow.show(view);
+    }
+
+    // opens the favorites menu
+    public void openFavorites(View view) {
+        FavoritesBottomSheetFragment favorites = new FavoritesBottomSheetFragment();
+        favorites.show(getSupportFragmentManager(), favorites.getTag());
     }
 }
