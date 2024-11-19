@@ -20,4 +20,9 @@ public class LoginFragmentTest {
         onView(withId(R.id.navigation_account)).perform(click());
         onView(withId(R.id.sign_in_button)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void checkAccountNavigation() {
+        // TODO: check that the login button is not displayed when mock account is logged in
+    }
 }
