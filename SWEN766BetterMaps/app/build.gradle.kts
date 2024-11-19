@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.annotation)
+    implementation(libs.legacy.support.v4)
 
 
     testImplementation(libs.junit)
