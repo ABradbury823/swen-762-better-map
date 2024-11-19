@@ -2,6 +2,7 @@ package com.example.swen766_bettermaps;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -16,6 +17,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.swen766_bettermaps.databinding.ActivityMainBinding;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         // button to open filters
         ImageButton openFilterButton = findViewById(R.id.openRouteFilterButton);
         openFilterButton.setOnClickListener(this::openRouteFilters);
+
     }
 
     // opens the route filters popup menu

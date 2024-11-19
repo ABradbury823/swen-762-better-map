@@ -1,12 +1,15 @@
 package com.example.swen766_bettermaps.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.swen766_bettermaps.BuildConfig;
 import com.example.swen766_bettermaps.Location;
 import com.example.swen766_bettermaps.Route;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -21,6 +24,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.swen766_bettermaps.R;
 import com.example.swen766_bettermaps.databinding.FragmentHomeBinding;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+
+import java.util.Arrays;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
@@ -40,6 +49,32 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        // Initialize the Places SDK
+        if (!Places.isInitialized()) {
+            Places.initialize(getContext(), BuildConfig.MAPS_API_KEY);
+        }
+
+        // Set up the AutocompleteSupportFragment
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+//        System.out.println(autocompleteFragment);
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                // Handle the selected place
+                Log.i("Place", "Place: " + place.getName() + ", " + place.getLatLng());
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                // Handle the error
+                Log.e("Place", "An error occurred: " + status);
+            }
+        });
+
         return root;
     }
 
