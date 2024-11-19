@@ -1,19 +1,12 @@
 package com.example.swen766_bettermaps;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
+import android.widget.ImageButton;
 
-import com.example.swen766_bettermaps.ui.login.LoginActivity;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -55,11 +48,10 @@ public class MainActivity extends AppCompatActivity /*implements OnMapReadyCallb
 //            return false;
 //        });
 
-        // Initialize the map
-        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }*/
+
+        // button to open filters
+        ImageButton openFilterButton = findViewById(R.id.openRouteFilterButton);
+        openFilterButton.setOnClickListener(this::openRouteFilters);
     }
 
     /*@Override
@@ -71,4 +63,12 @@ public class MainActivity extends AppCompatActivity /*implements OnMapReadyCallb
         mMap.addMarker(new MarkerOptions().position(RIT).title("Golisano Hall on RIT Campus"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(RIT, 10)); // Zoom level 10
     }*/
+
+
+    // opens the route filters popup menu
+    public void openRouteFilters(View view) {
+        RouteFilterPopupWindow routeFilterPopupWindow =
+                new RouteFilterPopupWindow(MainActivity.this);
+        routeFilterPopupWindow.show(view);
+    }
 }
