@@ -15,12 +15,18 @@ public class LoginFragmentTest {
     @Rule
     public ActivityScenarioRule<MainActivity> mainActivityScenario = new ActivityScenarioRule<>(MainActivity.class);
 
+    /**
+     * Checks if the account navigation button displays the login screen when logged out.
+     */
     @Test
     public void checkLoginNavigation() {
         onView(withId(R.id.navigation_account)).perform(click());
         onView(withId(R.id.sign_in_button)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Checks if the account navigation button does NOT display the login screen when logged in.
+     */
     @Test
     public void checkAccountNavigation() {
         // TODO: check that the login button is not displayed when mock account is logged in
