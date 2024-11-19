@@ -37,6 +37,24 @@
         android:clickable="true"
         android:focusable="true" />
 
+    <!-- Icon button for opening filter settings -->
+    <ImageButton
+        android:id="@+id/openFavoritesButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_favorites"
+        android:contentDescription="Open route filter settings"
+        android:background="@drawable/circular_button_background"
+        android:padding="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="centerInside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:importantForAccessibility="yes"
+        android:clickable="true"
+        android:focusable="true" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
