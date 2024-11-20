@@ -17,7 +17,7 @@ public class LoggedInActivity extends AppCompatActivity {
         TextView accountInfoTextView = findViewById(R.id.account_info_text);
 
         // Retrieve RITUser from Intent
-        RITUser ritUser = (RITUser) getIntent().getSerializableExtra("RIT_USER");
+        RITUser ritUser = getIntent().getParcelableExtra("RIT_USER");  // For Parcelable
         if (ritUser != null) {
             String displayText = "Welcome, " + ritUser.getFirst_name() +
                     "\nRIT ID: " + ritUser.getRIT_id() +

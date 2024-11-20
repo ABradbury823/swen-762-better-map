@@ -9,13 +9,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.swen766_bettermaps.data.RITUser;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -28,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.swen766_bettermaps.R;
+import com.example.swen766_bettermaps.ui.login.LoginViewModel;
+import com.example.swen766_bettermaps.ui.login.LoginViewModelFactory;
 import com.example.swen766_bettermaps.databinding.ActivityLoginBinding;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -145,14 +145,12 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(v -> {
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
-            System.out.println("MADE IT IN");
         });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("MADE IT IN");
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
@@ -160,33 +158,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        System.out.println("MADE IT IN");
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            String email = account.getEmail();
-            System.out.println("HERE IS THE EMAIL: " + email);
-            String displayName = account.getDisplayName();
+            String email = account.getEmail(); // Get email address
+            String displayName = account.getDisplayName(); // Get the user's display name
 
-            if (email != null && email.endsWith("@g.rit.edu")) {
-                String firstName = displayName != null ? displayName.split(" ")[0] : "User";
-                String ritUsername = email.split("@")[0];
+            // Check if email ends with "@rit.edu"
+            boolean isRITAssociated = email != null && email.endsWith("rit.edu");
 
-                RITUser ritUser = new RITUser(ritUsername, firstName, email);
-
-                // Log the user info to verify
-                Log.d("LoginSuccess", "User: " + ritUser.getFirst_name() + ", Email: " + ritUser.getEmail());
-
+            if (isRITAssociated) {
+                // Pass the user's display name to the LoggedInActivity
                 Intent loggedInIntent = new Intent(LoginActivity.this, LoggedInActivity.class);
-                loggedInIntent.putExtra("RIT_USER", ritUser);
+                loggedInIntent.putExtra("name", displayName); // Pass the name here
                 startActivity(loggedInIntent);
-                finish();
+                finish(); // Close the login activity
             } else {
                 Toast.makeText(this, "Only RIT-associated emails are allowed", Toast.LENGTH_SHORT).show();
             }
         } catch (ApiException e) {
-            Log.e("SignInError", "Sign-in failed: " + e.getStatusCode());
-            Toast.makeText(this, "Sign-in failed. Status Code: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
-        }
+            Toast.makeText(this, "Sign-in failed. Status Code: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();        }
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
