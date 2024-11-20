@@ -1,8 +1,10 @@
 package com.example.swen766_bettermaps.ui.home.favorite_locations;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,16 +20,25 @@ import java.util.List;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
     private List<String> favoriteLocations;
+    private Context context;
+    private OnFavoriteDeleteListener deleteListener;
 
-    public FavoritesAdapter(List<String> favoriteLocations) {
+    public interface OnFavoriteDeleteListener {
+        void onFavoriteDeleted(String location);
+    }
+
+    // Constructor with deleteListener to communicate with the Fragment/Activity
+    public FavoritesAdapter(Context context, List<String> favoriteLocations, OnFavoriteDeleteListener listener) {
+        this.context = context;
         this.favoriteLocations = favoriteLocations;
+        this.deleteListener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // inflate the layout for each individual item
-        View view = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(context)
                 .inflate(R.layout.favorite_item, parent, false);
         return new ViewHolder(view);
     }
@@ -38,6 +49,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         String location = favoriteLocations.get(position);
         // set the location name in the TextView
         holder.locationName.setText(location);
+
+        // Set remove button click listener
+        holder.removeButton.setOnClickListener(v -> {
+            // Notify the fragment or activity to remove the favorite
+            if (deleteListener != null) {
+                deleteListener.onFavoriteDeleted(location);
+            }
+        });
     }
 
     @Override
@@ -45,16 +64,25 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         return favoriteLocations.size();
     }
 
+    // Method to update the list of favorite locations
+    public void updateFavorites(List<String> newFavorites) {
+        this.favoriteLocations = newFavorites;
+        // Notify the adapter that the dataset has changed
+        notifyDataSetChanged();  // You can optimize this by using notifyItemInserted() / notifyItemRemoved()
+    }
+
     /**
      * Wrapper class for each item in the list. Holds references to all customizable views.
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView locationName;
+        ImageButton removeButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
             // initialize the views for each item
             locationName = itemView.findViewById(R.id.location_name);
+            removeButton = itemView.findViewById(R.id.remove_favorite);
         }
     }
 }
