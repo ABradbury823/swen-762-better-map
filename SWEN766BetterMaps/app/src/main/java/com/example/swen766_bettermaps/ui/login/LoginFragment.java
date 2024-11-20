@@ -21,10 +21,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.swen766_bettermaps.data.RITUser;
 import com.example.swen766_bettermaps.databinding.FragmentLoginBinding;
 
 import com.example.swen766_bettermaps.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
@@ -149,6 +152,45 @@ public class LoginFragment extends Fragment {
         if (getContext() != null && getContext().getApplicationContext() != null) {
             Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            String email = account.getEmail();
+            String displayName = account.getDisplayName();
+
+            if (email != null && email.endsWith("rit.edu")) {
+                // Extract the first name from the display name
+                String firstName = displayName != null ? displayName.split(" ")[0] : "User";
+                // Extract RIT username (part before '@')
+                String ritUsername = email.split("@")[0];
+
+                System.out.println(ritUsername);
+                System.out.println(firstName);
+
+                // Create RITUser object
+                RITUser ritUser = new RITUser(ritUsername, firstName, email);
+
+                // Pass RITUser object to the logged-in activity
+                Intent loggedInIntent = new Intent(getActivity(), LoggedInActivity.class);                loggedInIntent.putExtra("RIT_USER", ritUser);
+                startActivity(loggedInIntent);
+                getActivity().finish();
+
+            } else {
+                Toast.makeText(getContext(), "Only RIT-associated emails are allowed", Toast.LENGTH_SHORT).show();            }
+            } catch (ApiException e) {
+                Toast.makeText(getContext(), "Sign-in failed. Status Code: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
+            }
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

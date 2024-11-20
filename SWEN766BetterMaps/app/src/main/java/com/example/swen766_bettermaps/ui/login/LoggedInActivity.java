@@ -1,12 +1,11 @@
 package com.example.swen766_bettermaps.ui.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.swen766_bettermaps.R;
+import com.example.swen766_bettermaps.data.RITUser;
 
 public class LoggedInActivity extends AppCompatActivity {
 
@@ -15,17 +14,21 @@ public class LoggedInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in);
 
-        // Get the name from the Intent that was passed from LoginActivity
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
+        TextView accountInfoTextView = findViewById(R.id.account_info_text);
 
-        // Find the TextView where the greeting will be displayed
-        TextView greetingTextView = findViewById(R.id.greeting_text_view);
+        // Retrieve RITUser from Intent
+        RITUser ritUser = getIntent().getParcelableExtra("RIT_USER");  // For Parcelable
+        if (ritUser != null) {
+            String displayText = "Welcome, " + ritUser.getFirst_name() +
+                    "\nRIT ID: " + ritUser.getRIT_id() +
+                    "\nEmail: " + ritUser.getEmail();
+            accountInfoTextView.setText(displayText);
+        }
 
-        // Set the greeting message
-        greetingTextView.setText("Hello, " + name);
-
-        // Optionally, you can add functionality to navigate back to the main activity
-        // For example, by adding a back button or a button to open the main content.
+        // Implement sign-out functionality
+        findViewById(R.id.sign_out_button).setOnClickListener(v -> {
+            // Logic for signing out and returning to the login screen
+            finish();
+        });
     }
 }
