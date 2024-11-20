@@ -1,6 +1,5 @@
 package com.example.swen766_bettermaps.ui.home.favorite_locations;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +19,14 @@ import java.util.List;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
     private List<String> favoriteLocations;
-    private Context context;
-    private OnFavoriteDeleteListener deleteListener;
+    private final OnFavoriteDeleteListener deleteListener;
 
     public interface OnFavoriteDeleteListener {
         void onFavoriteDeleted(String location);
     }
 
     // Constructor with deleteListener to communicate with the Fragment/Activity
-    public FavoritesAdapter(Context context, List<String> favoriteLocations, OnFavoriteDeleteListener listener) {
-        this.context = context;
+    public FavoritesAdapter(List<String> favoriteLocations, OnFavoriteDeleteListener listener) {
         this.favoriteLocations = favoriteLocations;
         this.deleteListener = listener;
     }
@@ -38,7 +35,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // inflate the layout for each individual item
-        View view = LayoutInflater.from(context)
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.favorite_item, parent, false);
         return new ViewHolder(view);
     }

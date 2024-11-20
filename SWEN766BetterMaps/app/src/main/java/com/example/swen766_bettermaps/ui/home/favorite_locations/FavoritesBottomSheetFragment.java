@@ -1,6 +1,8 @@
 package com.example.swen766_bettermaps.ui.home.favorite_locations;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.swen766_bettermaps.R;
@@ -11,7 +13,6 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class FavoritesBottomSheetFragment extends BottomSheetDialogFragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         sharedPreferencesHelper = new SharedPreferencesHelper(getContext());
@@ -37,7 +38,7 @@ public class FavoritesBottomSheetFragment extends BottomSheetDialogFragment
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_favorites);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // add some test elements
+        // uncomment to add some test elements when favorites are opened
 //        Set<String> testFavorites = new HashSet<>();
 //        testFavorites.add("Golisano Hall");
 //        testFavorites.add("Tiger Statue");
@@ -51,7 +52,7 @@ public class FavoritesBottomSheetFragment extends BottomSheetDialogFragment
                 new ArrayList<>();
 
         // Set the adapter for the RecyclerView
-        adapter = new FavoritesAdapter(getContext(), favoriteLocations, this::onFavoriteDeleted);
+        adapter = new FavoritesAdapter(favoriteLocations, this);
         recyclerView.setAdapter(adapter);
 
         updateFavoriteList();

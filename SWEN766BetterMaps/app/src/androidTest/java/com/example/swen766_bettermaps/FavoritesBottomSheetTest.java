@@ -9,9 +9,14 @@ import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,13 +40,14 @@ public class FavoritesBottomSheetTest {
 
     @Test
     public void testRecyclerViewDisplaysCorrectItems() {
+
         // open the favorites menu
         onView(withId(R.id.openFavoritesButton)).perform(click());
 
         // Verify that the RecyclerView contains the correct items
-        onView(withText("Tiger Statue")).check(matches(isDisplayed()));
         onView(withText("Golisano Hall")).check(matches(isDisplayed()));
-        onView(withText("Cantina & Grille at Global Village")).check(matches(isDisplayed()));
+        onView(withText("Tiger Statue")).check(matches(isDisplayed()));
+        onView(withText("Midnight Oil")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -54,5 +60,27 @@ public class FavoritesBottomSheetTest {
 
         // check that favorites menu is no longer shown
         onView(withId(R.id.recycler_view_favorites)).check(doesNotExist());
+    }
+
+    @Before
+    public void setUp() {
+        String PREFS_NAME = "favorite_locations";
+        // Get the SharedPreferences instance
+        Context context = ApplicationProvider.getApplicationContext();
+        SharedPreferences sharedPreferences =
+                context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        // Clear SharedPreferences before each test to avoid interference between tests
+        sharedPreferences.edit().clear().apply();
+    }
+
+    // test that opening the favorites menu for the first time loads default values
+    @Test
+    public void firstOpenLoadsDefaults() {
+        // open the filters menu
+        onView(withId(R.id.openFavoritesButton)).perform(click());
+
+        // check that checkboxes have default loaded values
+        onView(withId(R.id.location_name)).check(doesNotExist());
     }
 }
