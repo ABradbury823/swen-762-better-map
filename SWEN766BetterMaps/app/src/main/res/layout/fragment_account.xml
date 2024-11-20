@@ -30,13 +30,15 @@
             android:textSize="16sp" />
 
         <!-- Main content or any other UI elements you want -->
+
+        <!-- Sign Out Button -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="Welcome to the app! This is your logged-in view." />
+            android:text="Welcome to the app!" />
 
-        <!-- Sign Out Button -->
         <Button
             android:id="@+id/sign_out_button"
             android:layout_width="wrap_content"
