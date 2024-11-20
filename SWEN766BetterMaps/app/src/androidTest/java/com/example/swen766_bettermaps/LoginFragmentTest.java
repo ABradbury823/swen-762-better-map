@@ -16,7 +16,7 @@ public class LoginFragmentTest {
     public ActivityScenarioRule<MainActivity> mainActivityScenario = new ActivityScenarioRule<>(MainActivity.class);
 
     /**
-     * Checks if the account navigation button displays the login screen when logged out.
+     * Checks that the account navigation button displays the login screen when logged out.
      */
     @Test
     public void checkLoginNavigation() {
@@ -25,7 +25,7 @@ public class LoginFragmentTest {
     }
 
     /**
-     * Checks if the account navigation button does NOT display the login screen when logged in.
+     * Checks that the account navigation button does NOT display the login screen when logged in.
      */
     @Test
     public void checkAccountNavigation() {

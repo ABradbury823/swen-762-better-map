@@ -25,6 +25,15 @@
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.example.swen766_bettermaps.ui.login.LoginFragment"
-        android:label="Login" />
+        android:label="Login" >
+        <action
+            android:id="@+id/action_navigation_account_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.swen766_bettermaps.ui.login.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 
 </navigation>

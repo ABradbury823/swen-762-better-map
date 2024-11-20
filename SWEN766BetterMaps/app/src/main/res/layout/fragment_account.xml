@@ -5,9 +5,44 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.AccountFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Greeting TextView -->
+        <TextView
+            android:id="@+id/greeting_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Hello!"
+            android:textSize="24sp" />
+
+        <!-- Account Info TextView -->
+        <TextView
+            android:id="@+id/account_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Account Info: [email]"
+            android:textSize="16sp" />
+
+        <!-- Main content or any other UI elements you want -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Welcome to the app! This is your logged-in view." />
+
+        <!-- Sign Out Button -->
+        <Button
+            android:id="@+id/sign_out_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Sign Out" />
+
+    </LinearLayout>
 </FrameLayout>
