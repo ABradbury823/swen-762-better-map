@@ -14,10 +14,28 @@
         android:textSize="24sp"
         android:layout_marginBottom="20dp" />
 
+    <!-- Account Info TextView -->
+    <TextView
+        android:id="@+id/account_info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account Info: [email]"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp" />
+
     <!-- Main content or any other UI elements you want -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to the app! This is your logged-in view." />
+        android:text="Welcome to the app! This is your logged-in view."
+        android:layout_marginBottom="20dp" />
+
+    <!-- Sign Out Button -->
+    <Button
+        android:id="@+id/sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>

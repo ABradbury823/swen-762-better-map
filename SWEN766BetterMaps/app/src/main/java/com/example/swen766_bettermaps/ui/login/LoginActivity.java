@@ -9,11 +9,13 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.swen766_bettermaps.data.RITUser;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -26,8 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.swen766_bettermaps.R;
-import com.example.swen766_bettermaps.ui.login.LoginViewModel;
-import com.example.swen766_bettermaps.ui.login.LoginViewModelFactory;
 import com.example.swen766_bettermaps.databinding.ActivityLoginBinding;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -51,14 +51,6 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        /*BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_account, R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_login);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);*/
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
@@ -153,12 +145,14 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(v -> {
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
+            System.out.println("MADE IT IN");
         });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("MADE IT IN");
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
@@ -166,25 +160,33 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        System.out.println("MADE IT IN");
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            String email = account.getEmail(); // Get email address
-            String displayName = account.getDisplayName(); // Get the user's display name
+            String email = account.getEmail();
+            System.out.println("HERE IS THE EMAIL: " + email);
+            String displayName = account.getDisplayName();
 
-            // Check if email ends with "@rit.edu"
-            boolean isRITAssociated = email != null && email.endsWith("rit.edu");
+            if (email != null && email.endsWith("@g.rit.edu")) {
+                String firstName = displayName != null ? displayName.split(" ")[0] : "User";
+                String ritUsername = email.split("@")[0];
 
-            if (isRITAssociated) {
-                // Pass the user's display name to the LoggedInActivity
+                RITUser ritUser = new RITUser(ritUsername, firstName, email);
+
+                // Log the user info to verify
+                Log.d("LoginSuccess", "User: " + ritUser.getFirst_name() + ", Email: " + ritUser.getEmail());
+
                 Intent loggedInIntent = new Intent(LoginActivity.this, LoggedInActivity.class);
-                loggedInIntent.putExtra("name", displayName); // Pass the name here
+                loggedInIntent.putExtra("RIT_USER", ritUser);
                 startActivity(loggedInIntent);
-                finish(); // Close the login activity
+                finish();
             } else {
                 Toast.makeText(this, "Only RIT-associated emails are allowed", Toast.LENGTH_SHORT).show();
             }
         } catch (ApiException e) {
-            Toast.makeText(this, "Sign-in failed. Status Code: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();        }
+            Log.e("SignInError", "Sign-in failed: " + e.getStatusCode());
+            Toast.makeText(this, "Sign-in failed. Status Code: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
