@@ -4,12 +4,14 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
+    <!-- Display map pin icon -->
     <ImageView
         android:id="@+id/location_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_location" />
 
+    <!-- Display name of location -->
     <TextView
         android:id="@+id/location_name"
         android:layout_width="wrap_content"

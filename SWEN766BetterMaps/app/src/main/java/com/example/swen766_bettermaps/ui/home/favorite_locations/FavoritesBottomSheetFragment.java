@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class FavoritesBottomSheetFragment extends BottomSheetDialogFragment {
-    // TODO: add comments to all favorites files
+
     private RecyclerView recyclerView;
     private List<String> favoriteLocations;
 
@@ -28,11 +28,11 @@ public class FavoritesBottomSheetFragment extends BottomSheetDialogFragment {
         // Inflate the layout for the bottom sheet
         View view = inflater.inflate(R.layout.favorite_locations_menu, container, false);
 
-        // Initialize the RecyclerView
+        // Initialize the RecyclerView - arrange items in a list
         recyclerView = view.findViewById(R.id.recycler_view_favorites);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Sample data (replace with actual favorite locations)
+        // Sample data (replace with loaded data)
         favoriteLocations = new ArrayList<>();
         favoriteLocations.add("Tiger Statue");
         favoriteLocations.add("Golisano Hall");
