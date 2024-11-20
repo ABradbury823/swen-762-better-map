@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
-//        System.out.println(autocompleteFragment);
+        System.out.println(autocompleteFragment);
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -87,7 +87,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-
         LatLng TigerStatue = new LatLng(43.084180,-77.675593);
         mMap.addMarker(new MarkerOptions().position(TigerStatue).title("Tiger Statue"));
 
