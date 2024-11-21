@@ -11,9 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    # defaults:
-    #   run:
-    #     working-directory: ~/swen-762-better-map/SWEN766BetterMaps
+    defaults:
+      run:
+        working-directory: ./SWEN766BetterMaps
 
     steps:
     - uses: actions/checkout@v4
