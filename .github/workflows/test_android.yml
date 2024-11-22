@@ -48,6 +48,6 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Run Unit Tests
-      run: ./gradlew testDebugUnitTest
+      run: ./gradlew testReleaseUnitTest
     # - name: Run Instrumented Tests
     #   run: ./gradlew connectedAndroidTest
