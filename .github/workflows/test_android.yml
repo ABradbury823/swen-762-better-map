@@ -21,14 +21,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
-    - name: Update Android SDK Command-Line Tools
-      run: |
-        sdkmanager --update
-        sdkmanager --install "cmdline-tools;latest"
-
-    - name: Install Android Emulator
-      run: |
-        sdkmanager "platform-tools" "platforms;android-33" "system-images;android-33;google_apis;x86_64" "emulator"
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
     
 
     - name: Grant execute permission for gradlew
