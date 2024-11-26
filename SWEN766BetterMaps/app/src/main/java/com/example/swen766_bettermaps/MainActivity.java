@@ -2,12 +2,12 @@ package com.example.swen766_bettermaps;
 
 import android.os.Bundle;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import android.view.View;
+import android.widget.ImageButton;
+
+import com.example.swen766_bettermaps.ui.home.favorite_locations.FavoritesBottomSheetFragment;
+import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +18,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.swen766_bettermaps.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +30,40 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
+        AppBarConfiguration appBarConfiguration;
+        if (getIntent().getParcelableExtra("RIT_USER") == null) {
+            appBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.navigation_account, R.id.navigation_home)
+                    .build();
+        } else {
+            appBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.accountFragment, R.id.navigation_home)
+                    .build();
+        }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // Initialize the map
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
+
+        // button to open filters
+        ImageButton openFilterButton = findViewById(R.id.openRouteFilterButton);
+        openFilterButton.setOnClickListener(this::openRouteFilters);
+
+        // button to open favorites
+        ImageButton openFavoritesButton = findViewById(R.id.openFavoritesButton);
+        openFavoritesButton.setOnClickListener(this::openFavorites);
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+    // opens the route filters popup menu
+    public void openRouteFilters(View view) {
+        RouteFilterPopupWindow routeFilterPopupWindow =
+                new RouteFilterPopupWindow(MainActivity.this);
+        routeFilterPopupWindow.show(view);
+    }
 
-        // Add a marker and move the camera
-        LatLng RIT = new LatLng(43.0839295, -77.680005); // Example coordinates (Sydney)
-        mMap.addMarker(new MarkerOptions().position(RIT).title("Golisano Hall on RIT Campus"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(RIT, 10)); // Zoom level 10
+    // opens the favorites menu
+    public void openFavorites(View view) {
+        FavoritesBottomSheetFragment favorites = new FavoritesBottomSheetFragment();
+        favorites.show(getSupportFragmentManager(), favorites.getTag());
     }
 }

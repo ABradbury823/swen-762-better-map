@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/routeFilterMenu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/routeFilterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Route Filter Options"
+        android:textSize="18sp"
+        android:paddingBottom="8dp" />
+
+    <CheckBox
+        android:id="@+id/fastestRouteCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fastest route"
+        android:tooltipText="Disable to ignore fastest route."
+        android:checked="true"/>
+
+    <CheckBox
+        android:id="@+id/indoorsOnlyCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Indoors only"
+        android:tooltipText="Enable to minimize outdoor routing."/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:paddingBottom="16dp">
+
+        <Button
+            android:id="@+id/applyRouteFilterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Apply Filters" />
+
+        <Button
+            android:id="@+id/closeRouteFilterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Close" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
