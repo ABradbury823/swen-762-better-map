@@ -11,7 +11,7 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
+    <!--<fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.swen766_bettermaps.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
@@ -21,5 +21,24 @@
         android:id="@+id/navigation_notifications"
         android:name="com.example.swen766_bettermaps.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" />-->
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.example.swen766_bettermaps.ui.login.LoginFragment"
+        android:label="Login" >
+        <action
+            android:id="@+id/action_navigation_account_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.swen766_bettermaps.ui.login.AccountFragment"
+        android:label="Account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/navigation_account" />
+    </fragment>
+
 </navigation>
