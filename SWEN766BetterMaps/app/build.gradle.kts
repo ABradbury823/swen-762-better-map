@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.adarshr.test-logger") version "4.0.0" apply true
 }
 
 android {
@@ -34,6 +35,11 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+    }
+    // Encapsulates options for running tests.
+    testOptions {
+        reportDir = "$rootDir/test-reports"
+        resultsDir = "$rootDir/test-results"
     }
 }
 
