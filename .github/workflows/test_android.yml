@@ -32,7 +32,7 @@ jobs:
     # - name: Build with Gradle
     #   run: ./gradlew build
     - name: Run Unit Tests
-      run: ./gradlew testReleaseUnitTest
+      run: ./gradlew testReleaseUnitTest -i
 
     # - name: Run Instrumented Tests
     #   uses: reactivecircus/android-emulator-runner@v2
