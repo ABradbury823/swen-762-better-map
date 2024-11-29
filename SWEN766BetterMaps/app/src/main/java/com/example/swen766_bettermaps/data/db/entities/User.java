@@ -1,10 +1,11 @@
 package com.example.swen766_bettermaps.data.db.entities;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.example.swen766_bettermaps.data.db.types.UserRoleConverter;
 import com.example.swen766_bettermaps.data.db.types.UserRole;
 
 /**
@@ -16,13 +17,13 @@ public class User {
     private int id;
 
     @NonNull
-    @ColumnInfo(name = "username")
     private String username;
+
     @NonNull
-    @ColumnInfo(name = "email")
     private String email;
+
     @NonNull
-    @ColumnInfo(name = "role")
+    @TypeConverters(UserRoleConverter.class)
     private UserRole role;
 
 

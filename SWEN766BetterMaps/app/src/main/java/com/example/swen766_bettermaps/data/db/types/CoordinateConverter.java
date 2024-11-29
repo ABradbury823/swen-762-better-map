@@ -2,21 +2,10 @@ package com.example.swen766_bettermaps.data.db.types;
 
 import androidx.room.TypeConverter;
 
-import com.example.swen766_bettermaps.data.db.entities.User;
-
-public class Converter {
-    // convert UserRole to String (for db storage)
-    @TypeConverter
-    public static String fromUserRole(UserRole userRole) {
-        return userRole.name();
-    }
-
-    // convert String back to UserRole (reading from db)
-    @TypeConverter
-    public static UserRole toUserRole(String userRole) {
-        return UserRole.valueOf(userRole);
-    }
-
+/**
+ * Class responsible for converting the Coordinate class into a database-safe String entry.
+ */
+public class CoordinateConverter {
     // convert Coordinate to String (for db storage)
     @TypeConverter
     public static String fromCoordinate(Coordinate coordinate) {
