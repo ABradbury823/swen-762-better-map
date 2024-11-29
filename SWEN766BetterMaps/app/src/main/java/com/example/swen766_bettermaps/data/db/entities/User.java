@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey;
 
 import com.example.swen766_bettermaps.data.db.types.UserRole;
 
+/**
+ * Entity representing a user of BetterMaps.
+ */
 @Entity(tableName = "users")
 public class User {
     @PrimaryKey(autoGenerate = true)
@@ -23,6 +26,12 @@ public class User {
     private UserRole role;
 
 
+    /**
+     * Constructs a User.
+     * @param username the user's username.
+     * @param email the user's email.
+     * @param role the user's role (STUDENT, FACULTY, ADMIN).
+     */
     public User(@NonNull String username, @NonNull String email, @NonNull UserRole role) {
         this.username = username;
         this.email = email;
@@ -31,12 +40,15 @@ public class User {
 
     public int getId() { return id; }
 
+    @NonNull
     public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public void setUsername(@NonNull String username) { this.username = username; }
 
+    @NonNull
     public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(@NonNull String email) { this.email = email; }
 
+    @NonNull
     public UserRole getRole() { return role; }
-    public void setUserRole(UserRole role) { this.role = role; }
+    public void setUserRole(@NonNull UserRole role) { this.role = role; }
 }
