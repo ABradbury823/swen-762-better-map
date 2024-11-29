@@ -1,14 +1,25 @@
 package com.example.swen766_bettermaps.data.db.types;
 
+/**
+ * Represents a map coordinate measuring latitudinal and longitudinal degrees.
+ */
 public class Coordinate {
     private float latitude;
     private float longitude;
 
-    Coordinate(float latitude, float longitude) {
+    /**
+     * Constructs a Coordinate.
+     * @param latitude Latitude, in degrees.
+     * @param longitude Longitude, in degrees.
+     */
+    public Coordinate(float latitude, float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
+    /**
+     * Constructs a Coordinate with default location of (0.0, 0.0).
+     */
     public Coordinate() {
         this(0.0f, 0.0f);
     }
