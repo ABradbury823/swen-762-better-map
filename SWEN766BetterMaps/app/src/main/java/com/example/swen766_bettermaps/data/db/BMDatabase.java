@@ -8,7 +8,7 @@ import com.example.swen766_bettermaps.data.db.entities.User;
 
 /**
  * A database using Room for the BetterMaps application.
- * Initialize the singleton instance with <code>Room.databaseBuilder()</code>
+ * <br>Initialize the singleton instance with <code>Room.databaseBuilder()</code>
  */
 @Database(entities = {User.class}, version = 1, exportSchema = false)
 public abstract class BMDatabase extends RoomDatabase {
