@@ -1,5 +1,7 @@
 package com.example.swen766_bettermaps.data.db.entities;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,11 +12,18 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @NonNull
+    @ColumnInfo(name = "username")
     private String username;
+    @NonNull
+    @ColumnInfo(name = "email")
     private String email;
+    @NonNull
+    @ColumnInfo(name = "role")
     private UserRole role;
 
-    public User(String username, String email, UserRole role) {
+
+    public User(@NonNull String username, @NonNull String email, @NonNull UserRole role) {
         this.username = username;
         this.email = email;
         this.role = role;
