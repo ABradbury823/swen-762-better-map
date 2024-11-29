@@ -2,11 +2,14 @@ package com.example.swen766_bettermaps.data.db.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
 import com.example.swen766_bettermaps.data.db.types.CoordinateConverter;
+
+import java.util.List;
 
 /**
  * Entity representing a location in Better Maps.
@@ -28,6 +31,9 @@ public class Location {
     @NonNull
     @TypeConverters(CoordinateConverter.class)
     private Coordinate coordinates;
+
+    @Ignore
+    private List<User> favoriteUsers;    // will be populated by join table
 
     /**
      * Constructs a Location.
@@ -60,24 +66,25 @@ public class Location {
 
     @NonNull
     public String getName() { return name; }
-
     public void setName(@NonNull String name) { this.name = name; }
 
     @NonNull
     public String getDescription() { return description; }
-
     public void setDescription(@NonNull String description) { this.description = description; }
 
     @NonNull
     public String getAddress() { return address; }
-
     public void setAddress(@NonNull String address) { this.address = address; }
 
     @NonNull
     public Coordinate getCoordinates() { return coordinates; }
-
     public void setCoordinates(@NonNull Coordinate coordinates) { this.coordinates = coordinates; }
     public void setCoordinates(float latitude, float longitude) {
         this.coordinates = new Coordinate(latitude, longitude);
+    }
+
+    public List<User> getFavoriteUsers() { return favoriteUsers; }
+    public void setFavoriteUsers(List<User> favoriteUsers) {
+        this.favoriteUsers = favoriteUsers;
     }
 }

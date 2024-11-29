@@ -2,11 +2,14 @@ package com.example.swen766_bettermaps.data.db.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.swen766_bettermaps.data.db.types.UserRoleConverter;
 import com.example.swen766_bettermaps.data.db.types.UserRole;
+
+import java.util.List;
 
 /**
  * Entity representing a user of BetterMaps.
@@ -26,6 +29,8 @@ public class User {
     @TypeConverters(UserRoleConverter.class)
     private UserRole role;
 
+    @Ignore
+    private List<Location> favoriteLocations;   // will be filled by join table
 
     /**
      * Constructs a User.
@@ -51,5 +56,10 @@ public class User {
 
     @NonNull
     public UserRole getRole() { return role; }
-    public void setUserRole(@NonNull UserRole role) { this.role = role; }
+    public void setRole(@NonNull UserRole role) { this.role = role; }
+
+    public List<Location> getFavoriteLocations() { return favoriteLocations; }
+    public void setFavoriteLocations(List<Location> favoriteLocations) {
+        this.favoriteLocations = favoriteLocations;
+    }
 }
