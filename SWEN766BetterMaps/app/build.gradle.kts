@@ -60,6 +60,10 @@ dependencies {
     implementation(libs.annotation)
     implementation(libs.legacy.support.v4)
 
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.lifecycle.extensions)
+
 
     testImplementation(libs.junit)
     testImplementation("org.mockito:mockito-core:4.0.0")
