@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 
 /**
  * A join table between Locations and their Amenities.
@@ -24,6 +25,11 @@ import androidx.room.Ignore;
             childColumns = "amenity_id",
             onDelete = ForeignKey.CASCADE
         )
+    },
+    // index on foreign keys to improve select, filter, and join queries
+    indices = {
+        @Index(value = "location_id"),
+        @Index(value = "amenity_id")
     }
 )
 public class LocationAmenity {

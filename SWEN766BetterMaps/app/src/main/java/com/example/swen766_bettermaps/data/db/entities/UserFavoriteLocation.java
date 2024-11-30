@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 
 /**
  * A join table between Users and their favorite Locations.
@@ -22,7 +23,12 @@ import androidx.room.Ignore;
             parentColumns = "id",
             childColumns = "location_id",
             onDelete = ForeignKey.CASCADE)
-        }
+    },
+    // index on foreign keys to improve select, filter, and join queries
+    indices = {
+        @Index(value = "user_id"),
+        @Index(value = "location_id")
+    }
 )
 public class UserFavoriteLocation {
 
