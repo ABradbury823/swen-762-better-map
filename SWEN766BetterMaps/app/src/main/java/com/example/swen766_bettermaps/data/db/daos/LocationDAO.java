@@ -57,7 +57,8 @@ public interface LocationDAO {
      * @param amenityId The id of the amenity.
      * @return A connection between a location and an amenity. Null if there is no connection.
      */
-    @Query("SELECT * FROM favorites WHERE user_id = :userId AND location_id = :locationId")
+    @Query("SELECT * FROM location_amenities " +
+        "WHERE location_id = :locationId AND amenity_id = :amenityId")
     LocationAmenity getLocationAmenity(int locationId, int amenityId);
 
     /**
