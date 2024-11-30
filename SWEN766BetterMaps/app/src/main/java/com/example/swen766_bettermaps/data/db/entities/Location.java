@@ -38,7 +38,7 @@ public class Location {
     @Relation(
         parentColumn = "id",                        // primary key in location
         entityColumn = "address_id",                // foreign key in join table
-        associateBy = @Junction(Favorites.class)    // join table
+        associateBy = @Junction(UserFavoriteLocation.class)    // join table
     )
     private List<User> favoriteUsers;    // will be populated by join table
 
@@ -66,7 +66,10 @@ public class Location {
      * @param name The location's name.
      */
     public Location(@NonNull String name) {
-        this(name, "", "", new Coordinate());
+        this(name,
+            "No description available",
+            "No address available",
+            new Coordinate());
     }
 
     public int getId() { return id; }
