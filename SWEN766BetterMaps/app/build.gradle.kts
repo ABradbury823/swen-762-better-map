@@ -65,8 +65,8 @@ dependencies {
     implementation(libs.lifecycle.extensions)
 
 
-    testImplementation(libs.junit)
-    testImplementation("org.mockito:mockito-core:4.0.0")
+    testImplementation(libs.junit)                  // impl. for test module
+    androidTestImplementation(libs.mockito.core)    // impl. for androidTest module
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 

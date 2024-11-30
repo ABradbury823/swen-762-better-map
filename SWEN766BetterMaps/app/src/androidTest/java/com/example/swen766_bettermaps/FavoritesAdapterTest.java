@@ -1,23 +1,19 @@
 package com.example.swen766_bettermaps;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.swen766_bettermaps.ui.home.favorite_locations.FavoritesAdapter;
-import com.example.swen766_bettermaps.ui.home.favorite_locations.FavoritesBottomSheetFragment;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FavoritesAdapterTest {
