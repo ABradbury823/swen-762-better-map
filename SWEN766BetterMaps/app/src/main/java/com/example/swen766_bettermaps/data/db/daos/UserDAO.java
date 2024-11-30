@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.swen766_bettermaps.data.db.entities.User;
@@ -41,9 +42,11 @@ public interface UserDAO {
 
     /**
      * Retrieves a user from the users table based on their id.
+     * <br>Also retrieves the user's favorite locations.
      * @param userId The user's ID.
      * @return The user, or null if the id does not match to a user.
      */
+    @Transaction
     @Query("SELECT * FROM users WHERE id = :userId LIMIT 1")
     User getUserById(int userId);
 
@@ -64,6 +67,15 @@ public interface UserDAO {
      */
     @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
     User getUserByEmail(String email);
+
+    /**
+     * Retrieves a connection between a user and a location from the favorites table.
+     * @param userId The id of the user.
+     * @param locationId The id of the location.
+     * @return A connection between a user and a location. Null if there is no connection.
+     */
+    @Query("SELECT * FROM favorites WHERE user_id = :userId AND location_id = :locationId")
+    UserFavoriteLocation getUserFavoriteLocation(int userId, int locationId);
 
     /**
      * Updates a user in the users table.
