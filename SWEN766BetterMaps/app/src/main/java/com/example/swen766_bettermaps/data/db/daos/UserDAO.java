@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.swen766_bettermaps.data.db.entities.User;
+import com.example.swen766_bettermaps.data.db.entities.UserFavoriteLocation;
 
 import java.util.List;
 
@@ -22,6 +23,14 @@ public interface UserDAO {
      */
     @Insert
     void insert(User user);
+
+    /**
+     * Inserts a new favorite location for a user into the favorites table.
+     * @param userFavoriteLocation A link between an existing user and an existing location
+     *                             in the format (userId, locationId).
+     */
+    @Insert
+    void insertFavoriteLocation(UserFavoriteLocation userFavoriteLocation);
 
     /**
      * Retrieves all users from the users table.
@@ -69,4 +78,12 @@ public interface UserDAO {
      */
     @Delete
     void delete(User user);
+
+    /**
+     * Removes a location from the favorites table.
+     * @param userFavoriteLocation A link between an existing user and an existing location
+     *                             in the format (userId, locationId).
+     */
+    @Delete
+    void deleteFavoriteLocation(UserFavoriteLocation userFavoriteLocation);
 }

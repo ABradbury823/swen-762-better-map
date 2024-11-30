@@ -23,13 +23,18 @@ import androidx.room.ForeignKey;
             onDelete = ForeignKey.CASCADE)
         }
 )
-public class Favorites {
+public class UserFavoriteLocation {
 
     @ColumnInfo(name = "user_id")
     private int userId;
 
     @ColumnInfo(name = "location_id")
     private int locationId;
+
+    public UserFavoriteLocation(int userId, int locationId) {
+        this.userId = userId;
+        this.locationId = locationId;
+    }
 
     public int getUserId() { return userId; }
 

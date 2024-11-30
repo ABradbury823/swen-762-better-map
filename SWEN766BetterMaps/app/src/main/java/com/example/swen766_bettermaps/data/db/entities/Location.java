@@ -3,7 +3,9 @@ package com.example.swen766_bettermaps.data.db.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Junction;
 import androidx.room.PrimaryKey;
+import androidx.room.Relation;
 import androidx.room.TypeConverters;
 
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
@@ -33,6 +35,11 @@ public class Location {
     private Coordinate coordinates;
 
     @Ignore
+    @Relation(
+        parentColumn = "id",                        // primary key in location
+        entityColumn = "address_id",                // foreign key in join table
+        associateBy = @Junction(Favorites.class)    // join table
+    )
     private List<User> favoriteUsers;    // will be populated by join table
 
     /**
