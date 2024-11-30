@@ -32,7 +32,7 @@ public interface LocationDAO {
 
     /**
      * Retrieves a location from the locations table based on its id.
-     * @param locationId The user's id.
+     * @param locationId The location's id.
      * @return The location that matches the id,
      * or null if the id does not match to a location.
      */
