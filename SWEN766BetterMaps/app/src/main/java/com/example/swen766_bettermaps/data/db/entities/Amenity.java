@@ -28,17 +28,39 @@ public class Amenity {
     @Relation(
         parentColumn = "id",
         entityColumn = "amenity_id",
-        associateBy = @Junction(LocationAmenities.class)
+        associateBy = @Junction(LocationAmenity.class)
     )
     private List<Location> includedLocations;
 
+    // default constructor for Room functionality
+    public Amenity(){
+        initLists();
+    }
+
+    /***
+     * Constructs an Amenity.
+     * @param name The name of the amenity.
+     * @param description A description of the amenity.
+     */
+    @Ignore
     public Amenity(@NonNull String name, @NonNull String description) {
         this.name = name;
         this.description = description;
+        initLists();
     }
 
+    /**
+     * Constructs an amenity with a default description.
+     * @param name The name of the amenity.
+     */
+    @Ignore
     public Amenity(@NonNull String name) {
         this(name, "No description available");
+    }
+
+    @Ignore
+    private void initLists() {
+        this.includedLocations = new ArrayList<>();
     }
 
     @NonNull

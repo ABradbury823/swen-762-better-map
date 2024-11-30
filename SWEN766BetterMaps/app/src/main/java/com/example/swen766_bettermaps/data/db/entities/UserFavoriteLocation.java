@@ -26,10 +26,15 @@ import androidx.room.ForeignKey;
 public class UserFavoriteLocation {
 
     @ColumnInfo(name = "user_id")
-    private final int userId;
+    private int userId;
 
     @ColumnInfo(name = "location_id")
-    private final int locationId;
+    private int locationId;
+
+    // Default constructor for Room functionality
+    public UserFavoriteLocation() {
+
+    }
 
     /**
      * Constructs a join relationship between a User and a favorite Location.

@@ -25,19 +25,24 @@ import androidx.room.ForeignKey;
         )
     }
 )
-public class LocationAmenities {
+public class LocationAmenity {
     @ColumnInfo(name = "location_id")
-    private final int locationId;
+    private int locationId;
 
     @ColumnInfo(name = "amenity_id")
-    private final int amenityId;
+    private int amenityId;
+
+    // Default constructor for Room functionality
+    public LocationAmenity() {
+
+    }
 
     /**
      * Constructs a join relationship between a Location and an Amenity.
      * @param locationId The id of the Location.
      * @param amenityId The id of the Amenity.
      */
-    public LocationAmenities(int locationId, int amenityId) {
+    public LocationAmenity(int locationId, int amenityId) {
         this.locationId = locationId;
         this.amenityId = amenityId;
     }

@@ -40,16 +40,28 @@ public class User {
     )
     private List<Location> favoriteLocations;   // will be filled by join table
 
+    // Default constructor for Room functionality
+    public User() {
+        initLists();
+    }
+
     /**
      * Constructs a User.
      * @param username the user's username.
      * @param email the user's email.
      * @param role the user's role (STUDENT, FACULTY, ADMIN).
      */
+    @Ignore
     public User(@NonNull String username, @NonNull String email, @NonNull UserRole role) {
         this.username = username;
         this.email = email;
         this.role = role;
+        initLists();
+    }
+
+    @Ignore
+    private void initLists() {
+        this.favoriteLocations = new ArrayList<>();
     }
 
     public int getId() { return id; }

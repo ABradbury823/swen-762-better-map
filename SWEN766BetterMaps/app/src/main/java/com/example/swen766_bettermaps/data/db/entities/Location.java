@@ -47,9 +47,14 @@ public class Location {
     @Relation(
         parentColumn = "id",
         entityColumn = "location_id",
-        associateBy = @Junction(LocationAmenities.class)
+        associateBy = @Junction(LocationAmenity.class)
     )
     private List<Amenity> amenities;
+
+    // default constructor for Room functionality
+    public Location(){
+        initLists();
+    }
 
     /**
      * Constructs a Location.
@@ -58,6 +63,7 @@ public class Location {
      * @param address The location's address.
      * @param coordinates The location's coordinates.
      */
+    @Ignore
     public Location(@NonNull String name,
                     @NonNull String description,
                     @NonNull String address,
@@ -66,6 +72,7 @@ public class Location {
         this.description = description;
         this.address = address;
         this.coordinates = coordinates;
+        initLists();
     }
 
     /**
@@ -74,11 +81,18 @@ public class Location {
      * <br>&emsp;Coordinates are set to (0.0, 0.0) by default.
      * @param name The location's name.
      */
+    @Ignore
     public Location(@NonNull String name) {
         this(name,
             "No description available",
             "No address available",
             new Coordinate());
+    }
+
+    @Ignore
+    private void initLists() {
+        this.favoriteUsers = new ArrayList<>();
+        this.amenities = new ArrayList<>();
     }
 
     public int getId() { return id; }
@@ -104,6 +118,7 @@ public class Location {
 
     public List<User> getFavoriteUsers() { return favoriteUsers; }
     public void setFavoriteUsers(List<User> favoriteUsers) {
+        if(favoriteUsers == null) return;
         this.favoriteUsers = favoriteUsers;
     }
 
@@ -112,9 +127,6 @@ public class Location {
      * @param user The user to add.
      */
     public void addFavoriteUser(User user) {
-        if(favoriteUsers == null) {
-            favoriteUsers = new ArrayList<>();
-        }
         favoriteUsers.add(user);
     }
 
@@ -123,12 +135,12 @@ public class Location {
      * @param user The user to remove.
      */
     public void removeFavoriteUser(User user) {
-        if(favoriteUsers == null) return;
         favoriteUsers.remove(user);
     }
 
     public List<Amenity> getAmenities() { return amenities; }
     public void setAmenities(List<Amenity> amenities) {
+        if(amenities == null) return;
         this.amenities = amenities;
     }
 
@@ -137,9 +149,6 @@ public class Location {
      * @param amenity The amenity to add.
      */
     public void addAmenity(Amenity amenity) {
-        if(amenities == null) {
-            amenities = new ArrayList<>();
-        }
         amenities.add(amenity);
     }
 
@@ -148,7 +157,6 @@ public class Location {
      * @param amenity The amenity to remove.
      */
     public void removeAmenity(Amenity amenity) {
-        if(amenities == null) return;
         amenities.remove(amenity);
     }
 }
