@@ -53,6 +53,10 @@ public class Location {
 
     // default constructor for Room functionality
     public Location(){
+        this.name = "";
+        this.description = "";
+        this.address = "";
+        this.coordinates = new Coordinate();
         initLists();
     }
 

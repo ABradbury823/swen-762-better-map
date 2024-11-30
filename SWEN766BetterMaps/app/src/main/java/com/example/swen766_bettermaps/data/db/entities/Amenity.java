@@ -34,6 +34,8 @@ public class Amenity {
 
     // default constructor for Room functionality
     public Amenity(){
+        this.name = "";
+        this.description = "";
         initLists();
     }
 

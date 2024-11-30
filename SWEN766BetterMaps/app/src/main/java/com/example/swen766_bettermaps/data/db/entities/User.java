@@ -42,6 +42,9 @@ public class User {
 
     // Default constructor for Room functionality
     public User() {
+        this.username = "";
+        this.email = "";
+        this.role = UserRole.NONE;
         initLists();
     }
 
