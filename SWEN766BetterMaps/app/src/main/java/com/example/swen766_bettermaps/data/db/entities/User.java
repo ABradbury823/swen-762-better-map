@@ -11,6 +11,7 @@ import androidx.room.TypeConverters;
 import com.example.swen766_bettermaps.data.db.types.UserRoleConverter;
 import com.example.swen766_bettermaps.data.db.types.UserRole;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class User {
     @Relation(
         parentColumn = "id",                        // primary key in user
         entityColumn = "user_id",                   // foreign key in join table
-        associateBy = @Junction(Favorites.class)    // join table
+        associateBy = @Junction(UserFavoriteLocation.class)    // join table
     )
     private List<Location> favoriteLocations;   // will be filled by join table
 
@@ -68,5 +69,26 @@ public class User {
     public List<Location> getFavoriteLocations() { return favoriteLocations; }
     public void setFavoriteLocations(List<Location> favoriteLocations) {
         this.favoriteLocations = favoriteLocations;
+    }
+
+    /**
+     * Adds a location to the user's favorite locations.
+     * @param location The location to add.
+     */
+    public void addFavoriteLocation(Location location) {
+        if(favoriteLocations == null) {
+            favoriteLocations = new ArrayList<>();
+        }
+        favoriteLocations.add(location);
+    }
+
+    /**
+     * Removes a location from the user's favorite locations.
+     * @param location The location to remove.
+     */
+    public void removeFavoriteLocation(Location location) {
+        if(favoriteLocations == null) return;
+
+        favoriteLocations.remove(location);
     }
 }

@@ -11,6 +11,7 @@ import androidx.room.TypeConverters;
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
 import com.example.swen766_bettermaps.data.db.types.CoordinateConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,11 +37,19 @@ public class Location {
 
     @Ignore
     @Relation(
-        parentColumn = "id",                        // primary key in location
-        entityColumn = "address_id",                // foreign key in join table
+        parentColumn = "id",                            // primary key in location
+        entityColumn = "location_id",                   // foreign key in join table
         associateBy = @Junction(UserFavoriteLocation.class)    // join table
     )
     private List<User> favoriteUsers;    // will be populated by join table
+
+    @Ignore
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "location_id",
+        associateBy = @Junction(LocationAmenities.class)
+    )
+    private List<Amenity> amenities;
 
     /**
      * Constructs a Location.
@@ -96,5 +105,50 @@ public class Location {
     public List<User> getFavoriteUsers() { return favoriteUsers; }
     public void setFavoriteUsers(List<User> favoriteUsers) {
         this.favoriteUsers = favoriteUsers;
+    }
+
+    /**
+     * Adds a user to this location's favorite users.
+     * @param user The user to add.
+     */
+    public void addFavoriteUser(User user) {
+        if(favoriteUsers == null) {
+            favoriteUsers = new ArrayList<>();
+        }
+        favoriteUsers.add(user);
+    }
+
+    /**
+     * Removes a user from this location's favorite users.
+     * @param user The user to remove.
+     */
+    public void removeFavoriteUser(User user) {
+        if(favoriteUsers == null) return;
+        favoriteUsers.remove(user);
+    }
+
+    public List<Amenity> getAmenities() { return amenities; }
+    public void setAmenities(List<Amenity> amenities) {
+        this.amenities = amenities;
+    }
+
+    /**
+     * Adds an amenity to this location's amenities.
+     * @param amenity The amenity to add.
+     */
+    public void addAmenity(Amenity amenity) {
+        if(amenities == null) {
+            amenities = new ArrayList<>();
+        }
+        amenities.add(amenity);
+    }
+
+    /**
+     * Removes an amenity from this location's amenities.
+     * @param amenity The amenity to remove.
+     */
+    public void removeAmenity(Amenity amenity) {
+        if(amenities == null) return;
+        amenities.remove(amenity);
     }
 }
