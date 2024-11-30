@@ -3,6 +3,7 @@ package com.example.swen766_bettermaps.data.db;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
+import com.example.swen766_bettermaps.data.db.daos.AmenityDAO;
 import com.example.swen766_bettermaps.data.db.daos.LocationDAO;
 import com.example.swen766_bettermaps.data.db.daos.UserDAO;
 import com.example.swen766_bettermaps.data.db.entities.Amenity;
@@ -30,4 +31,6 @@ public abstract class BMDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
 
     public abstract LocationDAO locationDAO();
+
+    public abstract AmenityDAO amenityDAO();
 }
