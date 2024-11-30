@@ -65,6 +65,13 @@ public class Amenity {
         this.includedLocations = new ArrayList<>();
     }
 
+    public int getId() { return id; }
+    public void setId(int id) {
+        // only change once (after insertion)
+        if(this.id != 0) return;
+        this.id = id;
+    }
+
     @NonNull
     public String getName() { return name; }
     public void setName(@NonNull String name) { this.name = name; }

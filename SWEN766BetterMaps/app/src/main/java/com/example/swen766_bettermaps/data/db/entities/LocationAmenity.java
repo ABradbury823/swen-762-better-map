@@ -3,6 +3,7 @@ package com.example.swen766_bettermaps.data.db.entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 
 /**
  * A join table between Locations and their Amenities.
@@ -42,12 +43,23 @@ public class LocationAmenity {
      * @param locationId The id of the Location.
      * @param amenityId The id of the Amenity.
      */
+    @Ignore
     public LocationAmenity(int locationId, int amenityId) {
         this.locationId = locationId;
         this.amenityId = amenityId;
     }
 
     public int getLocationId() { return locationId; }
+    public void setLocationId(int locationId) {
+        // only change once (after insertion)
+        if(this.locationId != 0) return;
+        this.locationId = locationId;
+    }
 
     public int getAmenityId() { return amenityId; }
+    public void setAmenityId(int amenityId) {
+        // only change once (after insertion)
+        if(this.amenityId != 0) return;
+        this.amenityId = amenityId;
+    }
 }
