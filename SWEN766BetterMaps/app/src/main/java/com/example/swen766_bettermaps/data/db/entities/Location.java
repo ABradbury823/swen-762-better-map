@@ -182,4 +182,21 @@ public class Location {
             ", coordinates: " + coordinates +
             '}';
     }
+
+    /**
+     * Provides a String representation of a Location, using cardinal direction and degrees
+     * to represent the Location's coordinate.
+     * @return A string representation of a Location.
+     */
+    @NonNull
+    @Ignore
+    public String toStringCardinal() {
+        return "Location{" +
+            "id: " + id +
+            ", name: '" + name + '\'' +
+            ", description: '" + description + '\'' +
+            ", address: '" + address + '\'' +
+            ", coordinates: " + coordinates.toStringDegrees() +
+            '}';
+    }
 }
