@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.swen766_bettermaps.data.db.entities.Amenity;
@@ -32,10 +33,12 @@ public interface AmenityDAO {
 
     /**
      * Retrieves an amenity from the amenities table based on its id.
+     * <br>Also retrieves the amenity's included locations.
      * @param amenityId The amenity's id.
      * @return The amenity that matches the id,
      * or null if the id does not match to an amenity.
      */
+    @Transaction
     @Query("SELECT * FROM amenities WHERE id = :amenityId")
     Amenity getAmenityById(int amenityId);
 
