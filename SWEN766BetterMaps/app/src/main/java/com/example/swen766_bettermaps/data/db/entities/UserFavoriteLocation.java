@@ -56,18 +56,10 @@ public class UserFavoriteLocation {
     }
 
     public int getUserId() { return userId; }
-    public void setUserId(int userId) {
-        // only change once (after insertion)
-        if(this.userId != 0) return;
-        this.userId = userId;
-    }
+    public void setUserId(int userId) { this.userId = userId; }
 
     public int getLocationId() { return locationId; }
-    public void setLocationId(int locationId) {
-        // only change once (after insertion)
-        if(this.locationId != 0) return;
-        this.locationId = locationId;
-    }
+    public void setLocationId(int locationId) { this.locationId = locationId; }
 
     @NonNull
     @Override

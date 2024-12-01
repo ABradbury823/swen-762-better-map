@@ -68,11 +68,7 @@ public class User {
     }
 
     public int getId() { return id; }
-    public void setId(int id) {
-        // only change once (after insertion)
-        if(this.id != 0) return;
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
     @NonNull
     public String getUsername() { return username; }
