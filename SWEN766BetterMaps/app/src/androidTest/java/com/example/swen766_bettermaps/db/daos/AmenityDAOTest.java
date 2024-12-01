@@ -96,7 +96,6 @@ public class AmenityDAOTest {
         String newName = "New Amenity Name";
         String newDesc = "New Amenity Description";
 
-        //dbAmenity.setId(11); // this should do nothing
         dbAmenity.setName(newName);
         dbAmenity.setDescription(newDesc);
 
@@ -107,7 +106,27 @@ public class AmenityDAOTest {
         assertEquals(dbAmenity.getDescription(), updatedAmenity.getDescription());
     }
 
-    // TODO: updating a user that does not exist
+    /**
+     * Tests that updating an amenity that does not exist does nothing
+     */
+    @Test
+    public void testUpdateDoesNotExist() {
+        Amenity amenity = new Amenity("Test Name", "Test Description");
+        amenityDAO.insert(amenity);
+        Amenity dbAmenity = amenityDAO.getAmenityById(1);
+        String newName = "New Amenity Name";
+        String newDesc = "New Amenity Description";
+
+        dbAmenity.setId(10);    // does not exist
+        dbAmenity.setName(newName);
+        dbAmenity.setDescription(newDesc);
+
+        amenityDAO.update(dbAmenity);
+
+        Amenity updatedAmenity = amenityDAO.getAmenityById(10);
+        assertNull(updatedAmenity);
+    }
+
 
     /**
      * Tests that delete removes an Amenity from the database.
@@ -122,5 +141,27 @@ public class AmenityDAOTest {
 
         Amenity deletedAmenity = amenityDAO.getAmenityById(1);
         assertNull(deletedAmenity);
+    }
+
+    /**
+     * Tests that deleting an amenity that does not exist does nothing.
+     */
+    @Test
+    public void testDeleteDoesNotExist() {
+        Amenity[] amenities = {
+            new Amenity("Amenity 1", "Amenity 1 Description"),
+            new Amenity("Amenity 2", "Amenity 2 Description"),
+            new Amenity("Amenity 3", "Amenity 3 Description")
+        };
+        for(Amenity a : amenities) {
+            amenityDAO.insert(a);
+        }
+        Amenity nonExistentAmenity = new Amenity("Amenity Name", "Amenity Desc.");
+        nonExistentAmenity.setId(10);
+        amenityDAO.delete(nonExistentAmenity);
+
+        List<Amenity> retrievedAmenities = amenityDAO.getAllAmenities();
+        assertEquals(amenities.length, retrievedAmenities.size());
+
     }
 }
