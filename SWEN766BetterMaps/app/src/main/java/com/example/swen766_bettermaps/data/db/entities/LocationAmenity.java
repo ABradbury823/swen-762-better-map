@@ -1,5 +1,6 @@
 package com.example.swen766_bettermaps.data.db.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -67,5 +68,15 @@ public class LocationAmenity {
         // only change once (after insertion)
         if(this.amenityId != 0) return;
         this.amenityId = amenityId;
+    }
+
+    @NonNull
+    @Override
+    @Ignore
+    public String toString() {
+        return "LocationAmenity{" +
+            "locationId: " + locationId +
+            ", amenityId: '" + amenityId +
+            '}';
     }
 }

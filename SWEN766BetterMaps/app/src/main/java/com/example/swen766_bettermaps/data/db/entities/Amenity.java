@@ -89,6 +89,7 @@ public class Amenity {
      * Adds a location to this amenity's included locations.
      * @param location The location to remove.
      */
+    @Ignore
     public void addIncludedLocation(Location location) {
         if(includedLocations == null) {
             includedLocations = new ArrayList<>();
@@ -100,9 +101,21 @@ public class Amenity {
      * Removes a location from this amenity's included locations.
      * @param location The location to remove.
      */
+    @Ignore
     public void removeIncludedLocation(Location location) {
         if(includedLocations == null) return;
 
         includedLocations.remove(location);
+    }
+
+    @NonNull
+    @Override
+    @Ignore
+    public String toString() {
+        return "Amenity{" +
+            "id: " + id +
+            ", name: '" + name + '\'' +
+            ", description: '" + description + '\'' +
+            '}';
     }
 }

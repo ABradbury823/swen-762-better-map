@@ -1,5 +1,6 @@
 package com.example.swen766_bettermaps.data.db.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -66,5 +67,15 @@ public class UserFavoriteLocation {
         // only change once (after insertion)
         if(this.locationId != 0) return;
         this.locationId = locationId;
+    }
+
+    @NonNull
+    @Override
+    @Ignore
+    public String toString() {
+        return "UserFavoriteLocation{" +
+            "userId: " + userId +
+            ", locationId: " + locationId +
+            '}';
     }
 }

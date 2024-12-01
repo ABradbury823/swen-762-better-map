@@ -121,6 +121,7 @@ public class Location {
     @NonNull
     public Coordinate getCoordinates() { return coordinates; }
     public void setCoordinates(@NonNull Coordinate coordinates) { this.coordinates = coordinates; }
+    @Ignore
     public void setCoordinates(float latitude, float longitude) {
         this.coordinates = new Coordinate(latitude, longitude);
     }
@@ -135,6 +136,7 @@ public class Location {
      * Adds a user to this location's favorite users.
      * @param user The user to add.
      */
+    @Ignore
     public void addFavoriteUser(User user) {
         favoriteUsers.add(user);
     }
@@ -143,6 +145,7 @@ public class Location {
      * Removes a user from this location's favorite users.
      * @param user The user to remove.
      */
+    @Ignore
     public void removeFavoriteUser(User user) {
         favoriteUsers.remove(user);
     }
@@ -157,6 +160,7 @@ public class Location {
      * Adds an amenity to this location's amenities.
      * @param amenity The amenity to add.
      */
+    @Ignore
     public void addAmenity(Amenity amenity) {
         amenities.add(amenity);
     }
@@ -165,7 +169,21 @@ public class Location {
      * Removes an amenity from this location's amenities.
      * @param amenity The amenity to remove.
      */
+    @Ignore
     public void removeAmenity(Amenity amenity) {
         amenities.remove(amenity);
+    }
+
+    @NonNull
+    @Override
+    @Ignore
+    public String toString() {
+        return "Location{" +
+            "id: " + id +
+            ", name: '" + name + '\'' +
+            ", description: '" + description + '\'' +
+            ", address: '" + address + '\'' +
+            ", coordinates: " + coordinates +
+            '}';
     }
 }
