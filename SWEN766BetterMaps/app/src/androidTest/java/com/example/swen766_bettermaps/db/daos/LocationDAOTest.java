@@ -10,8 +10,12 @@ import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.example.swen766_bettermaps.data.db.BMDatabase;
+import com.example.swen766_bettermaps.data.db.daos.AmenityDAO;
 import com.example.swen766_bettermaps.data.db.daos.LocationDAO;
+import com.example.swen766_bettermaps.data.db.daos.UserDAO;
+import com.example.swen766_bettermaps.data.db.entities.Amenity;
 import com.example.swen766_bettermaps.data.db.entities.Location;
+import com.example.swen766_bettermaps.data.db.entities.LocationAmenity;
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
 
 import org.junit.After;
@@ -22,7 +26,9 @@ import java.util.List;
 
 public class LocationDAOTest {
     private BMDatabase database;
+    private AmenityDAO amenityDAO;
     private LocationDAO locationDAO;
+    private UserDAO userDAO;
 
     // create db before each test
     @Before
@@ -33,7 +39,9 @@ public class LocationDAOTest {
             .allowMainThreadQueries() // main thread use for testing only
             .build();
 
+        amenityDAO = database.amenityDAO();
         locationDAO = database.locationDAO();
+        userDAO = database.userDAO();
     }
 
     // clean up db after each test
@@ -62,7 +70,28 @@ public class LocationDAOTest {
         assertEquals(location.getCoordinates(), retrievedLocation.getCoordinates());
     }
 
-    //TODO: test insertLocationAmenity
+    /**
+     * Tests that insertLocationAmenity adds a connection between a location and an Amenity
+     */
+    @Test
+    public void testInsertLocationAmenity() {
+        Location location = new Location("Location", "Desc.",
+            "Address", new Coordinate());
+        locationDAO.insert(location);
+        Amenity amenity = new Amenity("Amenity", "Amenity Desc.");
+        amenityDAO.insert(amenity);
+
+        location = locationDAO.getLocationById(1);
+        amenity = amenityDAO.getAmenityById(1);
+
+        LocationAmenity locationAmenity =
+            new LocationAmenity(location.getId(), amenity.getId());
+        locationDAO.insertLocationAmenity(locationAmenity);
+
+        // need to make sure getById returns a list,
+        // which requires User's insertFavoriteLocation,
+        // which requires User's getById to return a list.
+    }
 
     /**
      * Tests that getAllLocations retrieves all locations.

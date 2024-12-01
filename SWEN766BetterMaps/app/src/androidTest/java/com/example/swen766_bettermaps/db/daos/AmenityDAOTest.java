@@ -13,6 +13,8 @@ import androidx.test.core.app.ApplicationProvider;
 import com.example.swen766_bettermaps.data.db.BMDatabase;
 import com.example.swen766_bettermaps.data.db.daos.AmenityDAO;
 import com.example.swen766_bettermaps.data.db.entities.Amenity;
+import com.example.swen766_bettermaps.data.db.entities.Location;
+import com.example.swen766_bettermaps.data.db.types.Coordinate;
 
 import org.junit.After;
 import org.junit.Before;
@@ -60,6 +62,21 @@ public class AmenityDAOTest {
     }
 
     //TODO: test getById gets the list of includedLocations (need Location DAO tests first)
+    /**
+     * Tests that getById also retrieves a list of included Locations.
+     */
+    @Test
+    public void testGetIncludedLocations() {
+        Location[] locations = {
+            new Location("Location 1", "Location 1",
+                "Location 1 Address", new Coordinate(25.0f, 25.0f)),
+            new Location("Location 2", "Location 2",
+                "Location 2 Address", new Coordinate(17.8f, -97.3f)),
+            new Location("Location 3", "Location 3",
+                "Location 3 Address", new Coordinate()),
+        };
+
+    }
 
     /**
      * Tests that get all retrieves all elements from the amenities table.

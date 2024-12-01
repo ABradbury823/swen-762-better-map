@@ -10,8 +10,11 @@ import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.example.swen766_bettermaps.data.db.BMDatabase;
+import com.example.swen766_bettermaps.data.db.daos.LocationDAO;
 import com.example.swen766_bettermaps.data.db.daos.UserDAO;
+import com.example.swen766_bettermaps.data.db.entities.Location;
 import com.example.swen766_bettermaps.data.db.entities.User;
+import com.example.swen766_bettermaps.data.db.types.Coordinate;
 import com.example.swen766_bettermaps.data.db.types.UserRole;
 
 import org.junit.After;
@@ -22,6 +25,7 @@ import java.util.List;
 
 public class UserDAOTest {
     private BMDatabase database;
+    private LocationDAO locationDAO;
     private UserDAO userDAO;
 
     // create db before each test
@@ -33,6 +37,7 @@ public class UserDAOTest {
             .allowMainThreadQueries() // main thread use for testing only
             .build();
 
+        locationDAO = database.locationDAO();
         userDAO = database.userDAO();
     }
 
@@ -87,6 +92,32 @@ public class UserDAOTest {
     }
 
     // TODO: test getById retrieves the list of favorite locations (test LocationDAO first)
+    /**
+     * Tests that getById retrieves a list of favorite Locations.
+     */
+    @Test
+    public void testGetFavoriteLocations() {
+        Location[] locations ={
+            new Location("Location 1 Name", "Location 1 Desc.",
+            "Location 1 Address", new Coordinate()),
+            new Location("Location 2 Name", "Location 2 Desc.",
+                "Location 2 Address", new Coordinate()),
+            new Location("Location 3 Name", "Location 3 Desc.",
+                "Location 3 Address", new Coordinate()),
+        };
+        for(Location l : locations) {
+            locationDAO.insert(l);
+        }
+        User user = new User("User 1", "user1@email.com", UserRole.STUDENT);
+        userDAO.insert(user);
+
+        List<Location> dbLocations = locationDAO.getAllLocations();
+        user = userDAO.getUserById(1);
+
+        // this needs a test for inserting user favorites, hmmm cyclical...
+    }
+
+
     // TODO: test getFavoriteLocation
 
     /**
