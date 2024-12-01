@@ -16,19 +16,21 @@ public class CoordinateConverter {
     // convert String to Coordinate (reading from db)
     @TypeConverter
     public static Coordinate toCoordinate(String coordinate) {
-        if(coordinate == null) return null;
         // split entry by comma
-        String[] parts = coordinate.split(",");
-        if(parts.length == 2) {
+        try {
+            String[] parts = coordinate.split(",");
+            if(parts.length == 2) {
             // convert lat. and long. to float
-            try {
                 float latitude = Float.parseFloat(parts[0]);
                 float longitude = Float.parseFloat(parts[1]);
                 return new Coordinate(latitude, longitude);
-            } catch(NumberFormatException nfe) {
-                System.out.println(nfe.getMessage());
-                System.out.println("Converter: latitude and longitude must be floats");
-            }
+        }
+        } catch (NumberFormatException nfe) {
+            System.out.println(nfe.getMessage());
+            System.out.println("Converter: latitude and longitude must be floats");
+        } catch (NullPointerException npe) {
+            System.out.println(npe.getMessage());
+            System.out.println("Coordinate String was null");
         }
         return null;    // invalid length or bad parse
     }
