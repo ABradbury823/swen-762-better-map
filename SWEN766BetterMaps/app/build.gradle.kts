@@ -64,16 +64,14 @@ dependencies {
     androidTestImplementation(libs.mockito.core)    // impl. for androidTest module
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    testImplementation(libs.androidx.core)
-    androidTestImplementation(libs.androidx.core)
+
 
     // Room + Room Testing
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
     implementation(libs.lifecycle.extensions)
-    testImplementation(libs.androidx.room.room.testing)
     androidTestImplementation(libs.androidx.room.room.testing)
-
+    androidTestImplementation(libs.androidx.core)
 
     implementation("com.google.android.gms:play-services-auth:20.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
