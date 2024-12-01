@@ -2,6 +2,7 @@ package com.example.swen766_bettermaps.db.daos;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import android.content.Context;
 
@@ -108,5 +109,20 @@ public class UserDAOTest {
         assertEquals(user.getRole(), retrievedUser.getRole());
     }
 
+    /**
+     * Tests that delete removes a user.
+     */
+    @Test
+    public void testDelete() {
+        User user = new User("Delete Me", "deleted@email.com", UserRole.ADMIN);
+        userDAO.insert(user);
+
+        user = userDAO.getUserById(1);
+
+        userDAO.delete(user);
+
+        User deletedUser = userDAO.getUserById(1);
+        assertNull(deletedUser);
+    }
 
 }
