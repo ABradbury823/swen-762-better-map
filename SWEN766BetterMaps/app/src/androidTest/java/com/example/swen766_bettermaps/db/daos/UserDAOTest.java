@@ -85,5 +85,28 @@ public class UserDAOTest {
         }
     }
 
+    // TODO: test getById retrieves the list of favorite locations (test LocationDAO first)
+    // TODO: test getFavoriteLocation
+
+    /**
+     * Tests that update changes the values of a user
+     */
+    @Test
+    public void testUpdate() {
+        User user = new User("New User", "newuser@email.com", UserRole.NONE);
+        userDAO.insert(user);
+
+        user = userDAO.getUserById(1);
+        user.setUsername("New Name");
+        user.setEmail("newname@email.com");
+        user.setRole(UserRole.FACULTY);
+        userDAO.update(user);
+
+        User retrievedUser = userDAO.getUserById(1);
+        assertEquals(user.getUsername(), retrievedUser.getUsername());
+        assertEquals(user.getEmail(), retrievedUser.getEmail());
+        assertEquals(user.getRole(), retrievedUser.getRole());
+    }
+
 
 }
