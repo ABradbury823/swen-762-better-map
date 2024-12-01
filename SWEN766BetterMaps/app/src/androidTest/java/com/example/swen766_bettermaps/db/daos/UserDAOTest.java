@@ -125,4 +125,6 @@ public class UserDAOTest {
         assertNull(deletedUser);
     }
 
+    //TODO: test deleteFavoriteLocation
+
 }

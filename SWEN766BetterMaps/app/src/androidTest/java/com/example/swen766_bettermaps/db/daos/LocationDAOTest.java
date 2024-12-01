@@ -88,7 +88,32 @@ public class LocationDAOTest {
         }
 
     }
+
     //TODO: test getLocationAmenity
     //TODO: test that getByID retrieves a list of favoriteUsers and amenities
 
+    /**
+     * Tests that update changes the values of a Location.
+     */
+    @Test
+    public void testUpdate() {
+        Location location = new Location("Location Name", "Location Description",
+            "Location Address", new Coordinate(15.0f, -1.53f));
+        locationDAO.insert(location);
+
+        location = locationDAO.getLocationById(1);
+        location.setName("New Location Name");
+        location.setDescription("New Location Description");
+        location.setAddress("New Location Address");
+        location.setCoordinates(43.7f, 74.3f);
+        locationDAO.update(location);
+
+        Location retrievedLocation = locationDAO.getLocationById(1);
+        assertEquals(location.getName(), retrievedLocation.getName());
+        assertEquals(location.getDescription(), retrievedLocation.getDescription());
+        assertEquals(location.getAddress(), retrievedLocation.getAddress());
+        assertEquals(location.getCoordinates(), retrievedLocation.getCoordinates());
+    }
+
+    // TODO: test deleteLocationAmenity
 }
