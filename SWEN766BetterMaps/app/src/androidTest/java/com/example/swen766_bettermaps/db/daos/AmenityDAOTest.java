@@ -3,6 +3,7 @@ package com.example.swen766_bettermaps.db.daos;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import android.content.Context;
 
@@ -85,6 +86,41 @@ public class AmenityDAOTest {
     }
 
     /**
-     *
+     * Tests that update changes an existing Amenity.
      */
+    @Test
+    public void testUpdate() {
+        Amenity amenity = new Amenity("Test Name", "Test Description");
+        amenityDAO.insert(amenity);
+        Amenity dbAmenity = amenityDAO.getAmenityById(1);
+        String newName = "New Amenity Name";
+        String newDesc = "New Amenity Description";
+
+        //dbAmenity.setId(11); // this should do nothing
+        dbAmenity.setName(newName);
+        dbAmenity.setDescription(newDesc);
+
+        amenityDAO.update(dbAmenity);
+
+        Amenity updatedAmenity = amenityDAO.getAmenityById(1);
+        assertEquals(dbAmenity.getName(), updatedAmenity.getName());
+        assertEquals(dbAmenity.getDescription(), updatedAmenity.getDescription());
+    }
+
+    // TODO: updating a user that does not exist
+
+    /**
+     * Tests that delete removes an Amenity from the database.
+     */
+    @Test
+    public void testDelete() {
+        Amenity amenity = new Amenity("Test Name", "Test Description");
+        amenityDAO.insert(amenity);
+        Amenity dbAmenity = amenityDAO.getAmenityById(1);
+
+        amenityDAO.delete(dbAmenity);
+
+        Amenity deletedAmenity = amenityDAO.getAmenityById(1);
+        assertNull(deletedAmenity);
+    }
 }
