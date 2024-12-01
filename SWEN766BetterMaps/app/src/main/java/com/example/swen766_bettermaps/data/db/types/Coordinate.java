@@ -63,7 +63,9 @@ public class Coordinate {
     public boolean equals(Object obj) {
         if(obj instanceof Coordinate) {
             Coordinate c = (Coordinate)obj;
-            return this.latitude == c.latitude && this.longitude == c.longitude;
+            float latDiff = Math.abs(this.latitude - c.latitude);
+            float lonDiff = Math.abs(this.longitude - c.longitude);
+            return latDiff < 0.0001f && lonDiff < 0.0001f;
         }
         return false;
     }
