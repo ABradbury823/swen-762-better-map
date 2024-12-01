@@ -11,8 +11,8 @@ public class Coordinate {
 
     /**
      * Constructs a Coordinate.
-     * @param latitude Latitude, in degrees.
-     * @param longitude Longitude, in degrees.
+     * @param latitude Latitude, in degrees. Clamped between [-90, 90].
+     * @param longitude Longitude, in degrees. Clamped between [-180, 180].
      */
     public Coordinate(float latitude, float longitude) {
         this.latitude = clampCoordinate(latitude, -90.0f, 90.0f);
@@ -39,6 +39,10 @@ public class Coordinate {
 
     public float getLongitude() { return longitude; }
 
+    /**
+     * Sets the longitude. Does nothing if the absolute value of the argument is greater than 180.
+     * @param longitude The new longitude.
+     */
     public void setLongitude(float longitude) {
         if(Math.abs(longitude) > 180.0f) return;
         this.longitude = longitude;
