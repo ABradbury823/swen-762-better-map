@@ -39,6 +39,16 @@ public class CoordinateConverterTest {
     }
 
     /**
+     * Tests that toCoordinate returns null if the provided String is null.
+     */
+    @Test
+    public void testToCoordinateNull() {
+        Coordinate coordinate = CoordinateConverter.toCoordinate(null);
+        assertNull(coordinate);
+    }
+
+
+    /**
      * Tests that toCoordinate returns null if the data has too few arguments (one value/bad delimiter)
      */
     @Test
