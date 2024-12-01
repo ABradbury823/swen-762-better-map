@@ -64,6 +64,8 @@ dependencies {
     androidTestImplementation(libs.mockito.core)    // impl. for androidTest module
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    testImplementation(libs.androidx.core)
+    androidTestImplementation(libs.androidx.core)
 
     // Room + Room Testing
     implementation(libs.room.runtime)
