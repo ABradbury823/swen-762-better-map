@@ -21,4 +21,16 @@ public class UserRoleConverterTest {
         assertEquals(expectedStr, actualStr);
     }
 
+    /**
+     * Tests that toUserRole converts a valid String to a UserRole.
+     */
+    @Test
+    public void testToUserRole() {
+        UserRole role = UserRole.FACULTY;
+        String roleStr = UserRoleConverter.fromUserRole(role);
+
+        UserRole roleFromStr = UserRoleConverter.toUserRole(roleStr);
+        assertEquals(role, roleFromStr);
+    }
+
 }
