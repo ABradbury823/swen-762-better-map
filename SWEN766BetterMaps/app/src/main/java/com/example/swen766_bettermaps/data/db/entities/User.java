@@ -112,7 +112,9 @@ public class User {
         favoriteLocations.remove(location);
     }
 
+    @NonNull
     @Override
+    @Ignore
     public String toString() {
         return "User{" +
             "id: " + id +
