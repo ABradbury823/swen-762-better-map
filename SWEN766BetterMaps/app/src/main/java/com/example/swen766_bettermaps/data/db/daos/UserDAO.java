@@ -51,24 +51,6 @@ public interface UserDAO {
     User getUserById(int userId);
 
     /**
-     * Retrieves a user from the users table based on their username.
-     * @param username The user's username.
-     * @return The first user that matches the username,
-     * or null if the username does not match to a user.
-     */
-    @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
-    User getUserByUsername(String username);
-
-    /**
-     * Retrieves a user from the users table based on their email.
-     * @param email The user's email.
-     * @return The first user that matches the email,
-     * or null if the email does not match to a user.
-     */
-    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
-    User getUserByEmail(String email);
-
-    /**
      * Retrieves a connection between a user and a location from the favorites table.
      * @param userId The id of the user.
      * @param locationId The id of the location.
