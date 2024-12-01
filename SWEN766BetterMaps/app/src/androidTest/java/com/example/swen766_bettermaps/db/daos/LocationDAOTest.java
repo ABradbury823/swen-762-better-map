@@ -17,6 +17,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class LocationDAOTest {
     private BMDatabase database;
     private LocationDAO locationDAO;
@@ -58,4 +60,35 @@ public class LocationDAOTest {
         assertEquals(location.getAddress(), retrievedLocation.getAddress());
         assertEquals(location.getCoordinates(), retrievedLocation.getCoordinates());
     }
+
+    //TODO: test insertLocationAmenity
+
+    /**
+     * Tests that getAllLocations retrieves all locations.
+     */
+    @Test
+    public void testGetAllLocations() {
+        Location[] locations = {
+            new Location("Location 1", "Location 1 Desc.", "Location 1 Address", new Coordinate(50.0f, 50.0f)),
+            new Location("Location 1", "Location 1 Desc.", "Location 1 Address", new Coordinate(85.0f, -120.0f)),
+            new Location("Location 1", "Location 1 Desc.", "Location 1 Address", new Coordinate(-23.0f, 17.182f))
+        };
+        for(Location l : locations) {
+            locationDAO.insert(l);
+        }
+
+        List<Location> retrievedLocations = locationDAO.getAllLocations();
+        assertNotNull(retrievedLocations);
+        assertEquals(locations.length, retrievedLocations.size());
+        for(int i = 0; i < retrievedLocations.size(); i++) {
+            assertEquals(locations[i].getName(), retrievedLocations.get(i).getName());
+            assertEquals(locations[i].getDescription(), retrievedLocations.get(i).getDescription());
+            assertEquals(locations[i].getAddress(), retrievedLocations.get(i).getAddress());
+            assertEquals(locations[i].getCoordinates(), retrievedLocations.get(i).getCoordinates());
+        }
+
+    }
+    //TODO: test getLocationAmenity
+    //TODO: test that getByID retrieves a list of favoriteUsers and amenities
+
 }
