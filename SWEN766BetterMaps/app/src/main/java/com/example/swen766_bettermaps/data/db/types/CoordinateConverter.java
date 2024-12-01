@@ -9,12 +9,14 @@ public class CoordinateConverter {
     // convert Coordinate to String (for db storage)
     @TypeConverter
     public static String fromCoordinate(Coordinate coordinate) {
+        if(coordinate == null) return null;
         return coordinate.getLatitude() + "," + coordinate.getLongitude();
     }
 
     // convert String to Coordinate (reading from db)
     @TypeConverter
     public static Coordinate toCoordinate(String coordinate) {
+        if(coordinate == null) return null;
         // split entry by comma
         String[] parts = coordinate.split(",");
         if(parts.length == 2) {

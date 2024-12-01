@@ -22,4 +22,19 @@ public class CoordinateConverterTest {
         String actualStr = CoordinateConverter.fromCoordinate(coordinate);
         assertEquals(expectedStr, actualStr);
     }
+
+    /**
+     * Tests that toCoordinate converts a comma-separated String into a Coordinate.
+     */
+    @Test
+    public void testToCoordinate() {
+        float lat = 39.85f;
+        float lan = 81.2f;
+        Coordinate expectedCoordinate = new Coordinate(lat, lan);
+        String coordinateStr = CoordinateConverter.fromCoordinate(expectedCoordinate);
+
+        Coordinate actualCoordinate = CoordinateConverter.toCoordinate(coordinateStr);
+        assertEquals(expectedCoordinate, actualCoordinate);
+    }
+
 }

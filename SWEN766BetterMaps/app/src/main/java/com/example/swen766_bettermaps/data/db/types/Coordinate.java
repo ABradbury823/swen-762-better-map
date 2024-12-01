@@ -31,4 +31,14 @@ public class Coordinate {
     public float getLongitude() { return longitude; }
 
     public void setLongitude(float longitude) { this.longitude = longitude; }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Coordinate) {
+            Coordinate c = (Coordinate)obj;
+            return this.latitude == c.latitude && this.longitude == c.longitude;
+        }
+        return false;
+    }
+
 }
