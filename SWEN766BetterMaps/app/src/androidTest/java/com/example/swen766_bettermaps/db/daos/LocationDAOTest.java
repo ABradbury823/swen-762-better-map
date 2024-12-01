@@ -2,6 +2,7 @@ package com.example.swen766_bettermaps.db.daos;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import android.content.Context;
 
@@ -113,6 +114,22 @@ public class LocationDAOTest {
         assertEquals(location.getDescription(), retrievedLocation.getDescription());
         assertEquals(location.getAddress(), retrievedLocation.getAddress());
         assertEquals(location.getCoordinates(), retrievedLocation.getCoordinates());
+    }
+
+    /**
+     * Tests that delete removes a Location.
+     */
+    @Test
+    public void testDelete() {
+        Location location = new Location();
+        locationDAO.insert(location);
+
+        location = locationDAO.getLocationById(1);
+
+        locationDAO.delete(location);
+
+        Location deletedLocation = locationDAO.getLocationById(1);
+        assertNull(deletedLocation);
     }
 
     // TODO: test deleteLocationAmenity
