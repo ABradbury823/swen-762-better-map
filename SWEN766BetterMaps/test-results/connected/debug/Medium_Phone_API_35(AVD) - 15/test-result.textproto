@@ -1,19 +1,227 @@
-# 2024-12-02T05:07:51.612658200Z:
+# 2024-12-02T05:45:48.629817400Z:
 test_suite_meta_data {
-  scheduled_test_case_count: 1
+  scheduled_test_case_count: 7
 }
 test_status: PASSED
 test_result {
   test_case {
-    test_class: "AmenityDAOTest"
+    test_class: "UserDAOTest"
     test_package: "com.example.swen766_bettermaps.db.daos"
-    test_method: "testGetIncludedLocations"
+    test_method: "testInsertAndGetUserFavoriteLocation"
     start_time {
-      seconds: 1733116028
-      nanos: 463000000
+      seconds: 1733118347
+      nanos: 626000000
     }
     end_time {
-      seconds: 1733116070
+      seconds: 1733118347
+      nanos: 755000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testInsertAndGetUserFavoriteLocation.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "UserDAOTest"
+    test_package: "com.example.swen766_bettermaps.db.daos"
+    test_method: "testDeleteFavoriteLocation"
+    start_time {
+      seconds: 1733118347
+      nanos: 769000000
+    }
+    end_time {
+      seconds: 1733118347
+      nanos: 798000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testDeleteFavoriteLocation.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "UserDAOTest"
+    test_package: "com.example.swen766_bettermaps.db.daos"
+    test_method: "testGetAllUsers"
+    start_time {
+      seconds: 1733118347
+      nanos: 801000000
+    }
+    end_time {
+      seconds: 1733118347
+      nanos: 805000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testGetAllUsers.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "UserDAOTest"
+    test_package: "com.example.swen766_bettermaps.db.daos"
+    test_method: "testGetUserWithFavoriteLocations"
+    start_time {
+      seconds: 1733118347
+      nanos: 808000000
+    }
+    end_time {
+      seconds: 1733118347
+      nanos: 840000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testGetUserWithFavoriteLocations.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "UserDAOTest"
+    test_package: "com.example.swen766_bettermaps.db.daos"
+    test_method: "testInsertAndGet"
+    start_time {
+      seconds: 1733118347
+      nanos: 869000000
+    }
+    end_time {
+      seconds: 1733118347
       nanos: 872000000
     }
   }
@@ -24,7 +232,111 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.AmenityDAOTest-testGetIncludedLocations.txt"
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testInsertAndGet.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "UserDAOTest"
+    test_package: "com.example.swen766_bettermaps.db.daos"
+    test_method: "testDelete"
+    start_time {
+      seconds: 1733118347
+      nanos: 874000000
+    }
+    end_time {
+      seconds: 1733118347
+      nanos: 905000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testDelete.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "UserDAOTest"
+    test_package: "com.example.swen766_bettermaps.db.daos"
+    test_method: "testUpdate"
+    start_time {
+      seconds: 1733118347
+      nanos: 907000000
+    }
+    end_time {
+      seconds: 1733118347
+      nanos: 936000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testUpdate.txt"
     }
   }
   output_artifact {

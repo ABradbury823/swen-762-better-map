@@ -15,6 +15,7 @@ import com.example.swen766_bettermaps.data.db.daos.UserDAO;
 import com.example.swen766_bettermaps.data.db.entities.Location;
 import com.example.swen766_bettermaps.data.db.entities.User;
 import com.example.swen766_bettermaps.data.db.entities.UserFavoriteLocation;
+import com.example.swen766_bettermaps.data.db.entities.joins.LocationWithFavoriteUsersAndAmenities;
 import com.example.swen766_bettermaps.data.db.entities.joins.UserWithFavoriteLocations;
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
 import com.example.swen766_bettermaps.data.db.types.UserRole;
@@ -78,6 +79,12 @@ public class UserDAOTest {
             "Location Address", new Coordinate());
         long lid = locationDAO.insert(location);
 
+        UserWithFavoriteLocations userWithFavoriteLocations =
+            userDAO.getUserWithFavoriteLocations(uid);
+        LocationWithFavoriteUsersAndAmenities locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(lid);
+        assertEquals(0, userWithFavoriteLocations.favoriteLocations.size());
+        assertEquals(0, locationWithFavoriteUsersAndAmenities.favoriteUsers.size());
 
         UserFavoriteLocation ufl = new UserFavoriteLocation(uid, lid);
         userDAO.insertFavoriteLocation(ufl);
@@ -86,6 +93,12 @@ public class UserDAOTest {
         assertNotNull(r_ufl);
         assertEquals(r_ufl.getUserId(), uid);
         assertEquals(r_ufl.getLocationId(), lid);
+
+         userWithFavoriteLocations = userDAO.getUserWithFavoriteLocations(uid);
+         locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(lid);
+        assertEquals(1, userWithFavoriteLocations.favoriteLocations.size());
+        assertEquals(1, locationWithFavoriteUsersAndAmenities.favoriteUsers.size());
     }
 
     /**
@@ -195,7 +208,9 @@ public class UserDAOTest {
         assertNull(deletedUser);
     }
 
-    //TODO: test deleteFavoriteLocation
+    /**
+     * Tests that deleteFavoriteLocation removes a favorite location from the user.
+     */
     @Test
     public void testDeleteFavoriteLocation() {
         User user = new User("User Name", "user@email.com", UserRole.FACULTY);
@@ -207,18 +222,22 @@ public class UserDAOTest {
 
         UserFavoriteLocation ufl = new UserFavoriteLocation(uid, lid);
         userDAO.insertFavoriteLocation(ufl);
-        ufl = userDAO.getUserFavoriteLocation(uid, lid);
 
         UserWithFavoriteLocations userWithFavoriteLocations =
             userDAO.getUserWithFavoriteLocations(uid);
+        LocationWithFavoriteUsersAndAmenities locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(lid);
         assertEquals(1, userWithFavoriteLocations.favoriteLocations.size());
+        assertEquals(1, locationWithFavoriteUsersAndAmenities.favoriteUsers.size());
 
         userDAO.deleteFavoriteLocation(ufl);
         ufl = userDAO.getUserFavoriteLocation(uid, lid);
         assertNull(ufl);
 
-
         userWithFavoriteLocations = userDAO.getUserWithFavoriteLocations(uid);
+        locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(lid);
         assertEquals(0, userWithFavoriteLocations.favoriteLocations.size());
+        assertEquals(0, locationWithFavoriteUsersAndAmenities.favoriteUsers.size());
     }
 }

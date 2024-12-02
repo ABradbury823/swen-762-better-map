@@ -16,7 +16,12 @@ import com.example.swen766_bettermaps.data.db.daos.UserDAO;
 import com.example.swen766_bettermaps.data.db.entities.Amenity;
 import com.example.swen766_bettermaps.data.db.entities.Location;
 import com.example.swen766_bettermaps.data.db.entities.LocationAmenity;
+import com.example.swen766_bettermaps.data.db.entities.User;
+import com.example.swen766_bettermaps.data.db.entities.UserFavoriteLocation;
+import com.example.swen766_bettermaps.data.db.entities.joins.AmenityWithIncludedLocations;
+import com.example.swen766_bettermaps.data.db.entities.joins.LocationWithFavoriteUsersAndAmenities;
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
+import com.example.swen766_bettermaps.data.db.types.UserRole;
 
 import org.junit.After;
 import org.junit.Before;
@@ -74,23 +79,34 @@ public class LocationDAOTest {
      * Tests that insertLocationAmenity adds a connection between a location and an Amenity
      */
     @Test
-    public void testInsertLocationAmenity() {
+    public void testInsertAndGetLocationAmenity() {
         Location location = new Location("Location", "Desc.",
             "Address", new Coordinate());
-        locationDAO.insert(location);
+        long lid = locationDAO.insert(location);
         Amenity amenity = new Amenity("Amenity", "Amenity Desc.");
-        amenityDAO.insert(amenity);
+        long aid = amenityDAO.insert(amenity);
 
-        location = locationDAO.getLocationById(1);
-        amenity = amenityDAO.getAmenityById(1);
+        LocationWithFavoriteUsersAndAmenities locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(lid);
+        AmenityWithIncludedLocations amenityWithIncludedLocations =
+            amenityDAO.getAmenityWithIncludedLocations(aid);
+        assertEquals(0, locationWithFavoriteUsersAndAmenities.amenities.size());
+        assertEquals(0, amenityWithIncludedLocations.includedLocations.size());
 
         LocationAmenity locationAmenity =
-            new LocationAmenity(location.getId(), amenity.getId());
+            new LocationAmenity(lid, aid);
         locationDAO.insertLocationAmenity(locationAmenity);
 
-        // need to make sure getById returns a list,
-        // which requires User's insertFavoriteLocation,
-        // which requires User's getById to return a list.
+        LocationAmenity received_la = locationDAO.getLocationAmenity(lid, aid);
+        assertNotNull(received_la);
+        assertEquals(lid, received_la.getLocationId());
+        assertEquals(aid, received_la.getAmenityId());
+
+         locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(lid);
+         amenityWithIncludedLocations = amenityDAO.getAmenityWithIncludedLocations(aid);
+        assertEquals(1, locationWithFavoriteUsersAndAmenities.amenities.size());
+        assertEquals(1, amenityWithIncludedLocations.includedLocations.size());
     }
 
     /**
@@ -119,8 +135,68 @@ public class LocationDAOTest {
 
     }
 
-    //TODO: test getLocationAmenity
-    //TODO: test that getByID retrieves a list of favoriteUsers and amenities
+    /**
+     * Tests that getLocationWithFavoriteUsersAndAmenities retrieves a list of
+     * favorite users and amenities
+     */
+    @Test
+    public void testGetLocationWithFavoriteUsersAndAmenities() {
+        User[] users = {
+            new User("User 1", "user1@email.com", UserRole.STUDENT),
+            new User("User 2", "user2@email.com", UserRole.ADMIN),
+            new User("User 3", "user3@email.com", UserRole.FACULTY),
+        };
+        long[] uIds = new long[users.length];
+        for(int i = 0; i < users.length; i++) {
+            uIds[i] = userDAO.insert(users[i]);
+        }
+        Amenity[] amenities = {
+            new Amenity("Amenity 1", "Amenity 1 Description"),
+            new Amenity("Amenity 2", "Amenity 2 Description"),
+            new Amenity("Amenity 3", "Amenity 3 Description")
+        };
+        long[] aIds = new long[amenities.length];
+        for(int i = 0; i < amenities.length; i++) {
+            aIds[i] = amenityDAO.insert(amenities[i]);
+        }
+        Location location = new Location("Location", "Description",
+            "Address", new Coordinate());
+        long id = locationDAO.insert(location);
+
+        LocationWithFavoriteUsersAndAmenities locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(id);
+        assertEquals(0, locationWithFavoriteUsersAndAmenities.favoriteUsers.size());
+        assertEquals(0, locationWithFavoriteUsersAndAmenities.amenities.size());
+
+        for(long u : uIds) {
+            UserFavoriteLocation userFavoriteLocation =
+                new UserFavoriteLocation(u, id);
+            userDAO.insertFavoriteLocation(userFavoriteLocation);
+        }
+        for(long a : aIds) {
+            LocationAmenity locationAmenity =
+                new LocationAmenity(id, a);
+            locationDAO.insertLocationAmenity(locationAmenity);
+        }
+
+        locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(id);
+        List<User> favoriteUsers = locationWithFavoriteUsersAndAmenities.favoriteUsers;
+        List<Amenity> locationAmenities = locationWithFavoriteUsersAndAmenities.amenities;
+        assertEquals(users.length, favoriteUsers.size());
+        assertEquals(amenities.length, locationAmenities.size());
+        for(int i = 0; i < users.length; i++) {
+            assertEquals(uIds[i], favoriteUsers.get(i).getId());
+            assertEquals(users[i].getUsername(), favoriteUsers.get(i).getUsername());
+            assertEquals(users[i].getEmail(), favoriteUsers.get(i).getEmail());
+            assertEquals(users[i].getRole(), favoriteUsers.get(i).getRole());
+        }
+        for(int i = 0; i < amenities.length; i++) {
+            assertEquals(aIds[i], locationAmenities.get(i).getId());
+            assertEquals(amenities[i].getName(), locationAmenities.get(i).getName());
+            assertEquals(amenities[i].getDescription(), locationAmenities.get(i).getDescription());
+        }
+    }
 
     /**
      * Tests that update changes the values of a Location.
@@ -161,5 +237,36 @@ public class LocationDAOTest {
         assertNull(deletedLocation);
     }
 
-    // TODO: test deleteLocationAmenity
+    /**
+     * Tests that deleteLocationAmenity removes an amenity from the location.
+     */
+    @Test
+    public void testDeleteLocationAmenity() {
+        Amenity amenity = new Amenity("Amenity", "Description");
+        long aid = amenityDAO.insert(amenity);
+
+        Location location = new Location("Location", "Description",
+            "Address", new Coordinate());
+        long lid = locationDAO.insert(location);
+        LocationAmenity locationAmenity = new LocationAmenity(lid, aid);
+        locationDAO.insertLocationAmenity(locationAmenity);
+
+        LocationWithFavoriteUsersAndAmenities locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(lid);
+        AmenityWithIncludedLocations amenityWithIncludedLocations =
+            amenityDAO.getAmenityWithIncludedLocations(aid);
+        assertEquals(1, locationWithFavoriteUsersAndAmenities.amenities.size());
+        assertEquals(1, amenityWithIncludedLocations.includedLocations.size());
+
+        locationDAO.deleteLocationAmenity(locationAmenity);
+        locationAmenity = locationDAO.getLocationAmenity(lid, aid);
+        assertNull(locationAmenity);
+
+        locationWithFavoriteUsersAndAmenities =
+            locationDAO.getLocationWithFavoriteUsersAndAmenities(lid);
+        amenityWithIncludedLocations = amenityDAO.getAmenityWithIncludedLocations(aid);
+        assertEquals(0, locationWithFavoriteUsersAndAmenities.amenities.size());
+        assertEquals(0, amenityWithIncludedLocations.includedLocations.size());
+    }
+
 }
