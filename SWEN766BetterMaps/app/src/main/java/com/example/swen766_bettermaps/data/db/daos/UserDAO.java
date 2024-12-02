@@ -45,12 +45,27 @@ public interface UserDAO {
 
     /**
      * Retrieves a user from the users table based on their id.
-     * <br>Also retrieves the user's favorite locations.
      * @param userId The user's ID.
      * @return The user, or null if the id does not match to a user.
      */
     @Query("SELECT * FROM users WHERE id = :userId")
     User getUserById(long userId);
+
+    /**
+     * Retrieves a user from the users table based on their username.
+     * @param username The user's username.
+     * @return The user, or null if the username does not match to a user.
+     */
+    @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
+    User getUserByName(String username);
+
+    /**
+     * Retrieves a user from the users table based on their email.
+     * @param email The user's email.
+     * @return The user, or null if the email does not match to a user.
+     */
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    User getUserByEmail(String email);
 
     /**
      * Retrieves a connection between a user and a location from the favorites table.
