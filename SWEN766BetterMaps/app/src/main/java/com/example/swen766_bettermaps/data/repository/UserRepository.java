@@ -18,8 +18,8 @@ import java.util.concurrent.Executors;
 
 public class UserRepository {
 
-    private UserDAO userDAO;
-    private ExecutorService executorService;
+    private final UserDAO userDAO;
+    private final ExecutorService executorService;
 
     public UserRepository(Application application) {
         BMDatabase db = BMDatabase.getInstance(application.getApplicationContext());
@@ -88,6 +88,7 @@ public class UserRepository {
 
     /**
      * Retrieves a single user by id.
+     * @param userId The id of the user.
      * @param callback The DataCallback to determine how the retrieved User should be used.
      */
     public void getUserById(final long userId, final DataCallback<User> callback)
