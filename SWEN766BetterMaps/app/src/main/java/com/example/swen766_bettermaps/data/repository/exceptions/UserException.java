@@ -1,7 +1,7 @@
 package com.example.swen766_bettermaps.data.repository.exceptions;
 
-public class UserAlreadyExistsException extends RuntimeException {
-    public UserAlreadyExistsException(String message) {
+public class UserException extends RuntimeException {
+    public UserException(String message) {
         super(message);
     }
 }
