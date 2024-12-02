@@ -66,8 +66,58 @@ public class UserDAOTest {
         assertEquals(user.getRole(), retrievedUser.getRole());
     }
 
+    /**
+     * Tests that insertUserFavorite location adds a connection between user and location.
+     */
     @Test
-    public void testInsertFavoriteLocation() {
+    public void testInsertAndGetUserFavoriteLocation() {
+        User user = new User("User Name", "user@email.com", UserRole.FACULTY);
+        long uid = userDAO.insert(user);
+
+        Location location = new Location("Location", "Location Desc.",
+            "Location Address", new Coordinate());
+        long lid = locationDAO.insert(location);
+
+
+        UserFavoriteLocation ufl = new UserFavoriteLocation(uid, lid);
+        userDAO.insertFavoriteLocation(ufl);
+
+        UserFavoriteLocation r_ufl = userDAO.getUserFavoriteLocation(uid, lid);
+        assertNotNull(r_ufl);
+        assertEquals(r_ufl.getUserId(), uid);
+        assertEquals(r_ufl.getLocationId(), lid);
+    }
+
+    /**
+     * Tests that getAllUsers retrieves a list of every user.
+     */
+    @Test
+    public void testGetAllUsers() {
+        User[] users = {
+            new User("User 1", "user1@email.com", UserRole.STUDENT),
+            new User("User 2", "user2@email.com", UserRole.FACULTY),
+            new User("User 3", "user3@email.com", UserRole.ADMIN)
+        };
+        for(User u : users) {
+            userDAO.insert(u);
+        }
+
+        List<User> retrievedUsers = userDAO.getAllUsers();
+
+        assertNotNull(retrievedUsers);
+        assertEquals(users.length, retrievedUsers.size());
+        for(int i = 0; i < retrievedUsers.size(); i++) {
+            assertEquals(users[i].getUsername(), retrievedUsers.get(i).getUsername());
+            assertEquals(users[i].getEmail(), retrievedUsers.get(i).getEmail());
+            assertEquals(users[i].getRole(), retrievedUsers.get(i).getRole());
+        }
+    }
+
+    /**
+     * Tests that getUserWithFavoriteLocations can retrieve a list of favorite locations.
+     */
+    @Test
+    public void testGetUserWithFavoriteLocations() {
         Location[] locations ={
             new Location("Location 1 Name", "Location 1 Desc.",
                 "Location 1 Address", new Coordinate()),
@@ -98,56 +148,15 @@ public class UserDAOTest {
 
         userWithFavoriteLocations =
             userDAO.getUserWithFavoriteLocations(user.getId());
-    }
-
-    /**
-     * Tests that getAllUsers retrieves a list of every user.
-     */
-    @Test
-    public void testGetAllUsers() {
-        User[] users = {
-            new User("User 1", "user1@email.com", UserRole.STUDENT),
-            new User("User 2", "user2@email.com", UserRole.FACULTY),
-            new User("User 3", "user3@email.com", UserRole.ADMIN)
-        };
-        for(User u : users) {
-            userDAO.insert(u);
+        List<Location> favLocations = userWithFavoriteLocations.favoriteLocations;
+        assertEquals(dbLocations.size(), userWithFavoriteLocations.favoriteLocations.size());
+        for(int i = 0; i < dbLocations.size(); i++) {
+            assertEquals(dbLocations.get(i).getId(), favLocations.get(i).getId());
+            assertEquals(dbLocations.get(i).getName(), favLocations.get(i).getName());
+            assertEquals(dbLocations.get(i).getDescription(), favLocations.get(i).getDescription());
+            assertEquals(dbLocations.get(i).getAddress(), favLocations.get(i).getAddress());
+            assertEquals(dbLocations.get(i).getCoordinates(), favLocations.get(i).getCoordinates());
         }
-
-        List<User> retrievedUsers = userDAO.getAllUsers();
-
-        assertNotNull(retrievedUsers);
-        assertEquals(users.length, retrievedUsers.size());
-        for(int i = 0; i < retrievedUsers.size(); i++) {
-            assertEquals(users[i].getUsername(), retrievedUsers.get(i).getUsername());
-            assertEquals(users[i].getEmail(), retrievedUsers.get(i).getEmail());
-            assertEquals(users[i].getRole(), retrievedUsers.get(i).getRole());
-        }
-    }
-
-    /**
-     * Tests that getById retrieves a list of favorite Locations.
-     */
-    @Test
-    public void testGetFavoriteLocations() {
-        Location[] locations ={
-            new Location("Location 1 Name", "Location 1 Desc.",
-            "Location 1 Address", new Coordinate()),
-            new Location("Location 2 Name", "Location 2 Desc.",
-                "Location 2 Address", new Coordinate()),
-            new Location("Location 3 Name", "Location 3 Desc.",
-                "Location 3 Address", new Coordinate()),
-        };
-        for(Location l : locations) {
-            locationDAO.insert(l);
-        }
-        User user = new User("User 1", "user1@email.com", UserRole.STUDENT);
-        long id = userDAO.insert(user);
-
-        List<Location> dbLocations = locationDAO.getAllLocations();
-        user = userDAO.getUserById(id);
-
-        // this needs a test for inserting user favorites, hmmm cyclical...
     }
 
     /**
@@ -187,5 +196,29 @@ public class UserDAOTest {
     }
 
     //TODO: test deleteFavoriteLocation
+    @Test
+    public void testDeleteFavoriteLocation() {
+        User user = new User("User Name", "user@email.com", UserRole.FACULTY);
+        long uid = userDAO.insert(user);
 
+        Location location = new Location("Location", "Location Desc.",
+            "Location Address", new Coordinate());
+        long lid = locationDAO.insert(location);
+
+        UserFavoriteLocation ufl = new UserFavoriteLocation(uid, lid);
+        userDAO.insertFavoriteLocation(ufl);
+        ufl = userDAO.getUserFavoriteLocation(uid, lid);
+
+        UserWithFavoriteLocations userWithFavoriteLocations =
+            userDAO.getUserWithFavoriteLocations(uid);
+        assertEquals(1, userWithFavoriteLocations.favoriteLocations.size());
+
+        userDAO.deleteFavoriteLocation(ufl);
+        ufl = userDAO.getUserFavoriteLocation(uid, lid);
+        assertNull(ufl);
+
+
+        userWithFavoriteLocations = userDAO.getUserWithFavoriteLocations(uid);
+        assertEquals(0, userWithFavoriteLocations.favoriteLocations.size());
+    }
 }

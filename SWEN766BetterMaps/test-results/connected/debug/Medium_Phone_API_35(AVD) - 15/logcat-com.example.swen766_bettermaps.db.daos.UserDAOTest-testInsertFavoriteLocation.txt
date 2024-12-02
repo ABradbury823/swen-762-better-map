@@ -1,2 +1,0 @@
-12-01 23:30:30.360 23307 23324 I TestRunner: started: testInsertFavoriteLocation(com.example.swen766_bettermaps.db.daos.UserDAOTest)
-12-01 23:30:30.482 23307 23324 I TestRunner: finished: testInsertFavoriteLocation(com.example.swen766_bettermaps.db.daos.UserDAOTest)
