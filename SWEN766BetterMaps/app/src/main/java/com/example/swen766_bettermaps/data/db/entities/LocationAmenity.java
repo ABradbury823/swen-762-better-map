@@ -3,41 +3,20 @@ package com.example.swen766_bettermaps.data.db.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Ignore;
-import androidx.room.Index;
 
 /**
  * A join table between Locations and their Amenities.
  */
 @Entity(
     tableName = "location_amenities",
-    primaryKeys = {"location_id", "amenity_id"},
-    foreignKeys = {
-        @ForeignKey(
-            entity = Location.class,
-            parentColumns = "id",
-            childColumns = "location_id",
-            onDelete = ForeignKey.CASCADE
-        ),
-        @ForeignKey(
-            entity = Amenity.class,
-            parentColumns = "id",
-            childColumns = "amenity_id",
-            onDelete = ForeignKey.CASCADE
-        )
-    },
-    // index on foreign keys to improve select, filter, and join queries
-    indices = {
-        @Index(value = "location_id"),
-        @Index(value = "amenity_id")
-    }
+    primaryKeys = {"location_id", "amenity_id"}
 )
 public class LocationAmenity {
-    @ColumnInfo(name = "location_id")
+    @ColumnInfo(name = "location_id", index = true)
     private int locationId;
 
-    @ColumnInfo(name = "amenity_id")
+    @ColumnInfo(name = "amenity_id", index = true)
     private int amenityId;
 
     // Default constructor for Room functionality

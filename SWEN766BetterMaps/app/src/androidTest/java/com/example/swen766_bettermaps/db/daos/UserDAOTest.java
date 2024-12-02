@@ -14,6 +14,8 @@ import com.example.swen766_bettermaps.data.db.daos.LocationDAO;
 import com.example.swen766_bettermaps.data.db.daos.UserDAO;
 import com.example.swen766_bettermaps.data.db.entities.Location;
 import com.example.swen766_bettermaps.data.db.entities.User;
+import com.example.swen766_bettermaps.data.db.entities.UserFavoriteLocation;
+//import com.example.swen766_bettermaps.data.db.entities.joins.UserWithFavoriteLocations;
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
 import com.example.swen766_bettermaps.data.db.types.UserRole;
 
@@ -64,7 +66,39 @@ public class UserDAOTest {
         assertEquals(user.getRole(), retrievedUser.getRole());
     }
 
-    // TODO: test insert favorite location (test Location first)
+    @Test
+    public void testInsertFavoriteLocation() {
+        Location[] locations ={
+            new Location("Location 1 Name", "Location 1 Desc.",
+                "Location 1 Address", new Coordinate()),
+            new Location("Location 2 Name", "Location 2 Desc.",
+                "Location 2 Address", new Coordinate()),
+            new Location("Location 3 Name", "Location 3 Desc.",
+                "Location 3 Address", new Coordinate()),
+        };
+        for(Location l : locations) {
+            locationDAO.insert(l);
+        }
+        User user = new User("User 1", "user1@email.com", UserRole.STUDENT);
+        userDAO.insert(user);
+
+        List<Location> dbLocations = locationDAO.getAllLocations();
+        user = userDAO.getUserById(1);
+
+//        UserWithFavoriteLocations userWithFavoriteLocations =
+//            userDAO.getUserWithFavoriteLocations(user.getId());
+
+//        assertEquals(0, userWithFavoriteLocations.favoriteLocations.size());
+
+        for(Location l : dbLocations) {
+            UserFavoriteLocation ufl =
+                new UserFavoriteLocation(user.getId(), l.getId());
+            userDAO.insertFavoriteLocation(ufl);
+        }
+
+//        userWithFavoriteLocations =
+//            userDAO.getUserWithFavoriteLocations(user.getId());
+    }
 
     /**
      * Tests that getAllUsers retrieves a list of every user.
@@ -91,7 +125,6 @@ public class UserDAOTest {
         }
     }
 
-    // TODO: test getById retrieves the list of favorite locations (test LocationDAO first)
     /**
      * Tests that getById retrieves a list of favorite Locations.
      */
@@ -116,9 +149,6 @@ public class UserDAOTest {
 
         // this needs a test for inserting user favorites, hmmm cyclical...
     }
-
-
-    // TODO: test getFavoriteLocation
 
     /**
      * Tests that update changes the values of a user

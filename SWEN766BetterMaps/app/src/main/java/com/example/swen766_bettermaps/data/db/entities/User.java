@@ -3,16 +3,11 @@ package com.example.swen766_bettermaps.data.db.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.Junction;
 import androidx.room.PrimaryKey;
-import androidx.room.Relation;
 import androidx.room.TypeConverters;
 
 import com.example.swen766_bettermaps.data.db.types.UserRoleConverter;
 import com.example.swen766_bettermaps.data.db.types.UserRole;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Entity representing a user of BetterMaps.
@@ -32,20 +27,11 @@ public class User {
     @TypeConverters(UserRoleConverter.class)
     private UserRole role;
 
-    @Ignore
-    @Relation(
-        parentColumn = "id",                        // primary key in user
-        entityColumn = "user_id",                   // foreign key in join table
-        associateBy = @Junction(UserFavoriteLocation.class)    // join table
-    )
-    private List<Location> favoriteLocations;   // will be filled by join table
-
     // Default constructor for Room functionality
     public User() {
         this.username = "";
         this.email = "";
         this.role = UserRole.NONE;
-        initLists();
     }
 
     /**
@@ -59,12 +45,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.role = role;
-        initLists();
-    }
-
-    @Ignore
-    private void initLists() {
-        this.favoriteLocations = new ArrayList<>();
     }
 
     public int getId() { return id; }
@@ -81,32 +61,6 @@ public class User {
     @NonNull
     public UserRole getRole() { return role; }
     public void setRole(@NonNull UserRole role) { this.role = role; }
-
-    public List<Location> getFavoriteLocations() { return favoriteLocations; }
-    public void setFavoriteLocations(List<Location> favoriteLocations) {
-        this.favoriteLocations = favoriteLocations;
-    }
-
-    /**
-     * Adds a location to the user's favorite locations.
-     * @param location The location to add.
-     */
-    public void addFavoriteLocation(Location location) {
-        if(favoriteLocations == null) {
-            favoriteLocations = new ArrayList<>();
-        }
-        favoriteLocations.add(location);
-    }
-
-    /**
-     * Removes a location from the user's favorite locations.
-     * @param location The location to remove.
-     */
-    public void removeFavoriteLocation(Location location) {
-        if(favoriteLocations == null) return;
-
-        favoriteLocations.remove(location);
-    }
 
     @NonNull
     @Override

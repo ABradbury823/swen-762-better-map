@@ -1,0 +1,68 @@
+# 2024-12-02T04:17:15.711203200Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 1
+}
+test_status: PASSED
+test_result {
+  test_case {
+    test_class: "UserDAOTest"
+    test_package: "com.example.swen766_bettermaps.db.daos"
+    test_method: "testInsertFavoriteLocation"
+    start_time {
+      seconds: 1733113034
+      nanos: 903000000
+    }
+    end_time {
+      seconds: 1733113035
+      nanos: 14000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testInsertFavoriteLocation.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\testlog\\test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}
