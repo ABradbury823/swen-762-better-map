@@ -184,10 +184,13 @@ public class UserRepository {
     }
 
     /**
-     *
-     * @param ufl
+     * Deletes a favorite location from a user.
+     * @param ufl The connection between user and location.
+     * @throws UserFavoriteLocationException if user id or location id do not share an
+     * entry in the favorites table.
      */
-    public void deleteFavoriteLocation(UserFavoriteLocation ufl) {
+    public void deleteFavoriteLocation(UserFavoriteLocation ufl)
+    throws UserFavoriteLocationException{
         executorService.submit(() -> {
            if(userDAO.getUserFavoriteLocation(ufl.getUserId(), ufl.getLocationId()) == null) {
                throw new UserFavoriteLocationException("User with id " +
