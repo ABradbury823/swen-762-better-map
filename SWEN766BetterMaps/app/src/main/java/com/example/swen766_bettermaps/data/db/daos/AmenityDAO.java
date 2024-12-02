@@ -3,6 +3,7 @@ package com.example.swen766_bettermaps.data.db.daos;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
@@ -23,7 +24,7 @@ public interface AmenityDAO {
      * @param amenity The new amenity.
      * @return The auto-generated id of the new amenity.
      */
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Amenity amenity);
 
     /**
@@ -40,7 +41,7 @@ public interface AmenityDAO {
      * or null if the id does not match to an amenity.
      */
     @Query("SELECT * FROM amenities WHERE id = :amenityId")
-    Amenity getAmenityById(int amenityId);
+    Amenity getAmenityById(long amenityId);
 
     /**
      * Retrieves an amenity from the amenities table based on its id.
@@ -51,7 +52,7 @@ public interface AmenityDAO {
      */
     @Transaction
     @Query("SELECT * FROM amenities WHERE id = :amenityId")
-    AmenityWithIncludedLocations getAmenityWithIncludedLocations(int amenityId);
+    AmenityWithIncludedLocations getAmenityWithIncludedLocations(long amenityId);
 
     /**
      * Updates an amenity in the amenities table.

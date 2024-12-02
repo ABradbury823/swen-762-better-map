@@ -15,7 +15,7 @@ import com.example.swen766_bettermaps.data.db.daos.UserDAO;
 import com.example.swen766_bettermaps.data.db.entities.Location;
 import com.example.swen766_bettermaps.data.db.entities.User;
 import com.example.swen766_bettermaps.data.db.entities.UserFavoriteLocation;
-//import com.example.swen766_bettermaps.data.db.entities.joins.UserWithFavoriteLocations;
+import com.example.swen766_bettermaps.data.db.entities.joins.UserWithFavoriteLocations;
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
 import com.example.swen766_bettermaps.data.db.types.UserRole;
 
@@ -56,9 +56,9 @@ public class UserDAOTest {
     public void testInsertAndGet() {
         User user = new User("Example Name", "example@email.com", UserRole.STUDENT);
 
-        userDAO.insert(user);
+        long id = userDAO.insert(user);
 
-        User retrievedUser = userDAO.getUserById(1);
+        User retrievedUser = userDAO.getUserById(id);
 
         assertNotNull(retrievedUser);
         assertEquals(user.getUsername(), retrievedUser.getUsername());
@@ -80,15 +80,15 @@ public class UserDAOTest {
             locationDAO.insert(l);
         }
         User user = new User("User 1", "user1@email.com", UserRole.STUDENT);
-        userDAO.insert(user);
+        long id = userDAO.insert(user);
 
         List<Location> dbLocations = locationDAO.getAllLocations();
-        user = userDAO.getUserById(1);
+        user = userDAO.getUserById(id);
 
-//        UserWithFavoriteLocations userWithFavoriteLocations =
-//            userDAO.getUserWithFavoriteLocations(user.getId());
+        UserWithFavoriteLocations userWithFavoriteLocations =
+            userDAO.getUserWithFavoriteLocations(user.getId());
 
-//        assertEquals(0, userWithFavoriteLocations.favoriteLocations.size());
+        assertEquals(0, userWithFavoriteLocations.favoriteLocations.size());
 
         for(Location l : dbLocations) {
             UserFavoriteLocation ufl =
@@ -96,8 +96,8 @@ public class UserDAOTest {
             userDAO.insertFavoriteLocation(ufl);
         }
 
-//        userWithFavoriteLocations =
-//            userDAO.getUserWithFavoriteLocations(user.getId());
+        userWithFavoriteLocations =
+            userDAO.getUserWithFavoriteLocations(user.getId());
     }
 
     /**
@@ -142,10 +142,10 @@ public class UserDAOTest {
             locationDAO.insert(l);
         }
         User user = new User("User 1", "user1@email.com", UserRole.STUDENT);
-        userDAO.insert(user);
+        long id = userDAO.insert(user);
 
         List<Location> dbLocations = locationDAO.getAllLocations();
-        user = userDAO.getUserById(1);
+        user = userDAO.getUserById(id);
 
         // this needs a test for inserting user favorites, hmmm cyclical...
     }
@@ -156,15 +156,15 @@ public class UserDAOTest {
     @Test
     public void testUpdate() {
         User user = new User("New User", "newuser@email.com", UserRole.NONE);
-        userDAO.insert(user);
+        long id = userDAO.insert(user);
 
-        user = userDAO.getUserById(1);
+        user = userDAO.getUserById(id);
         user.setUsername("New Name");
         user.setEmail("newname@email.com");
         user.setRole(UserRole.FACULTY);
         userDAO.update(user);
 
-        User retrievedUser = userDAO.getUserById(1);
+        User retrievedUser = userDAO.getUserById(id);
         assertEquals(user.getUsername(), retrievedUser.getUsername());
         assertEquals(user.getEmail(), retrievedUser.getEmail());
         assertEquals(user.getRole(), retrievedUser.getRole());
@@ -176,13 +176,13 @@ public class UserDAOTest {
     @Test
     public void testDelete() {
         User user = new User("Delete Me", "deleted@email.com", UserRole.ADMIN);
-        userDAO.insert(user);
+        long id = userDAO.insert(user);
 
-        user = userDAO.getUserById(1);
+        user = userDAO.getUserById(id);
 
         userDAO.delete(user);
 
-        User deletedUser = userDAO.getUserById(1);
+        User deletedUser = userDAO.getUserById(id);
         assertNull(deletedUser);
     }
 

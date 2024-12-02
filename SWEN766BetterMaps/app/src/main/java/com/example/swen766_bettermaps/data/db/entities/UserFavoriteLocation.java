@@ -15,10 +15,10 @@ import androidx.room.Ignore;
 public class UserFavoriteLocation {
 
     @ColumnInfo(name = "user_id", index = true)
-    private int userId;
+    private long userId;
 
     @ColumnInfo(name = "location_id", index = true)
-    private int locationId;
+    private long locationId;
 
     // Default constructor for Room functionality
     public UserFavoriteLocation() {
@@ -31,16 +31,16 @@ public class UserFavoriteLocation {
      * @param locationId The id of the Location.
      */
     @Ignore
-    public UserFavoriteLocation(int userId, int locationId) {
+    public UserFavoriteLocation(long userId, long locationId) {
         this.userId = userId;
         this.locationId = locationId;
     }
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+    public long getUserId() { return userId; }
+    public void setUserId(long userId) { this.userId = userId; }
 
-    public int getLocationId() { return locationId; }
-    public void setLocationId(int locationId) { this.locationId = locationId; }
+    public long getLocationId() { return locationId; }
+    public void setLocationId(long locationId) { this.locationId = locationId; }
 
     @NonNull
     @Override

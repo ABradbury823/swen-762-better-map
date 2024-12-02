@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<testsuite name="com.example.swen766_bettermaps.db.daos.UserDAOTest" tests="1" failures="0" errors="0" skipped="0" time="0.771" timestamp="2024-12-02T04:17:15" hostname="localhost">
+<testsuite name="com.example.swen766_bettermaps.db.daos.UserDAOTest" tests="1" failures="0" errors="0" skipped="0" time="0.826" timestamp="2024-12-02T04:30:32" hostname="localhost">
   <properties>
     <property name="device" value="Medium_Phone_API_35(AVD) - 15" />
     <property name="flavor" value="" />
     <property name="project" value=":app" />
   </properties>
-  <testcase name="testInsertFavoriteLocation" classname="com.example.swen766_bettermaps.db.daos.UserDAOTest" time="0.107" />
+  <testcase name="testInsertFavoriteLocation" classname="com.example.swen766_bettermaps.db.daos.UserDAOTest" time="0.123" />
 </testsuite>

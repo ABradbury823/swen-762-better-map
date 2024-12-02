@@ -15,7 +15,7 @@ import com.example.swen766_bettermaps.data.db.types.CoordinateConverter;
 @Entity(tableName = "locations")
 public class Location {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     @NonNull
     private String name;
@@ -70,8 +70,8 @@ public class Location {
             new Coordinate());
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
     @NonNull
     public String getName() { return name; }

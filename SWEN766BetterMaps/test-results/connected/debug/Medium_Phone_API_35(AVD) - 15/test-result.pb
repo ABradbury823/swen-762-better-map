@@ -1,7 +1,7 @@
 
 ç
 l
-UserDAOTest&com.example.swen766_bettermaps.db.daostestInsertFavoriteLocation2Êé´ºÀßÊ®:Ëé´º€¿Ö"Ž
+UserDAOTest&com.example.swen766_bettermaps.db.daostestInsertFavoriteLocation2èï´ºÀ°úH:èï´º€õ»†"Ž
 
 logcatandroidø
 õC:\Users\abrad\Workspaces\School\SWEN 746 - Model-Driven Development\better-map\SWEN766BetterMaps\test-results\connected\debug\Medium_Phone_API_35(AVD) - 15\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testInsertFavoriteLocation.txt"É

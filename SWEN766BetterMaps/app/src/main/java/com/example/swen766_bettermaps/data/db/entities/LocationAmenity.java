@@ -14,10 +14,10 @@ import androidx.room.Ignore;
 )
 public class LocationAmenity {
     @ColumnInfo(name = "location_id", index = true)
-    private int locationId;
+    private long locationId;
 
     @ColumnInfo(name = "amenity_id", index = true)
-    private int amenityId;
+    private long amenityId;
 
     // Default constructor for Room functionality
     public LocationAmenity() {
@@ -30,16 +30,16 @@ public class LocationAmenity {
      * @param amenityId The id of the Amenity.
      */
     @Ignore
-    public LocationAmenity(int locationId, int amenityId) {
+    public LocationAmenity(long locationId, long amenityId) {
         this.locationId = locationId;
         this.amenityId = amenityId;
     }
 
-    public int getLocationId() { return locationId; }
-    public void setLocationId(int locationId) { this.locationId = locationId; }
+    public long getLocationId() { return locationId; }
+    public void setLocationId(long locationId) { this.locationId = locationId; }
 
-    public int getAmenityId() { return amenityId; }
-    public void setAmenityId(int amenityId) { this.amenityId = amenityId; }
+    public long getAmenityId() { return amenityId; }
+    public void setAmenityId(long amenityId) { this.amenityId = amenityId; }
 
     @NonNull
     @Override

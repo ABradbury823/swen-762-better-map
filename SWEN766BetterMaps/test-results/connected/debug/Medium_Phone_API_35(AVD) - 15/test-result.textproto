@@ -1,4 +1,4 @@
-# 2024-12-02T04:17:15.711203200Z:
+# 2024-12-02T04:30:33.016630200Z:
 test_suite_meta_data {
   scheduled_test_case_count: 1
 }
@@ -9,12 +9,12 @@ test_result {
     test_package: "com.example.swen766_bettermaps.db.daos"
     test_method: "testInsertFavoriteLocation"
     start_time {
-      seconds: 1733113034
-      nanos: 903000000
+      seconds: 1733113832
+      nanos: 153000000
     }
     end_time {
-      seconds: 1733113035
-      nanos: 14000000
+      seconds: 1733113832
+      nanos: 282000000
     }
   }
   test_status: PASSED

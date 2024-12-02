@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "amenities")
 public class Amenity {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     @NonNull
     private String name;
@@ -45,8 +45,8 @@ public class Amenity {
         this(name, "No description available");
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
     @NonNull
     public String getName() { return name; }

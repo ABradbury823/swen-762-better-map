@@ -15,7 +15,7 @@ import com.example.swen766_bettermaps.data.db.types.UserRole;
 @Entity(tableName = "users")
 public class User {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     @NonNull
     private String username;
@@ -47,8 +47,8 @@ public class User {
         this.role = role;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
     @NonNull
     public String getUsername() { return username; }

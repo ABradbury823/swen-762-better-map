@@ -129,16 +129,16 @@ public class LocationDAOTest {
     public void testUpdate() {
         Location location = new Location("Location Name", "Location Description",
             "Location Address", new Coordinate(15.0f, -1.53f));
-        locationDAO.insert(location);
+        long id = locationDAO.insert(location);
 
-        location = locationDAO.getLocationById(1);
+        location = locationDAO.getLocationById(id);
         location.setName("New Location Name");
         location.setDescription("New Location Description");
         location.setAddress("New Location Address");
         location.setCoordinates(43.7f, 74.3f);
         locationDAO.update(location);
 
-        Location retrievedLocation = locationDAO.getLocationById(1);
+        Location retrievedLocation = locationDAO.getLocationById(id);
         assertEquals(location.getName(), retrievedLocation.getName());
         assertEquals(location.getDescription(), retrievedLocation.getDescription());
         assertEquals(location.getAddress(), retrievedLocation.getAddress());
@@ -151,13 +151,13 @@ public class LocationDAOTest {
     @Test
     public void testDelete() {
         Location location = new Location();
-        locationDAO.insert(location);
+        long id = locationDAO.insert(location);
 
-        location = locationDAO.getLocationById(1);
+        location = locationDAO.getLocationById(id);
 
         locationDAO.delete(location);
 
-        Location deletedLocation = locationDAO.getLocationById(1);
+        Location deletedLocation = locationDAO.getLocationById(id);
         assertNull(deletedLocation);
     }
 

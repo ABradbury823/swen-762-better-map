@@ -49,8 +49,8 @@ public interface UserDAO {
      * @param userId The user's ID.
      * @return The user, or null if the id does not match to a user.
      */
-    @Query("SELECT * FROM users WHERE id = :userId LIMIT 1")
-    User getUserById(int userId);
+    @Query("SELECT * FROM users WHERE id = :userId")
+    User getUserById(long userId);
 
     /**
      * Retrieves a connection between a user and a location from the favorites table.
@@ -59,7 +59,7 @@ public interface UserDAO {
      * @return A connection between a user and a location. Null if there is no connection.
      */
     @Query("SELECT * FROM favorites WHERE user_id = :userId AND location_id = :locationId")
-    UserFavoriteLocation getUserFavoriteLocation(int userId, int locationId);
+    UserFavoriteLocation getUserFavoriteLocation(long userId, long locationId);
 
     /**
      * Retrieves a user from the users table based on their id.
@@ -69,7 +69,7 @@ public interface UserDAO {
      */
     @Transaction
     @Query("SELECT * FROM users WHERE id = :userId")
-    UserWithFavoriteLocations getUserWithFavoriteLocations(int userId);
+    UserWithFavoriteLocations getUserWithFavoriteLocations(long userId);
 
     /**
      * Updates a user in the users table.

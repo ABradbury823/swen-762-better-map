@@ -52,9 +52,9 @@ public class AmenityDAOTest {
     public void testInsertAndGet() {
         Amenity amenity = new Amenity("Test Name", "Test Description");
 
-        amenityDAO.insert(amenity);
+        long id = amenityDAO.insert(amenity);
 
-        Amenity retrievedAmenity = amenityDAO.getAmenityById(1);
+        Amenity retrievedAmenity = amenityDAO.getAmenityById(id);
 
         assertNotNull(retrievedAmenity);
         assertEquals(amenity.getName(), retrievedAmenity.getName());
@@ -108,8 +108,8 @@ public class AmenityDAOTest {
     @Test
     public void testUpdate() {
         Amenity amenity = new Amenity("Test Name", "Test Description");
-        amenityDAO.insert(amenity);
-        Amenity dbAmenity = amenityDAO.getAmenityById(1);
+        long id = amenityDAO.insert(amenity);
+        Amenity dbAmenity = amenityDAO.getAmenityById(id);
         String newName = "New Amenity Name";
         String newDesc = "New Amenity Description";
 
@@ -118,7 +118,7 @@ public class AmenityDAOTest {
 
         amenityDAO.update(dbAmenity);
 
-        Amenity updatedAmenity = amenityDAO.getAmenityById(1);
+        Amenity updatedAmenity = amenityDAO.getAmenityById(id);
         assertEquals(dbAmenity.getName(), updatedAmenity.getName());
         assertEquals(dbAmenity.getDescription(), updatedAmenity.getDescription());
     }
@@ -129,8 +129,8 @@ public class AmenityDAOTest {
     @Test
     public void testUpdateDoesNotExist() {
         Amenity amenity = new Amenity("Test Name", "Test Description");
-        amenityDAO.insert(amenity);
-        Amenity dbAmenity = amenityDAO.getAmenityById(1);
+        long id = amenityDAO.insert(amenity);
+        Amenity dbAmenity = amenityDAO.getAmenityById(id);
         String newName = "New Amenity Name";
         String newDesc = "New Amenity Description";
 
@@ -140,7 +140,7 @@ public class AmenityDAOTest {
 
         amenityDAO.update(dbAmenity);
 
-        Amenity updatedAmenity = amenityDAO.getAmenityById(10);
+        Amenity updatedAmenity = amenityDAO.getAmenityById(id + 1);
         assertNull(updatedAmenity);
     }
 
@@ -151,12 +151,12 @@ public class AmenityDAOTest {
     @Test
     public void testDelete() {
         Amenity amenity = new Amenity("Test Name", "Test Description");
-        amenityDAO.insert(amenity);
-        Amenity dbAmenity = amenityDAO.getAmenityById(1);
+        long id = amenityDAO.insert(amenity);
+        Amenity dbAmenity = amenityDAO.getAmenityById(id);
 
         amenityDAO.delete(dbAmenity);
 
-        Amenity deletedAmenity = amenityDAO.getAmenityById(1);
+        Amenity deletedAmenity = amenityDAO.getAmenityById(id);
         assertNull(deletedAmenity);
     }
 
