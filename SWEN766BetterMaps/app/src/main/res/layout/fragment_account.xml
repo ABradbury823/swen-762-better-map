@@ -12,21 +12,25 @@
         android:padding="16dp">
 
         <!-- Greeting TextView -->
+
+        <!-- Account Info TextView -->
+
         <TextView
             android:id="@+id/greeting_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:text="Hello!"
+            android:textAlignment="center"
             android:textSize="24sp" />
 
-        <!-- Account Info TextView -->
         <TextView
             android:id="@+id/account_info_text"
-            android:layout_width="wrap_content"
+            android:layout_width="369dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="Account Info: [email]"
+            android:textAlignment="center"
             android:textSize="16sp" />
 
         <!-- Main content or any other UI elements you want -->
@@ -34,14 +38,15 @@
         <!-- Sign Out Button -->
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="369dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="Welcome to the app!" />
+            android:text="Welcome to the app!"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/sign_out_button"
-            android:layout_width="wrap_content"
+            android:layout_width="371dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Sign Out" />
