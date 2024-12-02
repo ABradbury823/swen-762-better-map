@@ -12,8 +12,11 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.example.swen766_bettermaps.data.db.BMDatabase;
 import com.example.swen766_bettermaps.data.db.daos.AmenityDAO;
+import com.example.swen766_bettermaps.data.db.daos.LocationDAO;
 import com.example.swen766_bettermaps.data.db.entities.Amenity;
 import com.example.swen766_bettermaps.data.db.entities.Location;
+import com.example.swen766_bettermaps.data.db.entities.LocationAmenity;
+import com.example.swen766_bettermaps.data.db.entities.joins.AmenityWithIncludedLocations;
 import com.example.swen766_bettermaps.data.db.types.Coordinate;
 
 import org.junit.After;
@@ -26,6 +29,7 @@ public class AmenityDAOTest {
 
     private BMDatabase database;
     private AmenityDAO amenityDAO;
+    private LocationDAO locationDAO;
 
     // create db before each test
     @Before
@@ -37,6 +41,7 @@ public class AmenityDAOTest {
             .build();
 
         amenityDAO = database.amenityDAO();
+        locationDAO = database.locationDAO();
     }
 
     // clean up db after each test
@@ -75,7 +80,33 @@ public class AmenityDAOTest {
             new Location("Location 3", "Location 3",
                 "Location 3 Address", new Coordinate()),
         };
+        for(Location l : locations) {
+            locationDAO.insert(l);
+        }
+        Amenity amenity = new Amenity("Amenity Name", "Amenity Desc.");
+        long id = amenityDAO.insert(amenity);
 
+        List<Location> dbLocations = locationDAO.getAllLocations();
+
+        AmenityWithIncludedLocations amenityWithIncludedLocations =
+            amenityDAO.getAmenityWithIncludedLocations(id);
+        assertEquals(0, amenityWithIncludedLocations.includedLocations.size());
+
+        for(Location l : dbLocations) {
+            LocationAmenity locationAmenity =
+                new LocationAmenity(l.getId(), id);
+            locationDAO.insertLocationAmenity(locationAmenity);
+        }
+
+        amenityWithIncludedLocations = amenityDAO.getAmenityWithIncludedLocations(id);
+        List<Location> includedLocations = amenityWithIncludedLocations.includedLocations;
+        for(int i = 0; i < dbLocations.size(); i++) {
+            assertEquals(dbLocations.get(i).getId(), includedLocations.get(i).getId());
+            assertEquals(dbLocations.get(i).getName(), includedLocations.get(i).getName());
+            assertEquals(dbLocations.get(i).getDescription(), includedLocations.get(i).getDescription());
+            assertEquals(dbLocations.get(i).getAddress(), includedLocations.get(i).getAddress());
+            assertEquals(dbLocations.get(i).getCoordinates(), includedLocations.get(i).getCoordinates());
+        }
     }
 
     /**

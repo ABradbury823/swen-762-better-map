@@ -1,20 +1,20 @@
-# 2024-12-02T04:52:16.337390700Z:
+# 2024-12-02T05:07:51.612658200Z:
 test_suite_meta_data {
   scheduled_test_case_count: 1
 }
 test_status: PASSED
 test_result {
   test_case {
-    test_class: "UserDAOTest"
+    test_class: "AmenityDAOTest"
     test_package: "com.example.swen766_bettermaps.db.daos"
-    test_method: "testDeleteFavoriteLocation"
+    test_method: "testGetIncludedLocations"
     start_time {
-      seconds: 1733115135
-      nanos: 646000000
+      seconds: 1733116028
+      nanos: 463000000
     }
     end_time {
-      seconds: 1733115135
-      nanos: 759000000
+      seconds: 1733116070
+      nanos: 872000000
     }
   }
   test_status: PASSED
@@ -24,7 +24,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testDeleteFavoriteLocation.txt"
+      path: "C:\\Users\\abrad\\Workspaces\\School\\SWEN 746 - Model-Driven Development\\better-map\\SWEN766BetterMaps\\test-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.swen766_bettermaps.db.daos.AmenityDAOTest-testGetIncludedLocations.txt"
     }
   }
   output_artifact {

@@ -1,7 +1,7 @@
 EXECUTING: C:\Users\abrad\AppData\Local\Android\Sdk\build-tools\34.0.0\aapt.exe dump badging C:\Users\abrad\Workspaces\School\SWEN 746 - Model-Driven Development\better-map\SWEN766BetterMaps\app\build\intermediates\apk\androidTest\debug\app-debug-androidTest.apk
 CURRENT_WORKING_DIRECTORY: C:\Users\abrad\Workspaces\School\SWEN 746 - Model-Driven Development\better-map\SWEN766BetterMaps
-START_TIME: 2024-12-01 23:52:16.094
-START_TIME-NANOS: 2024-12-01 23:52:16.094560500
+START_TIME: 2024-12-02 00:07:51.290
+START_TIME-NANOS: 2024-12-02 00:07:51.290535100
 ENVIRONMENT:
 
 *****************************************
@@ -23,7 +23,7 @@ supports-any-density: 'true'
 locales: '--_--'
 densities: '160'
 ===================
-END_TIME: 2024-12-01 23:52:16.136
-END_TIME-NANOS: 2024-12-01 23:52:16.136560700
-DURATION: 42ms
+END_TIME: 2024-12-02 00:07:51.333
+END_TIME-NANOS: 2024-12-02 00:07:51.333535700
+DURATION: 43ms
 EXIT CODE: 0

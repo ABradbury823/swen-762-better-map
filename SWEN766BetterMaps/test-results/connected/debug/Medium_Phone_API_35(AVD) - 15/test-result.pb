@@ -1,10 +1,10 @@
 
-è
-m
-UserDAOTest&com.example.swen766_bettermaps.db.daostestDeleteFavoriteLocation2ÿù´º€Û„´:ÿù´ºÀ×õé"
+ê
+n
+AmenityDAOTest&com.example.swen766_bettermaps.db.daostestGetIncludedLocations2ü€µºÀ£ãÜ:¦µº€ÔæŸ"
 
-logcatandroidø
-õC:\Users\abrad\Workspaces\School\SWEN 746 - Model-Driven Development\better-map\SWEN766BetterMaps\test-results\connected\debug\Medium_Phone_API_35(AVD) - 15\logcat-com.example.swen766_bettermaps.db.daos.UserDAOTest-testDeleteFavoriteLocation.txt"É
+logcatandroidù
+öC:\Users\abrad\Workspaces\School\SWEN 746 - Model-Driven Development\better-map\SWEN766BetterMaps\test-results\connected\debug\Medium_Phone_API_35(AVD) - 15\logcat-com.example.swen766_bettermaps.db.daos.AmenityDAOTest-testGetIncludedLocations.txt"É
 
 device-infoandroid®
 «C:\Users\abrad\Workspaces\School\SWEN 746 - Model-Driven Development\better-map\SWEN766BetterMaps\test-results\connected\debug\Medium_Phone_API_35(AVD) - 15\device-info.pb"Ê
