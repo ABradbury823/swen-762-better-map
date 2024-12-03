@@ -47,7 +47,6 @@ public class TunnelFragment extends Fragment {
         buildingTitles.add("Residence Hall D");
         buildingTitles.add("Lyndon Baines Johnson");
         buildingTitles.add("Helen Fish");
-        buildingTitles.add("Ritchies Game Room (Carleton Gibson)");
         buildingTitles.add("Hettie L. Shumway Dining Commons");
         buildingTitles.add("Residence Hall A");
         buildingTitles.add("Residence Hall B");
