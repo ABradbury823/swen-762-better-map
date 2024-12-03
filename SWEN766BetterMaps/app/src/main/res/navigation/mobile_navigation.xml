@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/TunnelFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -42,7 +42,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/tunnelFragment"
+        android:id="@+id/TunnelFragment"
         android:name="com.example.swen766_bettermaps.ui.tunnel.TunnelFragment"
         android:label="Tunnels"
         tools:layout="@layout/fragment_tunnel" />

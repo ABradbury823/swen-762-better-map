@@ -17,7 +17,6 @@ public class DormsideTunnels {
         TunnelNode resHallD = new BuildingNode("Residence Hall D", 52);
         TunnelNode lbj = new BuildingNode("Lyndon Baines Johnson", 60);
         TunnelNode Fish = new BuildingNode("Helen Fish", 41);
-        TunnelNode Ritchies = new BuildingNode("Ritchies Game Room (Carleton Gibson)", 49);
         TunnelNode Commons = new BuildingNode("Hettie L. Shumway Dining Commons", 55);
         TunnelNode residenceHallA = new BuildingNode("Residence Hall A", 28);
         TunnelNode residenceHallB = new BuildingNode("Residence Hall B", 30);
@@ -35,7 +34,6 @@ public class DormsideTunnels {
         map.addNode(resHallD);
         map.addNode(lbj);
         map.addNode(Fish);
-        map.addNode(Ritchies);
         map.addNode(Commons);
         map.addNode(residenceHallA);
         map.addNode(residenceHallB);
@@ -53,24 +51,25 @@ public class DormsideTunnels {
         TunnelNode PCA = new IntersectionNode(2);
         map.addNode(PCA);
         map.connect(Peterson, PCA, 1, CardinalDirection.WEST);
-        map.connect(PCA, Commons, 1, CardinalDirection.NORTH);
-        map.connect(PCA, resHallD, 1, CardinalDirection.SOUTH);
+        map.connect(PCA, Commons, 2, CardinalDirection.NORTH);
+        map.connect(PCA, resHallD, 3, CardinalDirection.SOUTH);
         TunnelNode GR = new IntersectionNode(3);
         map.addNode(GR);
         map.connect(EP, GR, 2, CardinalDirection.WEST);
+        map.connect(GR,EP,2,CardinalDirection.EAST);
         map.connect(GR, Gibson, 1, CardinalDirection.EAST);
         TunnelNode GS = new IntersectionNode(4);
         map.addNode(GS);
         map.connect(Gibson, GS, 1, CardinalDirection.EAST);
-        map.connect(GS, Sol, 1, CardinalDirection.SOUTH);
+        map.connect(GS, Sol, 4, CardinalDirection.SOUTH);
         TunnelNode S6 = new IntersectionNode(5);
         map.addNode(S6);
-        map.connect(Sol, S6, 1, CardinalDirection.SOUTH);
+        map.connect(Sol, S6, 2, CardinalDirection.SOUTH);
         TunnelNode F5 = new IntersectionNode(6);
         map.addNode(F5);
         map.connect(S6, F5, 1, CardinalDirection.SOUTH);
         map.connect(F5,Fish,3,CardinalDirection.WEST);
-        map.connect(F5, DSP, 1, CardinalDirection.SOUTH);
+        map.connect(F5, DSP, 2, CardinalDirection.SOUTH);
         TunnelNode DC = new IntersectionNode(7);
         map.addNode(DC);
         map.connect(DSP, DC, 1, CardinalDirection.SOUTH);
@@ -106,39 +105,56 @@ public class DormsideTunnels {
     private int nameConvert(String buildingName){
         if ("Grace Watson Hall".equals(buildingName)) {
             return 25;
-        } else if ("Frances Baker Hall".equals(buildingName)) {
+        }
+        else if ("Frances Baker Hall".equals(buildingName)) {
             return 29;
-        } else if ("Kate Gleason".equals(buildingName)) {
+        }
+        else if ("Kate Gleason".equals(buildingName)) {
             return 35;
-        } else if ("Eugene Colby Hall".equals(buildingName)) {
+        }
+        else if ("Eugene Colby Hall".equals(buildingName)) {
             return 33;
-        } else if ("Sol Heumann".equals(buildingName)) {
+        }
+        else if ("Sol Heumann".equals(buildingName)) {
             return 47;
-        } else if ("Carleton Gibson Hall".equals(buildingName)) {
+        }
+        else if ("Carleton Gibson Hall".equals(buildingName)) {
             return 49;
-        } else if ("Peter Peterson Hall".equals(buildingName)) {
+        }
+        else if ("Peter Peterson Hall".equals(buildingName)) {
             return 50;
-        } else if ("Residence Hall D".equals(buildingName)) {
+        }
+        else if ("Residence Hall D".equals(buildingName)) {
             return 52;
-        } else if ("Lyndon Baines Johnson".equals(buildingName)) {
+        }
+        else if ("Lyndon Baines Johnson".equals(buildingName)) {
             return 60;
-        } else if ("Helen Fish".equals(buildingName)) {
+        }
+        else if ("Helen Fish".equals(buildingName)) {
             return 41;
-        } else if ("Ritchies Game Room (Carleton Gibson)".equals(buildingName)) {
+        }
+        else if ("Ritchies Game Room (Carleton Gibson)".equals(buildingName)) {
             return 49;
-        } else if ("Hettie L. Shumway Dining Commons".equals(buildingName)) {
+        }
+        else if ("Hettie L. Shumway Dining Commons".equals(buildingName)) {
             return 55;
-        } else if ("Residence Hall A".equals(buildingName)) {
+        }
+        else if ("Residence Hall A".equals(buildingName)) {
             return 28;
-        } else if ("Residence Hall B".equals(buildingName)) {
+        }
+        else if ("Residence Hall B".equals(buildingName)) {
             return 30;
-        } else if ("Residence Hall C".equals(buildingName)) {
+        }
+        else if ("Residence Hall C".equals(buildingName)) {
             return 32;
-        } else if ("Mark Ellingson".equals(buildingName)) {
+        }
+        else if ("Mark Ellingson".equals(buildingName)) {
             return 51;
-        } else if ("Douglas Sprague Perry".equals(buildingName)) {
+        }
+        else if ("Douglas Sprague Perry".equals(buildingName)) {
             return 43;
-        } else {
+        }
+        else {
             return -1; // Default case if the name does not match
         }
 
@@ -150,6 +166,7 @@ public class DormsideTunnels {
         }
 
         StringBuilder instructions = new StringBuilder();
+        CardinalDirection previousDirection = null;
 
         for (int i = 0; i < nodeIDs.size() - 1; i++) {
             int currentNodeID = nodeIDs.get(i);
@@ -169,21 +186,56 @@ public class DormsideTunnels {
                         "No connection found between nodes " + currentNodeID + " and " + nextNodeID);
             }
 
-            // Get the description for the current and next nodes
+
+            CardinalDirection currentDirection = movement.getDirection();
+            String relativeDirection = getRelativeDirection(previousDirection, currentDirection);
+
             String currentLocation = getNodeDescription(currentNode);
             String nextLocation = getNodeDescription(nextNode);
 
-            // Generate an instruction
-            instructions.append("From ")
+
+            if (currentNode instanceof BuildingNode) {
+                // Passing through a building
+                instructions.append("Continue past ")
+                        .append(currentLocation)
+                        .append(" for another ")
+                        .append(movement.getMagnitude())
+                        .append("0 meters.\n\n");
+            }
+            else if (!"forward".equals(relativeDirection) && !"unknown".equals(relativeDirection)) {
+                // Directional change at intersections
+                instructions.append("Turn ")
+                        .append(relativeDirection)
+                        .append(" at ")
+                        .append(currentLocation)
+                        .append(" and continue for ")
+                        .append(movement.getMagnitude())
+                        .append("0 meters towards ")
+                        .append(nextLocation)
+                        .append(".\n\n");
+            }
+            else {
+                // Default forward movement
+                instructions.append("From ")
                         .append(currentLocation)
                         .append(", head ")
-                        .append(movement.getDirection().toString().toLowerCase())
+                        .append(relativeDirection)
                         .append(" for ")
                         .append(movement.getMagnitude())
-                        .append(" meters towards ")
+                        .append("0 meters towards ")
                         .append(nextLocation)
-                        .append(". ");
+                        .append(".\n\n");
+            }
+
+            previousDirection = currentDirection;
         }
+
+        TunnelNode destinationNode = tunnelMap.getVertices().get(nodeIDs.get(nodeIDs.size() - 1));
+        String destinationDescription = getNodeDescription(destinationNode);
+
+        instructions.append("Congrats! You have arrived at ")
+                .append(destinationDescription)
+                .append(".");
 
         return instructions.toString().trim();
     }
@@ -194,10 +246,41 @@ public class DormsideTunnels {
             return building.equals("none") ? "an unknown building" : building;
         } else if (node instanceof IntersectionNode) {
             String type = ((IntersectionNode) node).getIntersectionType();
-            return type.equals("none") ? "an intersection" : "the " + type + " intersection";
+            return type.equals("none") ? "the intersection" : "the " + type + " intersection";
         } else {
             return "an unknown location";
         }
     }
-    
+
+    private static String getRelativeDirection(CardinalDirection previous, CardinalDirection current) {
+        if (previous == null) {
+            return "forward"; // Default to "forward" if there's no previous direction
+        }
+
+        if (current == previous) {
+            return "forward";
+        }
+        else if (current == previous.opposite()) {
+            return "backward";
+        }
+        else if ((previous == CardinalDirection.NORTH && current == CardinalDirection.EAST) ||
+                (previous == CardinalDirection.EAST && current == CardinalDirection.SOUTH) ||
+                (previous == CardinalDirection.SOUTH && current == CardinalDirection.WEST) ||
+                (previous == CardinalDirection.WEST && current == CardinalDirection.NORTH)) {
+            return "right";
+        }
+        else if ((previous == CardinalDirection.NORTH && current == CardinalDirection.WEST) ||
+                (previous == CardinalDirection.WEST && current == CardinalDirection.SOUTH) ||
+                (previous == CardinalDirection.SOUTH && current == CardinalDirection.EAST) ||
+                (previous == CardinalDirection.EAST && current == CardinalDirection.NORTH)) {
+            return "left";
+        }
+        else {
+            return "unknown"; // Fallback for unexpected directions
+        }
+    }
+
+
+
+
 }

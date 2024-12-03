@@ -44,13 +44,18 @@
         android:layout_marginTop="16dp"
         android:text="Show Route" />
 
-    <TextView
-        android:id="@+id/route_instructions"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/show_route_button"
-        android:layout_marginTop="16dp"
-        android:text="Route instructions will appear here."
-        android:textSize="14sp" />
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/route_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Route instructions will appear here."
+            android:textSize="14sp" />
+    </ScrollView>
 
 </RelativeLayout>
