@@ -71,24 +71,11 @@ to add favorite locations and view dorm tunnels.
     - Students should be able to look at their previously commented comments
 
 
-## Architecture and Design
+## Documentation
 
-This section describes the application architecture.
+The diagrams describing the design and architecture of RIT BetterMap can be found here.
 
-### Software Architecture
-![Architecture Diagram for Better Map](/assets/better_maps-architecture_diagram.png)
-
-### Use Cases
-![Use case diagram for Better Map](/assets/better_maps.png)
-
-### Domain Model
-![Domain model for Better Map](/assets/better_maps-domain_model.png)
-
-#### Sequence Diagram
-![Sequence diagram for student login](/assets//better_maps-sequence_diagram.png)
-
-### Class Diagram
-![Class diagram for better map](/assets/better_maps-class_diagram.png)
+[DesignDoc.md](https://github.com/ABradbury823/swen-762-better-map/blob/main/assets/DesignDoc.md)
 
 ### Code Coverage Results:
 ![image](https://github.com/user-attachments/assets/affe6541-8e67-4480-b716-8d842d0e8e81)
