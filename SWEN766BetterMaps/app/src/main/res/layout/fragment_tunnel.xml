@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/start_location_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Location"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/start_location_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_location_label"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/end_location_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Location"
+        android:textSize="16sp"
+        android:layout_below="@id/start_location_spinner"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/end_location_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/end_location_label"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/show_route_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/end_location_spinner"
+        android:layout_marginTop="16dp"
+        android:text="Show Route" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_route_button"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/route_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Route instructions will appear here."
+            android:textSize="14sp" />
+    </ScrollView>
+
+</RelativeLayout>

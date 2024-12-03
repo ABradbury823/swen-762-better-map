@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorPrimaryVariant">  <!-- Set the ripple color -->
+    <item>
+        <shape android:layout_width="wrap_content">
+            <solid android:color="?attr/colorPrimary" />
+            <corners android:radius="25dp" />  <!-- Circular shape -->
+        </shape>
+    </item>
+</ripple>
