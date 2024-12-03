@@ -37,22 +37,23 @@ public class TunnelFragment extends Fragment {
         TextView routeInstructions = root.findViewById(R.id.route_instructions);
 
         List<String> buildingTitles = new ArrayList<>();
-        buildingTitles.add("Grace Watson Hall");
-        buildingTitles.add("Frances Baker Hall");
-        buildingTitles.add("Kate Gleason");
-        buildingTitles.add("Eugene Colby Hall");
-        buildingTitles.add("Sol Heumann");
         buildingTitles.add("Carleton Gibson Hall");
-        buildingTitles.add("Peter Peterson Hall");
-        buildingTitles.add("Residence Hall D");
-        buildingTitles.add("Lyndon Baines Johnson");
+        buildingTitles.add("Douglas Sprague Perry");
+        buildingTitles.add("Eugene Colby Hall");
+        buildingTitles.add("Frances Baker Hall");
+        buildingTitles.add("Grace Watson Hall");
         buildingTitles.add("Helen Fish");
         buildingTitles.add("Hettie L. Shumway Dining Commons");
+        buildingTitles.add("Kate Gleason");
+        buildingTitles.add("Lyndon Baines Johnson");
+        buildingTitles.add("Mark Ellingson");
+        buildingTitles.add("Peter Peterson Hall");
         buildingTitles.add("Residence Hall A");
         buildingTitles.add("Residence Hall B");
         buildingTitles.add("Residence Hall C");
-        buildingTitles.add("Mark Ellingson");
-        buildingTitles.add("Douglas Sprague Perry");
+        buildingTitles.add("Residence Hall D");
+        buildingTitles.add("Sol Heumann");
+
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, buildingTitles);
