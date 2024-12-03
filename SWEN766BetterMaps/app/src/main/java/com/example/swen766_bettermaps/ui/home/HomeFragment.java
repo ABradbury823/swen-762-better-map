@@ -87,10 +87,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
 
         LatLng TigerStatue = new LatLng(43.084180,-77.675593);
-        mMap.addMarker(new MarkerOptions().position(TigerStatue).title("Tiger Statue"));
-
-        LatLng Golisano = new LatLng(43.083872,-77.67986);
-        mMap.addMarker(new MarkerOptions().position(Golisano).title("Golisano Building"));
 
         LatLngBounds RITBounds = new LatLngBounds(
                 new LatLng(43.078414, -77.687614), // Southwest corner
@@ -104,17 +100,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         // Optionally, set the minimum zoom level to prevent zooming out too much
         mMap.setMinZoomPreference(14.0f);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
-        Route myRoute = new Route(
-                new Location("Tiger Statue", TigerStatue),
-                new Location("Golisano", Golisano)
-        );
-
-        Location imaging = new Location(
-                "Chester F. Carlson Center for Imaging Science",
-                "54 Lomb Memorial Dr"
-        );
-        myRoute.addStop(imaging);
 
         mMap.clear();
 
