@@ -88,3 +88,7 @@ This section describes the application architecture.
 
 ### Class Diagram
 ![Class diagram for better map](/assets/better_maps-class_diagram.png)
+
+Code Coverage Results:
+![image](https://github.com/user-attachments/assets/ae8604ef-264c-4a07-b019-8742e315b13c)
+
