@@ -1,6 +1,5 @@
 package com.example.swen766_bettermaps.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.swen766_bettermaps.Location;
-import com.example.swen766_bettermaps.MainActivity;
 import com.example.swen766_bettermaps.Route;
 import com.example.swen766_bettermaps.ui.home.favorite_locations.FavoritesBottomSheetFragment;
 import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -116,16 +110,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 new Location("Golisano", Golisano)
         );
 
-        Location magic = new Location("Magic", "300 Lomb Memorial Dr");
-        myRoute.addStop(magic);
-
         Location imaging = new Location(
                 "Chester F. Carlson Center for Imaging Science",
                 "54 Lomb Memorial Dr"
         );
         myRoute.addStop(imaging);
 
-        myRoute.drawRoute(mMap);
+        mMap.clear();
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
