@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.adarshr.test-logger") version "4.0.0" apply true
 }
 
 android {
@@ -35,6 +36,11 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    // Encapsulates options for running tests.
+    testOptions {
+        reportDir = "$rootDir/test-reports"
+        resultsDir = "$rootDir/test-results"
+    }
 }
 
 dependencies {
@@ -54,11 +60,18 @@ dependencies {
     implementation(libs.annotation)
     implementation(libs.legacy.support.v4)
 
-
-    testImplementation(libs.junit)
-    testImplementation("org.mockito:mockito-core:4.0.0")
+    testImplementation(libs.junit)                  // impl. for test module
+    androidTestImplementation(libs.mockito.core)    // impl. for androidTest module
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
+    // Room + Room Testing
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.lifecycle.extensions)
+    androidTestImplementation(libs.androidx.room.room.testing)
+    androidTestImplementation(libs.androidx.core)
 
     implementation("com.google.android.gms:play-services-auth:20.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
