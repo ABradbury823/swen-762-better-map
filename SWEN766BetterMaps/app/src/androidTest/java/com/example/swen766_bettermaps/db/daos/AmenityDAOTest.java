@@ -66,7 +66,6 @@ public class AmenityDAOTest {
         assertEquals(amenity.getDescription(), retrievedAmenity.getDescription());
     }
 
-    //TODO: test getById gets the list of includedLocations (need Location DAO tests first)
     /**
      * Tests that getById also retrieves a list of included Locations.
      */
