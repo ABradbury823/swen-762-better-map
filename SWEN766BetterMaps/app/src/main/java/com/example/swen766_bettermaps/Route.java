@@ -1,7 +1,5 @@
 package com.example.swen766_bettermaps;
 
-import com.google.android.gms.maps.GoogleMap;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -62,7 +60,5 @@ public class Route {
         this.stops.add(index, stop);
     }
 
-    public void drawRoute(GoogleMap mMap) {
-        MapUtils.drawRoute(mMap,this, BuildConfig.MAPS_API_KEY);
-    }
+
 }

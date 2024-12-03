@@ -1,9 +1,11 @@
-package com.example.swen766_bettermaps;
+package com.example.swen766_bettermaps.ui;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.swen766_bettermaps.Location;
+import com.example.swen766_bettermaps.Route;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;

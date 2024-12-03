@@ -21,9 +21,9 @@ public class RouteTest {
     @Test
     public void createWithTravelMode() {
         Route r = new Route(
-            loc1,
-            loc2,
-            TravelMode.WALKING
+                loc1,
+                loc2,
+                TravelMode.WALKING
         );
 
         assertNotNull(r);
@@ -32,8 +32,8 @@ public class RouteTest {
     @Test
     public void createWithZeroStops() {
         Route r = new Route(
-            loc1,
-            loc2
+                loc1,
+                loc2
         );
         int expectedStops = 0;
 

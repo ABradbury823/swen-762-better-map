@@ -1,10 +1,11 @@
-package com.example.swen766_bettermaps;
+package com.example.swen766_bettermaps.ui;
 
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.swen766_bettermaps.R;
 import com.example.swen766_bettermaps.ui.home.favorite_locations.FavoritesBottomSheetFragment;
 import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
 
