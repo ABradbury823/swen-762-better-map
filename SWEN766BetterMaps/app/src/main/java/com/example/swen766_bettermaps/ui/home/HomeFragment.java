@@ -13,6 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     private FragmentHomeBinding binding;
     private GoogleMap mMap;
+
+    private Marker lastPlacedMarker;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -88,6 +91,22 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         myRoute.drawRoute(mMap);
 
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                mMap.clear();
+
+                if(lastPlacedMarker != null) {
+                    Marker startMarker = mMap.addMarker(new MarkerOptions().position(lastPlacedMarker.getPosition()).title(lastPlacedMarker.getTitle()));
+                    lastPlacedMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Sum Marker"));
+
+                    Route pinRoute = new Route(new Location("A", startMarker.getPosition()), new Location("B", lastPlacedMarker.getPosition()));
+                    pinRoute.drawRoute(mMap);
+                } else {
+                    lastPlacedMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Sum Marker"));
+                }
+            }
+        });
     }
 
 }
