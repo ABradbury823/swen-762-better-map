@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration;
         if (getIntent().getParcelableExtra("RIT_USER") == null) {
             appBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.navigation_account, R.id.navigation_home)
+                    R.id.navigation_account, R.id.navigation_home, R.id.navigation_tunnels)
                     .build();
         } else {
             appBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.accountFragment, R.id.navigation_home)
+                    R.id.accountFragment, R.id.navigation_home, R.id.navigation_tunnels)
                     .build();
         }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
