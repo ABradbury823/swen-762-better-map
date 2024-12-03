@@ -1,12 +1,21 @@
 package com.example.swen766_bettermaps.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.swen766_bettermaps.Location;
+import com.example.swen766_bettermaps.MainActivity;
 import com.example.swen766_bettermaps.Route;
+import com.example.swen766_bettermaps.ui.home.favorite_locations.FavoritesBottomSheetFragment;
+import com.example.swen766_bettermaps.ui.home.route_filter.RouteFilterPopupWindow;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -17,6 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -44,6 +54,32 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             mapFragment.getMapAsync(this);
         }
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // button to open filters
+        ImageButton openFilterButton = view.findViewById(R.id.openRouteFilterButton);
+        openFilterButton.setOnClickListener(this::openRouteFilters);
+
+        // button to open favorites
+        ImageButton openFavoritesButton = view.findViewById(R.id.openFavoritesButton);
+        openFavoritesButton.setOnClickListener(this::openFavorites);
+    }
+
+    // opens the route filters popup menu
+    public void openRouteFilters(View view) {
+        RouteFilterPopupWindow routeFilterPopupWindow =
+                new RouteFilterPopupWindow(this.getContext());
+        routeFilterPopupWindow.show(view);
+    }
+
+    // opens the favorites menu
+    public void openFavorites(View view) {
+        FavoritesBottomSheetFragment favorites = new FavoritesBottomSheetFragment();
+        favorites.show(getActivity().getSupportFragmentManager(), favorites.getTag());
     }
 
     @Override
