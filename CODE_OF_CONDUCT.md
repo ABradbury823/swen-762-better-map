@@ -67,7 +67,7 @@ of actions that affect the everyday operation of the application.
 interaction with the people involved, including unsolicited interaction with
 those enforcing the Code of Conduct, for a specified period of time.
 
-### 3. Temporary Ban
+### 2. Temporary Ban
 
 **Community Impact**: A serious violation of community standards, including
 sustained inappropriate behavior.
@@ -77,7 +77,7 @@ No public or private interaction with the people involved, including unsolicited
 with those enforcing the Code of Conduct, is allowed during this period.
 Violating these terms may lead to a permanent ban.
 
-### 4. Permanent Ban
+### 3. Permanent Ban
 
 **Community Impact**: Demonstrating a pattern of violation of community
 standards, including sustained inappropriate behavior,  harassment of an
